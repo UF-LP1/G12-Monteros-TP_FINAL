@@ -1,8 +1,27 @@
 #include "cPaciente.h"
 
-bool cPaciente::Solicitar_Autorizacion()
+cPaciente::cPaciente(string Nombre_Apellido_, time_t Feca_Nac_, string Telefono_, string Alergias_[N], string Hospital_, float Radio_Amp_) : Nombre_Apellido(Nombre_Apellido_), Fecha_Nac(Feca_Nac_),Alergias(Alergias_), Radio_Amputacion(Radio_Amp_)
 {
-	return false;
+	this->Telefono = Telefono_;
+	this->Hospital = "nn";
+	this->Autorizacion = false;
+	this->Medico = "nn";
+	this -> ancho_amputacion = 0;  // las dimensiones de la protesis no quirurgica empiezan en 0 porque 
+	this->Largo_amputacion = 0;	   // las decide el medico al hacer el analisis y otorgar el permiso
+
+	srand(time(0));
+
+	if (this->Radio_Amputacion > 0) //si hay un radio de amputacion se inicializa la parte danyada con algunas de las opciones no quirurgicas
+	{                               //revisar enum de cPaciente.h
+		this->Organo_Extremidad_Danyada = (rand() % 5 + 1);
+	}
+	else {                          // si el radio de amputacion es 0 se inicializa la parte danyada con alguna de las opciones quirurgicas  
+		this->Organo_Extremidad_Danyada = rand() % 5 + 6;
+	}
+}
+
+cPaciente::~cPaciente()
+{
 }
 
 void cPaciente::set_Autorizacion(bool Auto)
@@ -39,3 +58,15 @@ string cPaciente::get_Medico()
 {
 	return this->Medico;
 }
+
+void cPaciente::set_Dim_ancho(unsigned int ancho)
+{
+	this->ancho_amputacion = ancho;
+}
+
+void cPaciente::set_Dim_largo(unsigned int largo)
+{
+	this->Largo_amputacion = largo;
+}
+
+

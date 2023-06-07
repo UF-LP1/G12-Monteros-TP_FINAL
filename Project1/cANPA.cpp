@@ -28,3 +28,24 @@ bool cANPA::Solicitar_Protesis_A_Fabricante()
 {
 	return false;
 }
+
+bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital)
+{
+
+	list<cHospital>::iterator it_hosp = this->Hospitales.begin();
+
+	while (it_hosp != this->Hospitales.end())
+	{
+		if (it_hosp->get_Nombre() == Nombre_hospital)
+		{
+			;
+			break;
+		}
+	}
+	//Agregar una exception aca en caso de que no se encuentre el nombre del hospital en la lista de hospitales de ANPA
+	list<cOrtopedia>::iterator it_Ortopedias = this->Ortopedias.begin();
+	list<cOrtopedia>::iterator it_Afiliadas= Hos_aux.
+	while 
+
+	
+}

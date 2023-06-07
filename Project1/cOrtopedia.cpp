@@ -24,3 +24,8 @@ bool cOrtopedia::Buscar_Por_radio(float Radio_Amp)
 {
 	return false;
 }
+
+list<cProtesis> cOrtopedia::get_stock()
+{
+	return this->Stock_Protesis;
+}

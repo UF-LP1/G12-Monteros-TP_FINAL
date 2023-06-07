@@ -20,4 +20,5 @@ public:
 	bool Buscar_Protesis(float Radio_Amp, string Alergias[] );
 	bool Buscar_Por_Alergias(list<cProtesis> lista_filtrada, string Alergias[]);
 	bool Buscar_Por_radio(float Radio_Amp);
+	list<cProtesis> get_stock();
 };

@@ -149,6 +149,7 @@
     <ClCompile Include="cProt_No_Quirurgica.cpp" />
     <ClCompile Include="cProt_Quirurgica.cpp" />
     <ClCompile Include="cRegistros.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
