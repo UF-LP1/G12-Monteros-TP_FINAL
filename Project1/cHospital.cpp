@@ -34,3 +34,8 @@ string cHospital::get_Nombre()
 {
 	return this->Nombre;
 }
+
+list<cOrtopedia> cHospital::get_afiliadas()
+{
+	return this->lista_Afiliadas;
+}

@@ -16,4 +16,5 @@ public:
 	bool Otorgar_Autorizacion(cPaciente Paciente_actual);
 	string get_Nombre();
 	bool get_Disponibilidad();
+	unsigned int get_Matricula();
 };

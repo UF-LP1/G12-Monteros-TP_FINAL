@@ -24,4 +24,5 @@ public:
 	void set_Pacientes(list<cPaciente> lista_actual);
 	bool Evaluar_Paciente(cPaciente Paciente_Actual);
 	string get_Nombre();
+	list<cOrtopedia> get_afiliadas();
 };

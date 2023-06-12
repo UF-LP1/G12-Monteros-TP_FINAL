@@ -48,3 +48,8 @@ bool cMedico::get_Disponibilidad()
 	return this->Disponible;
 }
 
+unsigned int cMedico::get_Matricula()
+{
+	return this->Matricula;
+}
+

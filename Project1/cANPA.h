@@ -20,5 +20,5 @@ public:
 	void Crear_Registro();
 	bool Solicitar_Protesis_A_Ortopedia();
 	bool Solicitar_Protesis_A_Fabricante();
-    bool Buscar_En_Ortopedia_convenida(string Nombre_hospital);
+    bool Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual);
 };

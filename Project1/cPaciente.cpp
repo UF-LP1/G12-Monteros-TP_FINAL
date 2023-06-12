@@ -69,4 +69,19 @@ void cPaciente::set_Dim_largo(unsigned int largo)
 	this->Largo_amputacion = largo;
 }
 
+float cPaciente::get_radio()
+{
+	return this->Radio_Amputacion;
+}
+
+float cPaciente::get_largo()
+{
+	return this->Largo_amputacion;
+}
+
+float cPaciente::get_ancho()
+{
+	return this->ancho_amputacion;
+}
+
 

@@ -10,3 +10,18 @@ cProt_No_Quirurgica::cProt_No_Quirurgica(string Nombre_, time_t Fecha_Fabricacio
 cProt_No_Quirurgica::~cProt_No_Quirurgica()
 {
 }
+
+unsigned int cProt_No_Quirurgica::get_Largo()
+{
+	return this->Dim_Largo;
+}
+
+unsigned int cProt_No_Quirurgica::get_Ancho()
+{
+	return this->Dim_Ancho;
+}
+
+unsigned int cProt_No_Quirurgica::get_Radio()
+{
+	return this->Radio_Conexion;
+}

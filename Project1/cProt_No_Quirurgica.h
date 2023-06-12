@@ -13,4 +13,8 @@ private:
 public:
 	cProt_No_Quirurgica(string Nombre_, time_t Fecha_Fabricacion_, string Fabricante_, bool Superior_Infeior, unsigned int Dim_Largo_, unsigned int Dim_Ancho_, unsigned int Radio_Conexion);
 	~cProt_No_Quirurgica();
+
+	unsigned int get_Largo();
+	unsigned int get_Ancho();
+	unsigned int get_Radio();
 };

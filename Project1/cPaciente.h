@@ -35,5 +35,8 @@ public:
 	string get_Medico();
 	void set_Dim_ancho(unsigned int ancho);
 	void set_Dim_largo(unsigned int largo);
-
+	float get_radio();
+	float get_largo();
+	float get_ancho();
+	unsigned int get_danyada();
 };
