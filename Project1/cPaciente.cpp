@@ -84,4 +84,9 @@ float cPaciente::get_ancho()
 	return this->ancho_amputacion;
 }
 
+unsigned int cPaciente::get_danyada()
+{
+	return this->Organo_Extremidad_Danyada;
+}
+
 

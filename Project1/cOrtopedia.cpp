@@ -29,3 +29,8 @@ list<cProtesis> cOrtopedia::get_stock()
 {
 	return this->Stock_Protesis;
 }
+void cOrtopedia:: operator-(cProtesis* eliminado) {
+
+}
+
+

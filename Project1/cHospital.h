@@ -25,4 +25,5 @@ public:
 	bool Evaluar_Paciente(cPaciente Paciente_Actual);
 	string get_Nombre();
 	list<cOrtopedia> get_afiliadas();
+	list<cMedico> get_Medicos();
 };

@@ -2,10 +2,12 @@
 #include <string>
 #include <ctime>
 #include "cMedico.h"
+#include "cProt_No_Quirurgica.h"
+#include "cProt_Quirurgica.h"
 
 using namespace std;
 #define N 5 //Cantidad maxima de alergias de una persona
-enum { Brazo = 1, Pierna, Mano, Dedo, Pie, Hombro, Cadera, Clavicula, Placa_Metalica, Implante_Dental};
+enum Organo_Extremidad_danyada{ Brazo = 1, Pierna, Mano, Dedo, Pie, Hombro, Cadera, Clavicula, Placa_Metalica, Implante_Dental};
 class cPaciente {
 private:
 
@@ -18,9 +20,9 @@ private:
 	const float Radio_Amputacion;
 	bool Autorizacion;
 	string Medico;
-	unsigned int Organo_Extremidad_Danyada;
-	unsigned int Largo_amputacion;
-	unsigned int ancho_amputacion;
+	cProt_No_Quirurgica Necesitada_Q();
+	cProt_Quirurgica Necesitada_NQ();
+
 
 public:
 

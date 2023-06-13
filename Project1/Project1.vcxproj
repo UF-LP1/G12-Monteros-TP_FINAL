@@ -137,6 +137,7 @@
     <ClInclude Include="cProt_No_Quirurgica.h" />
     <ClInclude Include="cProt_Quirurgica.h" />
     <ClInclude Include="cRegistros.h" />
+    <ClInclude Include="Funciones_aux.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cANPA.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="cProt_No_Quirurgica.cpp" />
     <ClCompile Include="cProt_Quirurgica.cpp" />
     <ClCompile Include="cRegistros.cpp" />
+    <ClCompile Include="Funciones_aux.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

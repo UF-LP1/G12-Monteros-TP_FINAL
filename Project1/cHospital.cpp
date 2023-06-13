@@ -39,3 +39,8 @@ list<cOrtopedia> cHospital::get_afiliadas()
 {
 	return this->lista_Afiliadas;
 }
+
+list<cMedico> cHospital::get_Medicos()
+{
+	return this->Lista_Medicos;
+}
