@@ -9,7 +9,7 @@ private:
 	string Material;
 
 public:
-	cProt_Quirurgica(string Articulacion,string Material, Organo_Extremidad_Reemplazada Nombre_, time_t Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_);
+	cProt_Quirurgica(string Articulacion,string Material, Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_);
 	~cProt_Quirurgica();
 	string  get_material();
 	string  get_Articulacion();

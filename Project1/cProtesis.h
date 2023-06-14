@@ -13,16 +13,16 @@ class cProtesis {
 
 private:
 	Organo_Extremidad_Reemplazada Nombre;
-	const time_t Fecha_Fabricacion;
+	const tm Fecha_Fabricacion;
 	const string Fabricante;
 	const bool Superior_Inferior;
 
 public:
-	cProtesis(Organo_Extremidad_Reemplazada Nombre_, time_t Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_);
+	cProtesis(Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_);
 	~cProtesis();
 	cProtesis(list<cProtesis>::iterator copia);
 	Organo_Extremidad_Reemplazada get_nombre();
-	time_t get_Fabricacion();
+	tm get_Fabricacion();
 	string get_Fabricante();
 	bool get_Superior_inferior();
 	float virtual get_ancho() = 0;	         //por razones de comparacion de datos que se necesitan en diversos metodos

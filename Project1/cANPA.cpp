@@ -15,23 +15,105 @@ cANPA::~cANPA()
 {
 }
 
-void cANPA::Crear_Registro()
-{
-}
-
 bool cANPA::Solicitar_Protesis_A_Ortopedia()
 {
 	return false;
 }
 
-bool cANPA::Solicitar_Protesis_A_Fabricante()
+bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Paciente_Actual, unsigned int Matricula_med_)
 {
+	list<cHospital>::iterator it_hosp = this->Hospitales.begin(); // todas las veces comprobamos que el hospital existaen los
+	                                                              //listas del ANPA
+
+	while (it_hosp != this->Hospitales.end())
+	{
+		if (it_hosp->get_Nombre() == Nombre_hospital)
+		{
+			break;
+		}
+		it_hosp++;
+	}
+
+	list<cFabricante>::iterator it_Fab = this->Fabricantes.begin();
+	string tipo_fuente = "Fabrifcante";
+
+	while (it_Fab != this->Fabricantes.end())
+	{
+		srand(time(0));
+
+		if ((rand() % 4 + 1) == 4) //una de cada 4 veces el fabricante acepta hacer una protesis a medida
+		{
+			Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += it_Fab->get_Nombre());
+			if (Paciente_Actual.get_radio() > 0)
+			{
+				cProt_No_Quirurgica& Fabricada()
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
+bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente Paciente_Actual, unsigned int Matricula_med_)
+{
+	list<cHospital>::iterator it_hosp = this->Hospitales.begin();
+
+	while (it_hosp != this->Hospitales.end())
+	{
+		if (it_hosp->get_Nombre() == Nombre_hospital)
+		{
+			break;
+		}
+		it_hosp++;
+	}
+
+	list<cOrtopedia>::iterator it_No_Convenidas = this->Ortopedias.begin();
+	list<cProtesis>::iterator it_prot;
+	string tipo_fuente = "Ortopedia";
+
+	while (it_No_Convenidas != this->Ortopedias.end())
+	{
+		if (it_No_Convenidas != it_hosp->get_afiliadas())      //operador sobrecargado, si son ortopedias convenidas, 
+		{	                                                   //no hace el resto de preguntas 
+		
+			it_prot = it_No_Convenidas->get_stock().begin();
+			if (Paciente_Actual.get_radio() > 0)
+			{
+				while (it_prot != it_No_Convenidas->get_stock().end())
+				{
+					if (it_prot == &Paciente_Actual.get_Prot_NQ())
+					{
+						Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += it_No_Convenidas->get_Nombre());
+
+						//it_Afiliadas-it_prot; buscar forma de hacer esto funcionar
+						return true;
+					}
+
+					it_prot++;
+				}
+			}
+			else
+				while (it_prot != it_No_Convenidas->get_stock().end())
+				{
+
+					if (it_prot == &Paciente_Actual.get_Prot_Q())
+					{
+						Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += it_No_Convenidas->get_Nombre());
+						//it_Afiliadas-it_prot; buscar forma de hacer esto funcionar
+						return true;
+					}
+					it_prot++;
+				}
+		}
+		it_No_Convenidas++;
+	}
+
 	return false;
 }
 
 bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual,unsigned int Matricula_med_)
 {
-	cHospital Hos_aux();
+	
 	list<cHospital>::iterator it_hosp = this->Hospitales.begin();
 
 	while (it_hosp != this->Hospitales.end())
@@ -44,7 +126,7 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 	}
 	//Agregar una exception aca en caso de que no se encuentre el nombre del hospital en la lista de hospitales de ANPA
 
-	string tipo_fuente;
+	string 	tipo_fuente = "ortopedia";;
 	list<cOrtopedia>::iterator it_Afiliadas = it_hosp->get_afiliadas().begin();
 
 	list<cProtesis>::iterator it_prot;
@@ -58,19 +140,19 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 			while (it_prot != it_Afiliadas->get_stock().end())
 			{
 
-				if (paciente_actual.get_danyada() == it_prot->get_nombre())
+				if (it_prot == &paciente_actual.get_Prot_NQ())
 				{
-					if (it_prot == &paciente_actual.get_Prot_NQ()) {
-						tipo_fuente = "ortopedia";
-						Registrar_tramite(paciente_actual.get_danyada(), it_hosp, Matricula_med_, paciente_actual.get_Nombre_Ap(), tipo_fuente += it_Afiliadas->get_nombre()); 
+	
+						Registrar_tramite(paciente_actual.get_danyada(), it_hosp, Matricula_med_, paciente_actual.get_Nombre_Ap(), tipo_fuente += it_Afiliadas->get_Nombre()); 
 
 						//si se encuentra la pieza necesitada se genera un registro de la venta/tramite con los datos de
 						//los implicados y como fuente de la protesis se especifica que la fuente fue una ortopedia y se agrega su nombre
 						//aprovechando sobrecarga de operadores de la clase string
-						it_Afiliadas-it_prot;
+						
+						//it_Afiliadas-it_prot; buscar forma de hacer esto funcionar
 
 						return true;
-					}
+					
 				}
 				it_prot++;
 			}
@@ -79,21 +161,24 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 			while (it_prot != it_Afiliadas->get_stock().end())
 			{
 
-				if (paciente_actual.get_danyada() == it_prot->get_nombre())
+				if (it_prot == &paciente_actual.get_Prot_Q())
 				{
-					if (it_prot == &paciente_actual.get_Prot_Q())
-
+						Registrar_tramite(paciente_actual.get_danyada(), it_hosp, Matricula_med_, paciente_actual.get_Nombre_Ap(), tipo_fuente += it_Afiliadas->get_Nombre());
+						//it_Afiliadas-it_prot; buscar forma de hacer esto funcionar
 						return true;
 				}
 				it_prot++;
 			}
 		it_Afiliadas++;
 	}
+
+	if (it_Afiliadas == it_hosp->get_afiliadas().end())
+		return false;
 }
 
 void cANPA::Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospital>::iterator Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente)
 {
-	time_t fecha_actual;
+	tm fecha_actual;
 	time(&fecha_actual);
 	srand(time(0));
 

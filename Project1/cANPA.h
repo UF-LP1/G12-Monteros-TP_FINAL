@@ -21,9 +21,9 @@ public:
 
 	cANPA(list<cFabricante>Fabricantes_, list<cHospital>Hospitales_, list<cOrtopedia> Ortopedias_);
 	~cANPA();
-	void Crear_Registro();
 	bool Solicitar_Protesis_A_Ortopedia();
-	bool Solicitar_Protesis_A_Fabricante();
+	bool Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Paciente_Actual, unsigned int Matricula_med_);
+	bool Busqueda_Especial(string Nombre_hospital, cPaciente Paciente_Actual, unsigned int Matricula_med_);
     bool Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual, unsigned int Matricula_med_);
 	void Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospital>::iterator Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente);
 	string Buscar_Medico(list<cHospital>::iterator Hospital_, unsigned int Matricula);

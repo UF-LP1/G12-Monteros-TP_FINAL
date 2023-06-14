@@ -1,6 +1,6 @@
 #include "cProt_Quirurgica.h"
 
-cProt_Quirurgica::cProt_Quirurgica(string Articulacion_, string Material_, Organo_Extremidad_Reemplazada Nombre_, time_t Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_):cProtesis(Nombre_,Fecha_Fabricacion_,Fabricante_,Superior_Inferior_)
+cProt_Quirurgica::cProt_Quirurgica(string Articulacion_, string Material_, Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_):cProtesis(Nombre_,Fecha_Fabricacion_,Fabricante_,Superior_Inferior_)
 {
 	this->Articulacion = Articulacion_;
 	this->Material = Material;

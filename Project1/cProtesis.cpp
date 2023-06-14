@@ -1,6 +1,6 @@
 #include "cProtesis.h"
 
-cProtesis::cProtesis(Organo_Extremidad_Reemplazada Nombre_, time_t Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_): Nombre(Nombre_), Fecha_Fabricacion(Fecha_Fabricacion_), Fabricante(Fabricante_), Superior_Inferior(Superior_Inferior_)
+cProtesis::cProtesis(Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_): Nombre(Nombre_), Fecha_Fabricacion(Fecha_Fabricacion_), Fabricante(Fabricante_), Superior_Inferior(Superior_Inferior_)
 {
 }
 
@@ -19,7 +19,7 @@ Organo_Extremidad_Reemplazada cProtesis::get_nombre()
     return this->Nombre;
 }
 
-time_t cProtesis::get_Fabricacion()
+tm cProtesis::get_Fabricacion()
 {
     return this->Fecha_Fabricacion;
 }

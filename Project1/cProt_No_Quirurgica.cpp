@@ -1,6 +1,6 @@
 #include "cProt_No_Quirurgica.h"
 
-cProt_No_Quirurgica::cProt_No_Quirurgica(Organo_Extremidad_Reemplazada Nombre_, time_t Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_, unsigned int Dim_Largo_, unsigned int Dim_Ancho_, unsigned int Radio_Conexion_): cProtesis(Nombre_,Fecha_Fabricacion_, Fabricante_, Superior_Inferior_)
+cProt_No_Quirurgica::cProt_No_Quirurgica(Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_, unsigned int Dim_Largo_, unsigned int Dim_Ancho_, unsigned int Radio_Conexion_): cProtesis(Nombre_,Fecha_Fabricacion_, Fabricante_, Superior_Inferior_)
 {
 	this->Dim_Ancho = Dim_Ancho_;
 	this->Dim_Largo = Dim_Largo_;
@@ -42,3 +42,7 @@ float cProt_No_Quirurgica::get_Radio()
 {
 	return this->Radio_Conexion;
 }
+
+
+
+
