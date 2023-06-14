@@ -29,7 +29,7 @@ bool cANPA::Solicitar_Protesis_A_Fabricante()
 	return false;
 }
 
-bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual)
+bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual,unsigned int Matricula_med_)
 {
 	cHospital Hos_aux();
 	list<cHospital>::iterator it_hosp = this->Hospitales.begin();
@@ -44,6 +44,7 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 	}
 	//Agregar una exception aca en caso de que no se encuentre el nombre del hospital en la lista de hospitales de ANPA
 
+	string tipo_fuente;
 	list<cOrtopedia>::iterator it_Afiliadas = it_hosp->get_afiliadas().begin();
 
 	list<cProtesis>::iterator it_prot;
@@ -56,24 +57,41 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 
 			while (it_prot != it_Afiliadas->get_stock().end())
 			{
-				cProtesis *aux1();
-				cProt_No_Quirurgica* aux{ dynamic_cast<cProt_No_Quirurgica*>(*aux1) };
 
-				if (paciente_actual.get_danyada() == it_prot->get_nombre()) 
+				if (paciente_actual.get_danyada() == it_prot->get_nombre())
 				{
-					if (paciente_actual.get_ancho() == it_prot.get_ancho() && paciente_actual.get_largo()==it_prot.get_largo())
-						Registrar_tramite(it_prot->get_nombre(),)
+					if (it_prot == &paciente_actual.get_Prot_NQ()) {
+						tipo_fuente = "ortopedia";
+						Registrar_tramite(paciente_actual.get_danyada(), it_hosp, Matricula_med_, paciente_actual.get_Nombre_Ap(), tipo_fuente += it_Afiliadas->get_nombre()); 
 
+						//si se encuentra la pieza necesitada se genera un registro de la venta/tramite con los datos de
+						//los implicados y como fuente de la protesis se especifica que la fuente fue una ortopedia y se agrega su nombre
+						//aprovechando sobrecarga de operadores de la clase string
+						it_Afiliadas-it_prot;
+
+						return true;
+					}
 				}
 				it_prot++;
 			}
 		}
+		else
+			while (it_prot != it_Afiliadas->get_stock().end())
+			{
+
+				if (paciente_actual.get_danyada() == it_prot->get_nombre())
+				{
+					if (it_prot == &paciente_actual.get_Prot_Q())
+
+						return true;
+				}
+				it_prot++;
+			}
 		it_Afiliadas++;
 	}
-	
 }
 
-void cANPA::Registrar_tramite(string Pieza_, cHospital Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente)
+void cANPA::Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospital>::iterator Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente)
 {
 	time_t fecha_actual;
 	time(&fecha_actual);
@@ -83,15 +101,15 @@ void cANPA::Registrar_tramite(string Pieza_, cHospital Hospital_, unsigned int M
 	tm* Fecha_entrega = localtime(&fecha_actual);
 	Fecha_entrega->tm_mday += estimacion;        //la protesis se entrega en cualquier momento entre un lapso de 10 dias 
 												 //despues de la solicitud aceptada
-	cRegistros* aux= new cRegistros(Hospital_.get_Nombre(), Buscar_Medico(Hospital_, Matricula_Med), localtime(&fecha_actual),Fecha_entrega , estimacion, Pieza_, Nombre_pac, Nombre_fuente);
+	cRegistros* aux= new cRegistros(Hospital_->get_Nombre(), Buscar_Medico(Hospital_, Matricula_Med), localtime(&fecha_actual),Fecha_entrega , estimacion, Pieza_, Nombre_pac, Nombre_fuente);
 	
 	this->lista_registros + aux;
 }
 
-string cANPA::Buscar_Medico(cHospital Hospital_, unsigned int Matricula)
+string cANPA::Buscar_Medico(list<cHospital>::iterator Hospital_, unsigned int Matricula)
 {
-	list<cMedico>::iterator it = Hospital_.get_Medicos().begin();
-	while (it != Hospital_.get_Medicos().end())
+	list<cMedico>::iterator it = Hospital_->get_Medicos().begin();
+	while (it != Hospital_->get_Medicos().end())
 	{
 		if (it->get_Matricula() == Matricula)
 			return it->get_Nombre();
@@ -104,3 +122,8 @@ list<cRegistros>& operator+(list<cRegistros> lista, cRegistros* agregado)
 	lista.push_back(*agregado); //no es necesario agregar una excepcion porque el metodo pushback es a prueba de excepciones
 	                            //fuente:cplusplus
 }
+void operator-(list<cOrtopedia>::iterator original, list<cProtesis>::iterator* eliminado)
+{
+	original->get_stock().erase(*eliminado);
+}
+

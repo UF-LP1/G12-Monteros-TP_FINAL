@@ -7,7 +7,7 @@
 #include "cOrtopedia.h"
 #include "cProtesis.h"
 #include "cRegistros.h"
-
+#include "Funciones_aux.h"
 
 class cANPA {
 	
@@ -24,9 +24,10 @@ public:
 	void Crear_Registro();
 	bool Solicitar_Protesis_A_Ortopedia();
 	bool Solicitar_Protesis_A_Fabricante();
-    bool Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual);
-	void Registrar_tramite(string Pieza_, cHospital Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente);
-	string Buscar_Medico(cHospital Hospital_, unsigned int Matricula);
+    bool Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual, unsigned int Matricula_med_);
+	void Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospital>::iterator Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente);
+	string Buscar_Medico(list<cHospital>::iterator Hospital_, unsigned int Matricula);
 
 };
 list<cRegistros>& operator+(list<cRegistros> lista, cRegistros* agregado);
+void operator-(list<cOrtopedia>:: iterator original, list<cProtesis>::iterator* eliminado);

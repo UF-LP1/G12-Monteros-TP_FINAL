@@ -15,7 +15,9 @@ public:
 	cProt_No_Quirurgica(cProt_No_Quirurgica &copia);
 	~cProt_No_Quirurgica();
 
-	unsigned int get_Largo();
-	unsigned int get_Ancho();
-	unsigned int get_Radio();
+	float get_largo();
+	float get_ancho();
+	string get_material();
+	string get_Articulacion();
+	float get_Radio();
 };

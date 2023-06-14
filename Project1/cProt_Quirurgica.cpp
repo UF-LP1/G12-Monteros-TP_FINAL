@@ -19,3 +19,18 @@ string cProt_Quirurgica::get_Articulacion()
 {
 	return this->Articulacion;
 }
+
+float cProt_Quirurgica::get_ancho()		 //
+{												 //estas tres funciones no tienen utilidad en esta clase 
+	return 0;									 //
+}												 //
+												 //
+float cProt_Quirurgica::get_largo()		         //son declaradas y definidas para evitar que la clase se considere abstracta
+{												 //
+	return 0;									 //
+}												 //
+												 //
+float cProt_Quirurgica::get_Radio()		         //
+{												 //
+	return 0;									 //
+}												 //

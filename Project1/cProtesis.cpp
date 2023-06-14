@@ -33,3 +33,13 @@ bool cProtesis::get_Superior_inferior()
 {
     return this->Superior_Inferior;
 }
+
+void cProtesis::set_Nombre(Organo_Extremidad_Reemplazada set)
+{
+    this->Nombre = set;
+}
+void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado)
+{
+    original.erase(*eliminado);
+}
+

@@ -6,17 +6,17 @@ cPaciente::cPaciente(string Nombre_Apellido_, time_t Feca_Nac_, string Telefono_
 	this->Hospital = "nn";
 	this->Autorizacion = false;
 	this->Medico = "nn";
-	this -> ancho_amputacion = 0;  // las dimensiones de la protesis no quirurgica empiezan en 0 porque 
-	this->Largo_amputacion = 0;	   // las decide el medico al hacer el analisis y otorgar el permiso
+
+
 
 	srand(time(0));
 
-	if (this->Radio_Amputacion > 0) //si hay un radio de amputacion se inicializa la parte danyada con algunas de las opciones no quirurgicas
-	{                               //revisar enum de cPaciente.h
-		this->Organo_Extremidad_Danyada = (rand() % 5 + 1);
+	if (5>this->Radio_Amputacion > 0)                             //si hay un radio de amputacion se inicializa la parte danyada con algunas de las opciones no quirurgicas
+	{                                                             //revisar enum de cPaciente.h
+		this->Necesitada_NQ.set_Nombre( (Organo_Extremidad_Reemplazada)(rand() % 5 + 1));
 	}
 	else {                          // si el radio de amputacion es 0 se inicializa la parte danyada con alguna de las opciones quirurgicas  
-		this->Organo_Extremidad_Danyada = rand() % 5 + 6;
+		this->Necesitada_Q.set_Nombre( (Organo_Extremidad_Reemplazada)(rand() % 5 + 6));
 	}
 }
 
@@ -59,16 +59,6 @@ string cPaciente::get_Medico()
 	return this->Medico;
 }
 
-void cPaciente::set_Dim_ancho(unsigned int ancho)
-{
-	this->ancho_amputacion = ancho;
-}
-
-void cPaciente::set_Dim_largo(unsigned int largo)
-{
-	this->Largo_amputacion = largo;
-}
-
 float cPaciente::get_radio()
 {
 	return this->Radio_Amputacion;
@@ -76,17 +66,31 @@ float cPaciente::get_radio()
 
 float cPaciente::get_largo()
 {
-	return this->Largo_amputacion;
+	return this->Necesitada_NQ.get_largo();
 }
 
 float cPaciente::get_ancho()
 {
-	return this->ancho_amputacion;
+	return this->Necesitada_NQ.get_ancho();
 }
 
-unsigned int cPaciente::get_danyada()
+
+Organo_Extremidad_Reemplazada cPaciente::get_danyada()
 {
-	return this->Organo_Extremidad_Danyada;
+	if (Radio_Amputacion > 0)
+		return Necesitada_NQ.get_nombre();
+	else
+		return Necesitada_Q.get_nombre();
+}
+
+cProt_No_Quirurgica cPaciente::get_Prot_NQ()
+{
+	return this->Necesitada_NQ;
+}
+
+cProt_Quirurgica cPaciente::get_Prot_Q()
+{
+	return this->Necesitada_Q;
 }
 
 

@@ -12,16 +12,17 @@ private:
 	const string Nombre;
 	const string Direccion;
 	list<cProtesis> Stock_Protesis;
-	const string Especializacion;
 
 public:
-	cOrtopedia(string Nombre_, string Direccion_, string Especializacion_, list<cProtesis> lista_stock);
+	cOrtopedia(string Nombre_, string Direccion_, list<cProtesis> lista_stock);
 	~cOrtopedia();
+	string get_Direccion();
 	bool Buscar_Protesis(float Radio_Amp, string Alergias[] );
 	bool Buscar_Por_Alergias(list<cProtesis> lista_filtrada, string Alergias[]);
 	bool Buscar_Por_radio(float Radio_Amp);
 	list<cProtesis> get_stock();
-	void operator-(cProtesis* eliminado);
+	
+	string get_Nombre();
 	
 };
-
+void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado);

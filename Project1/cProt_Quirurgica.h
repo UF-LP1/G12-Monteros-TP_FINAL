@@ -13,4 +13,7 @@ public:
 	~cProt_Quirurgica();
 	string  get_material();
 	string  get_Articulacion();
+	float get_ancho();
+	float get_largo();
+	float get_Radio();
 };

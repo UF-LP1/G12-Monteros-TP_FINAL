@@ -18,6 +18,6 @@ private:
 	const string Nombre_Fuente;
 
 public:
-	cRegistros(string Hospital_, string Medico_, tm* Fecha_sol_, tm* Fecha_Entrega_, unsigned int Estimacion_, string Pieza_, string Paciente_, string Nombre_Fuente_);
+	cRegistros(string Hospital_, string Medico_, tm* Fecha_sol_, tm* Fecha_Entrega_, unsigned int Estimacion_, Organo_Extremidad_Reemplazada Pieza_, string Paciente_, string Nombre_Fuente_);
 	~cRegistros();
 };

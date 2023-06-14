@@ -7,7 +7,6 @@
 
 using namespace std;
 #define N 5 //Cantidad maxima de alergias de una persona
-enum Organo_Extremidad_danyada{ Brazo = 1, Pierna, Mano, Dedo, Pie, Hombro, Cadera, Clavicula, Placa_Metalica, Implante_Dental};
 class cPaciente {
 private:
 
@@ -20,8 +19,8 @@ private:
 	const float Radio_Amputacion;
 	bool Autorizacion;
 	string Medico;
-	cProt_No_Quirurgica Necesitada_Q();
-	cProt_Quirurgica Necesitada_NQ();
+	cProt_Quirurgica Necesitada_Q;
+	cProt_No_Quirurgica Necesitada_NQ;
 
 
 public:
@@ -35,10 +34,10 @@ public:
 	string get_Hospital();
 	bool get_Autorizacion();
 	string get_Medico();
-	void set_Dim_ancho(unsigned int ancho);
-	void set_Dim_largo(unsigned int largo);
 	float get_radio();
 	float get_largo();
 	float get_ancho();
-	unsigned int get_danyada();
+	Organo_Extremidad_Reemplazada get_danyada();
+	cProt_No_Quirurgica get_Prot_NQ();
+	cProt_Quirurgica get_Prot_Q();
 };

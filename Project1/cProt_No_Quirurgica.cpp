@@ -9,8 +9,8 @@ cProt_No_Quirurgica::cProt_No_Quirurgica(Organo_Extremidad_Reemplazada Nombre_, 
 
 cProt_No_Quirurgica::cProt_No_Quirurgica(cProt_No_Quirurgica& copia):cProtesis(copia)
 {
-	this->Dim_Ancho = copia.get_Ancho();
-	this->Dim_Largo = copia.get_Largo();
+	this->Dim_Ancho = copia.get_ancho();
+	this->Dim_Largo = copia.get_largo();
 	this->Radio_Conexion = copia.get_Radio();
 }
 
@@ -18,17 +18,27 @@ cProt_No_Quirurgica::~cProt_No_Quirurgica()
 {
 }
 
-unsigned int cProt_No_Quirurgica::get_Largo()
+float cProt_No_Quirurgica::get_largo()
 {
 	return this->Dim_Largo;
 }
 
-unsigned int cProt_No_Quirurgica::get_Ancho()
+float cProt_No_Quirurgica::get_ancho()
 {
 	return this->Dim_Ancho;
 }
+													  //
+string cProt_No_Quirurgica::get_material()			  //
+{													  //
+	return "Acero";									  //estas dos funciones no tienen utilidad en las protesis no quirurgicas
+}													  //se declaran y definen para evitar que la clase sea abstracta 
+													  //
+string cProt_No_Quirurgica::get_Articulacion()		  //
+{
+	return "Miembro";
+}
 
-unsigned int cProt_No_Quirurgica::get_Radio()
+float cProt_No_Quirurgica::get_Radio()
 {
 	return this->Radio_Conexion;
 }
