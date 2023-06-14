@@ -22,9 +22,9 @@ bool operator==(list<cOrtopedia>::iterator izquierda, list<cOrtopedia>::iterator
 		return false;
 }
 
-bool operator!=(list<cOrtopedia>::iterator Total, list<cOrtopedia> Convenida)
+bool operator!=(list<cOrtopedia*>::iterator Total, list<cOrtopedia*> Convenida)
 {
-	list<cOrtopedia>::iterator it = Convenida.begin();
+	list<cOrtopedia*>::iterator it = Convenida.begin();
 
 	while (it != Convenida.end())
 	{

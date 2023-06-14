@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de encabezado\Input Data_files">
+      <UniqueIdentifier>{57c9dc38-e3ff-4601-97aa-d127c99e98c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cPaciente.h">
@@ -86,5 +89,22 @@
     <ClCompile Include="Funciones_aux.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Input Data_files\Ortopedias.csv">
+      <Filter>Archivos de encabezado\Input Data_files</Filter>
+    </None>
+    <None Include="Input Data_files\Hospitales.csv">
+      <Filter>Archivos de encabezado\Input Data_files</Filter>
+    </None>
+    <None Include="Input Data_files\Fabricantes.csv">
+      <Filter>Archivos de encabezado\Input Data_files</Filter>
+    </None>
+    <None Include="Input Data_files\Pacientes.csv">
+      <Filter>Archivos de encabezado\Input Data_files</Filter>
+    </None>
+    <None Include="Input Data_files\Protesis.csv">
+      <Filter>Archivos de encabezado\Input Data_files</Filter>
+    </None>
   </ItemGroup>
 </Project>

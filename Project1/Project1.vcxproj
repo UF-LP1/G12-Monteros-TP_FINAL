@@ -153,6 +153,13 @@
     <ClCompile Include="Funciones_aux.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Input Data_files\Fabricantes.csv" />
+    <None Include="Input Data_files\Hospitales.csv" />
+    <None Include="Input Data_files\Ortopedias.csv" />
+    <None Include="Input Data_files\Pacientes.csv" />
+    <None Include="Input Data_files\Protesis.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

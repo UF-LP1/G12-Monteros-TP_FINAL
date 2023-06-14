@@ -1,0 +1,31 @@
+Radio_Amp , Nombre , Fecha_Fab , Fabricante , Superior_Inferior , Largo , Ancho , Articulacion , Material
+4.5 , Brazo , 23/02/2019 , Stephano , true , 20.4 , 19.1 , ninguna , Bronce 
+9.2 , pierna , 04/11/2020 , Ariana_Pereyra , false , 90.0 , 20.0 , ninguna , hierro 
+2.5 , Mano , 03/01/2023 , Agustina , true , 10.5 , 8.0 , ninguna , Bronce 
+0.3 , Dedo , 15/04/2023 , Fernando_Oras , true , 8.3 , 0.2 , ninguna , Titanio 
+4.5 , Pie , 30/08/2020 , Juliana , false , 7.8 , 8.9 , ninguna , oricalco
+0 , Hombro , 05/11/2022 , Agustina , true , 0 , 0 , Hombro , Platino
+0 , Cadera , 06/07/2021 , Stephano , false , 0 , 0 , Cadera , Titanio
+0 , Clavicula , 15/04/2023 , Ariana_Pereyra , true , 0 , 0 , Clavicula , Hierro 
+0 , Placa_Metalica , 20/09/2022 , Agustina , false , 0 , 0 , Pierna , Platino 
+0 , Implante_Dental , 25/04/2023 , Stephano , true , 0 ,0 , Mandibula , Titanio
+4.1 , Brazo , 21/12/2011 , Stephano , true , 20.4 , 19.1 , ninguna , Aluminio 
+10.0 , pierna , 10/10/2021 , Juliana , false , 50.0 , 10.0 , ninguna , Cobre 
+2.0 , Mano , 01/05/2022 , Fernando_Oras , true , 11.5 , 8.3 , ninguna , Bronce 
+0.2 , Dedo , 11/11/2013 , Agustina , true , 7.2 , 0.3 , ninguna , Plastico 
+5.0 , Pie , 15/10/2021 , Ariana_Pereyra , false , 6.8 , 4.9 , ninguna , Plastico
+0 , Manguito_Rotador , 02/01/2023 , Ariana_Pereyra , true , 0 , 0 , Hombro , Platino
+0 , Cadera , 08/10/2021 , Agustina , false , 0 , 0 , Cadera , Plastico
+0 , Clavicula , 20/12/2020 , Juliana , true , 0 , 0 , Clavicula , Platino 
+0 , Placa_Metalica , 25/10/2019 , Fernando_Oras , true , 0 , 0 , Brazo , Titanio 
+0 , Implante_Dental , 15/11/2022 , Stephano , true , 0 ,0 , Mandibula , Platino
+5.2 , Brazo , 12/07/2018 , Ariana_Pereyra , true , 21.4 , 19.0 , ninguna , Madera_De_Roble 
+8.2 , pierna , 05/12/2023 , Stephano , false , 70.0 , 15.4 , ninguna , Aluminio 
+2.8 , Mano , 05/06/2020 , Juliana , true , 10.1 , 8.7 , ninguna , Madera_De_Abedul 
+0.5 , Dedo , 11/09/2022 , Agustina , true , 8.9 , 1.2 , ninguna , Mithrilo 
+7.5 , Pie , 07/10/2015 , Ariana_Pereyra , false , 7.9 , 8.4 , ninguna , oricalco
+0 , Hombro , 01/07/2023 , Fernando_Oras , true , 0 , 0 , Hombro , Thaumio
+0 , Cadera , 09/03/2011 , Juliana , false , 0 , 0 , Cadera , Platino
+0 , Clavicula , 11/01/2022 , Stephano , true , 0 , 0 , Clavicula , Titanio 
+0 , Placa_Metalica , 15/08/2021 , Agustina , false , 0 , 0 , Pierna , Platino 
+0 , Implante_Dental , 25/04/2023 , Stephano , true , 0 ,0 , Mandibula , Titanio

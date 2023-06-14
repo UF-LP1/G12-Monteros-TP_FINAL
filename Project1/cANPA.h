@@ -8,6 +8,7 @@
 #include "cProtesis.h"
 #include "cRegistros.h"
 #include "Funciones_aux.h"
+#include "cProt_No_Quirurgica.h"
 
 class cANPA {
 	

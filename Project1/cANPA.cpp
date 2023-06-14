@@ -142,6 +142,8 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 
 				if (it_prot == &paciente_actual.get_Prot_NQ())
 				{
+					//cProt_No_Quirurgica* aux =dynamic_cast<cProt_No_Quirurgica*>(it_prot) efectivamente esto no funciona a menos que tengas un puntero en todas tus listas
+					//revisar si la alternativa de los gets virtuales funciona
 	
 						Registrar_tramite(paciente_actual.get_danyada(), it_hosp, Matricula_med_, paciente_actual.get_Nombre_Ap(), tipo_fuente += it_Afiliadas->get_Nombre()); 
 
@@ -178,7 +180,7 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 
 void cANPA::Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospital>::iterator Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente)
 {
-	tm fecha_actual;
+	time_t fecha_actual;
 	time(&fecha_actual);
 	srand(time(0));
 

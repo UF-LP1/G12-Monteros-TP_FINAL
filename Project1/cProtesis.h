@@ -25,11 +25,6 @@ public:
 	tm get_Fabricacion();
 	string get_Fabricante();
 	bool get_Superior_inferior();
-	float virtual get_ancho() = 0;	         //por razones de comparacion de datos que se necesitan en diversos metodos
-	float virtual get_largo() = 0; 	         //defino metodos virtuales para poder acceder a los miembros de objetos de clases hijas
-	float virtual get_Radio() = 0;			 //desde un iterador de una lista de cProtesis
-	string virtual get_material() = 0;       
-	string virtual get_Articulacion() = 0;
 	void set_Nombre(Organo_Extremidad_Reemplazada set);
 };
 void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado);

@@ -15,8 +15,8 @@ private:
 	list<cMedico> Lista_Medicos;
 	const string Direccion;
 	const string Especialidad;
-	list<cOrtopedia> lista_Afiliadas;
-	list<cPaciente> Lista_pacientes ;
+	list<cOrtopedia*> lista_Afiliadas;
+	list<cPaciente*> Lista_pacientes ;
 
 public:
 	cHospital(string Nombre_,string Direccion_,string Especialidad_, list<cMedico> Lista_Medicos_, string Direccion, string Especialidad, list<cOrtopedia> Lista_Afiliadas_);
@@ -24,6 +24,6 @@ public:
 	void set_Pacientes(list<cPaciente> lista_actual);
 	bool Evaluar_Paciente(cPaciente Paciente_Actual);
 	string get_Nombre();
-	list<cOrtopedia> get_afiliadas();
+	list<cOrtopedia*> get_afiliadas();
 	list<cMedico> get_Medicos();
 };
