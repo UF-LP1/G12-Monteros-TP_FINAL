@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef _CHOSPITAL_H
+#define _CHOSPITAL_H
+
 #include <string>
 #include <list>
 #include "cMedico.h"
@@ -27,3 +30,5 @@ public:
 	list<cOrtopedia*> get_afiliadas();
 	list<cMedico> get_Medicos();
 };
+
+#endif

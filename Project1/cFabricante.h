@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef _CFABRICANTE_H
+#define _CFABRICANTE_H
+
 #include <string>
 
 using namespace std;
@@ -18,3 +21,4 @@ public:
 	string get_Direccion();
 	unsigned int get_Num_Habilitacion();
 };
+#endif

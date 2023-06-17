@@ -1,9 +1,10 @@
 #pragma once
 
+#ifndef _CPROTESIS_H
+#define _CPROTESIS_H
+
 #include <string>
 #include <ctime>
-#include "cProt_No_Quirurgica.h"
-#include "cProt_Quirurgica.h"
 #include <list>
 
 using namespace std;
@@ -21,10 +22,18 @@ public:
 	cProtesis(Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_);
 	~cProtesis();
 	cProtesis(list<cProtesis>::iterator copia);
+	cProtesis();
 	Organo_Extremidad_Reemplazada get_nombre();
 	tm get_Fabricacion();
 	string get_Fabricante();
 	bool get_Superior_inferior();
+	float virtual get_largo()=0;
+	float virtual get_ancho() = 0;
+	float virtual get_Radio() = 0;
+	string virtual get_Articulacion() = 0;
+	string virtual get_material() = 0;
 	void set_Nombre(Organo_Extremidad_Reemplazada set);
 };
 void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado);
+
+#endif 

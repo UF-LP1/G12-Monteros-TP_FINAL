@@ -1,17 +1,17 @@
 #include "cPaciente.h"
 
-cPaciente::cPaciente(string Nombre_Apellido_, tm Feca_Nac_, string Telefono_, string Alergias_[N], string Hospital_, float Radio_Amp_) : Nombre_Apellido(Nombre_Apellido_), Fecha_Nac(Feca_Nac_),Alergias(Alergias_), Radio_Amputacion(Radio_Amp_)
+cPaciente::cPaciente(string Nombre_Apellido_, tm Feca_Nac_, string Telefono_, string* Alergias_, string Hospital_, float Radio_Amp_) : Nombre_Apellido(Nombre_Apellido_), Fecha_Nac(Feca_Nac_), Radio_Amputacion(Radio_Amp_)
 {
 	this->Telefono = Telefono_;
 	this->Hospital = "nn";
 	this->Autorizacion = false;
 	this->Medico = "nn";
-
+	this->Alergias = Alergias_;
 
 
 	srand(time(0));
 
-	if (5>this->Radio_Amputacion > 0)                             //si hay un radio de amputacion se inicializa la parte danyada con algunas de las opciones no quirurgicas
+	if (this->Radio_Amputacion > 0)                             //si hay un radio de amputacion se inicializa la parte danyada con algunas de las opciones no quirurgicas
 	{                                                             //revisar enum de cPaciente.h
 		this->Necesitada_NQ.set_Nombre( (Organo_Extremidad_Reemplazada)(rand() % 5 + 1));
 	}

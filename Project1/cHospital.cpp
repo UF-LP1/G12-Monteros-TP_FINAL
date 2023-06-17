@@ -5,7 +5,7 @@ cHospital::cHospital(string Nombre_, string Direccion_, string Especialidad_, li
 	list<cMedico>::iterator it_med = this->Lista_Medicos.begin();
 	this->Lista_Medicos.insert(it_med, Lista_Medicos_.begin(), Lista_Medicos_.end());
 
-	list<cOrtopedia>::iterator it_ort = this->lista_Afiliadas.begin();
+	list<cOrtopedia*>::iterator it_ort = this->lista_Afiliadas.begin();
 	this->lista_Afiliadas.insert(it_ort, Lista_Afiliadas_.begin(), Lista_Afiliadas_.end());
 }
 
@@ -15,7 +15,7 @@ cHospital::~cHospital()
 
 void cHospital::set_Pacientes(list<cPaciente> lista_actual)
 {
-	list<cPaciente>::iterator it = this->Lista_pacientes.begin();
+	list<cPaciente*>::iterator it = this->Lista_pacientes.begin();
 	this->Lista_pacientes.insert(it, lista_actual.begin(), lista_actual.end());
 }
 

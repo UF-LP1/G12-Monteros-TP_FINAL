@@ -1,6 +1,11 @@
 #pragma once
+
+#ifndef _CMEDICO_H
+#define _CMEDICO_H
+
 #include <string>
 #include "cPaciente.h"
+
 using namespace std;
 
 class cMedico {
@@ -18,3 +23,4 @@ public:
 	bool get_Disponibilidad();
 	unsigned int get_Matricula();
 };
+#endif

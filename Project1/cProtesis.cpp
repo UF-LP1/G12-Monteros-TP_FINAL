@@ -19,6 +19,11 @@ Organo_Extremidad_Reemplazada cProtesis::get_nombre()
     return this->Nombre;
 }
 
+cProtesis::cProtesis():Nombre(Brazo), Fecha_Fabricacion(), Fabricante(), Superior_Inferior()
+{
+}
+
+
 tm cProtesis::get_Fabricacion()
 {
     return this->Fecha_Fabricacion;

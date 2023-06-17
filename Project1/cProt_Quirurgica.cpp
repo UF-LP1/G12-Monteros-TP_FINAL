@@ -10,6 +10,10 @@ cProt_Quirurgica::~cProt_Quirurgica()
 {
 }
 
+cProt_Quirurgica::cProt_Quirurgica():cProtesis()
+{
+}
+
 string cProt_Quirurgica::get_material()
 {
 	return this->Material;

@@ -1,6 +1,6 @@
 #include "cProt_No_Quirurgica.h"
 
-cProt_No_Quirurgica::cProt_No_Quirurgica(Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_, unsigned int Dim_Largo_, unsigned int Dim_Ancho_, unsigned int Radio_Conexion_): cProtesis(Nombre_,Fecha_Fabricacion_, Fabricante_, Superior_Inferior_)
+cProt_No_Quirurgica::cProt_No_Quirurgica(Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_, float Dim_Largo_, float Dim_Ancho_, float Radio_Conexion_): cProtesis(Nombre_,Fecha_Fabricacion_, Fabricante_, Superior_Inferior_)
 {
 	this->Dim_Ancho = Dim_Ancho_;
 	this->Dim_Largo = Dim_Largo_;
@@ -14,6 +14,12 @@ cProt_No_Quirurgica::cProt_No_Quirurgica(cProt_No_Quirurgica& copia):cProtesis(c
 	this->Radio_Conexion = copia.get_Radio();
 }
 
+cProt_No_Quirurgica::cProt_No_Quirurgica() :cProtesis()
+{
+	this->Dim_Ancho = 0;
+    this->Dim_Largo = 0;
+	this->Radio_Conexion = 0;
+}
 cProt_No_Quirurgica::~cProt_No_Quirurgica()
 {
 }
@@ -41,6 +47,17 @@ string cProt_No_Quirurgica::get_Articulacion()		  //
 float cProt_No_Quirurgica::get_Radio()
 {
 	return this->Radio_Conexion;
+}
+
+void cProt_No_Quirurgica::set_Dim_ancho(float set_)
+{
+	this->Dim_Ancho = set_;
+
+}
+
+void cProt_No_Quirurgica::set_Dim_largo(float set_)
+{
+	this->Dim_Largo = set_;
 }
 
 

@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef _CORTOPEDIA_H
+#define _CORTOPEDIA_H
+
 #include <string>
 #include <list>
 #include "cProtesis.h"
@@ -11,7 +14,7 @@ class cOrtopedia {
 private: 
 	const string Nombre;
 	const string Direccion;
-	list<cProtesis> Stock_Protesis;
+	list<cProtesis*> Stock_Protesis;
 
 public:
 	cOrtopedia(string Nombre_, string Direccion_, list<cProtesis> lista_stock);
@@ -26,3 +29,5 @@ public:
 	
 };
 void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado);
+
+#endif 

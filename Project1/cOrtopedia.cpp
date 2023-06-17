@@ -2,7 +2,7 @@
 
 cOrtopedia::cOrtopedia(string Nombre_, string Direccion_, list<cProtesis> lista_stock_): Nombre(Nombre_), Direccion(Direccion_)
 {
-	list<cProtesis>::iterator it = this->Stock_Protesis.begin();
+	list<cProtesis*>::iterator it = this->Stock_Protesis.begin();
 	this->Stock_Protesis.insert(it, lista_stock_.begin(), lista_stock_.end());
 }
 
@@ -30,7 +30,7 @@ bool cOrtopedia::Buscar_Por_radio(float Radio_Amp)
 	return false;
 }
 
-list<cProtesis> cOrtopedia::get_stock()
+list<cProtesis*> cOrtopedia::get_stock()
 {
 	return this->Stock_Protesis;
 }
