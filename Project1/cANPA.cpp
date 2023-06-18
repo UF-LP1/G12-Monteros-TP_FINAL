@@ -5,7 +5,7 @@
 #endif
 #define __STDC_WANT_LIB_EXT1__ 1
 
-cANPA::cANPA(list<cFabricante> Fabricantes_, list<cHospital> Hospitales_, list<cOrtopedia> Ortopedias_)
+cANPA::cANPA(list<cFabricante*> Fabricantes_, list<cHospital*> Hospitales_, list<cOrtopedia*> Ortopedias_)
 {
 	list<cFabricante*>::iterator it_Fab = this->Fabricantes.begin();
 	list<cHospital*>::iterator it_Hos = this->Hospitales.begin();
@@ -14,6 +14,7 @@ cANPA::cANPA(list<cFabricante> Fabricantes_, list<cHospital> Hospitales_, list<c
 	this->Fabricantes.insert(it_Fab, Fabricantes.begin(), Fabricantes.end());
 	this->Hospitales.insert(it_Hos, Hospitales.begin(), Hospitales.end());
 	this->Ortopedias.insert(it_Ort, Ortopedias.begin(), Ortopedias.end());
+	this->lista_registros.clear();
 }
 
 cANPA::~cANPA()
@@ -48,16 +49,16 @@ bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Pa
 
 		if ((rand() % 4 + 1) == 4) //una de cada 4 veces el fabricante acepta hacer una protesis a medida
 		{
-			time_t* fechaactual;
-			time(fechaactual);
+			time_t fechaactual;
+			time(&fechaactual);
 
-			tm* Actual;
-			localtime_s(Actual, fechaactual);
+			tm Actual;
+			localtime_s(&Actual, &fechaactual);
 
 			Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += (*it_Fab)->get_Nombre());
 			if (Paciente_Actual.get_radio() > 0)
 			{
-				cProt_No_Quirurgica Fabricada(Paciente_Actual.get_danyada(),*Actual , (*it_Fab)->get_Nombre(), Paciente_Actual.get_Prot_NQ().get_Superior_inferior(), Paciente_Actual.get_Prot_NQ().get_largo(), Paciente_Actual.get_Prot_NQ().get_ancho(), Paciente_Actual.get_radio());
+				cProt_No_Quirurgica Fabricada(Paciente_Actual.get_danyada(),Actual , (*it_Fab)->get_Nombre(), Paciente_Actual.get_Prot_NQ().get_Superior_inferior(), Paciente_Actual.get_Prot_NQ().get_largo(), Paciente_Actual.get_Prot_NQ().get_ancho(), Paciente_Actual.get_radio());
 				
 			}
 			return true;
@@ -97,11 +98,11 @@ bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente Paciente_Actual, 
 					//cProtesis* aux = new cProt_No_Quirurgica();    //revisar si esto funciona
 					// aux = (cProt_No_Quirurgica*)(&it_prot);
 
-					if (it_prot == &(Paciente_Actual.get_Prot_NQ()))
+					if (it_prot ==  Paciente_Actual.get_Prot_NQ())
 					{
 						Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += (*it_No_Convenidas)->get_Nombre());
 
-						it_No_Convenidas-&it_prot;
+						it_No_Convenidas - &it_prot;
 						return true;
 					}
 
@@ -114,7 +115,7 @@ bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente Paciente_Actual, 
 					//cProtesis* aux = new cProt_Quirurgica();    //revisar si esto funciona
 					//aux = (cProt_Quirurgica*)(&it_prot);   
 
-					if (it_prot == &Paciente_Actual.get_Prot_Q())
+					if (it_prot == Paciente_Actual.get_Prot_Q())
 					{
 						Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += (*it_No_Convenidas)->get_Nombre());
 						it_No_Convenidas -&it_prot; 
@@ -158,7 +159,7 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 			while (it_prot != (*it_Afiliadas)->get_stock().end())
 			{
 
-				if (it_prot == &paciente_actual.get_Prot_NQ())
+				if (it_prot == paciente_actual.get_Prot_NQ())
 				{
 					//cProt_No_Quirurgica* aux =dynamic_cast<cProt_No_Quirurgica*>(it_prot) efectivamente esto no funciona a menos que tengas un puntero en todas tus listas
 					//revisar si la alternativa de los gets virtuales funciona
@@ -178,17 +179,19 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 			}
 		}
 		else
+		{
 			while (it_prot != (*it_Afiliadas)->get_stock().end())
 			{
 
-				if (it_prot == &paciente_actual.get_Prot_Q())
+				if (it_prot == paciente_actual.get_Prot_Q())
 				{
-						Registrar_tramite(paciente_actual.get_danyada(), it_hosp, Matricula_med_, paciente_actual.get_Nombre_Ap(), tipo_fuente += (*it_Afiliadas)->get_Nombre());
-						it_Afiliadas-&it_prot;
-						return true;
+					Registrar_tramite(paciente_actual.get_danyada(), it_hosp, Matricula_med_, paciente_actual.get_Nombre_Ap(), tipo_fuente += (*it_Afiliadas)->get_Nombre());
+					it_Afiliadas - &it_prot;
+					return true;
 				}
 				it_prot++;
 			}
+		}
 		it_Afiliadas++;
 	}
 
@@ -198,35 +201,36 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 
 void cANPA::Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospital*>::iterator Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente)
 {
-	time_t* fecha_actual;
-	time(fecha_actual);
+	time_t fecha_actual;
+	time(&fecha_actual);
 	srand(time(0));
 
 	unsigned int estimacion = rand() % 10 + 1;
-	tm* Fecha_Actual;
-	localtime_s(Fecha_Actual, fecha_actual);
+	tm Fecha_Actual;
+	localtime_s(&Fecha_Actual, &fecha_actual);
 
-	tm* fecha_entrega=Fecha_Actual;
-	fecha_entrega->tm_mday += estimacion;
+	tm fecha_entrega=Fecha_Actual;
+	fecha_entrega.tm_mday += estimacion;
 	                                             //la protesis se entrega en cualquier momento entre un lapso de 10 dias 
 												 //despues de que la solicitud fue aceptada
-	cRegistros* aux= new cRegistros((*Hospital_)->get_Nombre(), Buscar_Medico(Hospital_, Matricula_Med), Fecha_Actual, fecha_entrega, estimacion, Pieza_, Nombre_pac, Nombre_fuente);
+	cRegistros* aux= new cRegistros((*Hospital_)->get_Nombre(), Buscar_Medico(Hospital_, Matricula_Med), &Fecha_Actual, &fecha_entrega, estimacion, Pieza_, Nombre_pac, Nombre_fuente);
 	
-	this->lista_registros + aux;
+	this->lista_registros + aux;  // se crea el registro con los datos recibidos y se agrega a la lista
 }
 
 string cANPA::Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int Matricula)
 {
-	list<cMedico>::iterator it = (*Hospital_)->get_Medicos().begin();
+	list<cMedico*>::iterator it =  (*Hospital_)->get_Medicos().begin();
+
 	while (it != (*Hospital_)->get_Medicos().end())
 	{
-		if (it->get_Matricula() == Matricula)
-			return it->get_Nombre();
+		if ((*it)->get_Matricula() == Matricula)
+			return (*it)->get_Nombre();
 	}
 	// no se necesita una excepcion para el caso de que no exista el medico, porque la existencia de dicho medico ya fue comprobada anteriormente en el codigo
 }
 
-list<cRegistros>& operator+(list<cRegistros*> lista, cRegistros* agregado)
+void operator+(list<cRegistros*> lista, cRegistros* agregado)
 {
 	lista.push_back(agregado); //no es necesario agregar una excepcion porque el metodo pushback es a prueba de excepciones
 	                            //fuente:cplusplus

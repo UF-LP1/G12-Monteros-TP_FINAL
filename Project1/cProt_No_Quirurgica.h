@@ -16,7 +16,7 @@ private:
 
 public:
 	cProt_No_Quirurgica(Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Infeior, float Dim_Largo_, float Dim_Ancho_, float Radio_Conexion);
-	cProt_No_Quirurgica(cProt_No_Quirurgica &copia);
+	//cProt_No_Quirurgica(cProt_No_Quirurgica &copia);
 	cProt_No_Quirurgica();
 	~cProt_No_Quirurgica();
 

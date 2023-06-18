@@ -15,7 +15,7 @@ class cHospital {
 
 private:
 	const string Nombre;
-	list<cMedico> Lista_Medicos;
+	list<cMedico*> Lista_Medicos;
 	const string Direccion;
 	const string Especialidad;
 	list<cOrtopedia*> lista_Afiliadas;
@@ -28,7 +28,7 @@ public:
 	bool Evaluar_Paciente(cPaciente Paciente_Actual);
 	string get_Nombre();
 	list<cOrtopedia*> get_afiliadas();
-	list<cMedico> get_Medicos();
+	list<cMedico*> get_Medicos();
 };
 
 #endif

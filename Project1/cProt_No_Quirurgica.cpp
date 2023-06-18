@@ -7,12 +7,12 @@ cProt_No_Quirurgica::cProt_No_Quirurgica(Organo_Extremidad_Reemplazada Nombre_, 
 	this->Radio_Conexion = Radio_Conexion_;
 }
 
-cProt_No_Quirurgica::cProt_No_Quirurgica(cProt_No_Quirurgica& copia):cProtesis(copia)
-{
-	this->Dim_Ancho = copia.get_ancho();
-	this->Dim_Largo = copia.get_largo();
-	this->Radio_Conexion = copia.get_Radio();
-}
+//cProt_No_Quirurgica::cProt_No_Quirurgica(cProt_No_Quirurgica& copia):cProtesis(copia)
+//{
+//	this->Dim_Ancho = copia.get_ancho();
+//	this->Dim_Largo = copia.get_largo();
+//	this->Radio_Conexion = copia.get_Radio();
+//}
 
 cProt_No_Quirurgica::cProt_No_Quirurgica() :cProtesis()
 {

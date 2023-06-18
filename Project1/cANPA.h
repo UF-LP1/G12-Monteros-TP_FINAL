@@ -22,7 +22,7 @@ private:
 
 public:
 
-	cANPA(list<cFabricante>Fabricantes_, list<cHospital>Hospitales_, list<cOrtopedia> Ortopedias_);
+	cANPA(list<cFabricante*>Fabricantes_, list<cHospital*>Hospitales_, list<cOrtopedia*> Ortopedias_);
 	~cANPA();
 	bool Solicitar_Protesis_A_Ortopedia();
 	bool Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Paciente_Actual, unsigned int Matricula_med_);
@@ -32,7 +32,7 @@ public:
 	string Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int Matricula);
 
 };
-list<cRegistros>& operator+(list<cRegistros*> lista, cRegistros* agregado);
+void operator+(list<cRegistros*> lista, cRegistros* agregado);
 void operator-(list<cOrtopedia*>:: iterator original, list<cProtesis*>::iterator* eliminado);
 
 #endif

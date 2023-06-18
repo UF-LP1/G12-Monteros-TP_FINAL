@@ -18,9 +18,10 @@ public:
 	cMedico(string Nombre_Apellido_, unsigned int Matricula_, string Hospitales_);
 	~cMedico();
 
-	bool Otorgar_Autorizacion(cPaciente Paciente_actual);
+	bool Otorgar_Autorizacion(cPaciente Paciente_actual_);
 	string get_Nombre();
 	bool get_Disponibilidad();
 	unsigned int get_Matricula();
 };
+
 #endif

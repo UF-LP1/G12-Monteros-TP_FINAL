@@ -2,7 +2,7 @@
 
 cHospital::cHospital(string Nombre_, string Direccion_, string Especialidad_, list<cMedico> Lista_Medicos_, string Direccion, string Especialidad, list<cOrtopedia> Lista_Afiliadas_): Nombre(Nombre_),Direccion(Direccion_), Especialidad(Especialidad_)
 {
-	list<cMedico>::iterator it_med = this->Lista_Medicos.begin();
+	list<cMedico*>::iterator it_med = this->Lista_Medicos.begin();
 	this->Lista_Medicos.insert(it_med, Lista_Medicos_.begin(), Lista_Medicos_.end());
 
 	list<cOrtopedia*>::iterator it_ort = this->lista_Afiliadas.begin();
@@ -21,11 +21,11 @@ void cHospital::set_Pacientes(list<cPaciente> lista_actual)
 
 bool cHospital::Evaluar_Paciente(cPaciente Paciente_Actual)
 {
-	list<cMedico>::iterator Med_Aux = this->Lista_Medicos.begin();
+	list<cMedico*>::iterator Med_Aux = this->Lista_Medicos.begin();
 	while (Med_Aux != this->Lista_Medicos.end())
 	{
-		if (Med_Aux->get_Disponibilidad() == true)
-			return Med_Aux->Otorgar_Autorizacion(Paciente_Actual);
+		if ((*Med_Aux)->get_Disponibilidad() == true)
+			return (*Med_Aux)->Otorgar_Autorizacion(Paciente_Actual);
 	}
 	return false;  // caso de que no haya ningun medico disponible en el hospital
 }
@@ -40,7 +40,7 @@ list<cOrtopedia*> cHospital::get_afiliadas()
 	return this->lista_Afiliadas;
 }
 
-list<cMedico> cHospital::get_Medicos()
+list<cMedico*> cHospital::get_Medicos()
 {
 	return this->Lista_Medicos;
 }
