@@ -12,6 +12,7 @@
 using namespace std;
 #define N 5 //Cantidad maxima de alergias de una persona
 
+
 class cPaciente {
 private:
 
@@ -19,7 +20,7 @@ private:
 	const string Nombre_Apellido;
 	const tm Fecha_Nac;
 	string Telefono;
-	string* Alergias;
+	list<string*> Alergias;
 	string Hospital;
 	const float Radio_Amputacion;
 	bool Autorizacion;
@@ -30,7 +31,7 @@ private:
 
 public:
 
-	cPaciente(string Nombre_Apellido_, tm Feca_Nac_, string Telefono_, string* Alergias_, string Hospital_, float Radio_Amp_);
+	cPaciente(string Nombre_Apellido_, tm Feca_Nac_, string Telefono_, list<string*> Alergias_, float Radio_Amp_);
 	~cPaciente();
 	void set_Autorizacion(bool Auto);
 	void set_Medico(string Medico_);

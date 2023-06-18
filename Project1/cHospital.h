@@ -19,12 +19,12 @@ private:
 	const string Direccion;
 	const string Especialidad;
 	list<cOrtopedia*> lista_Afiliadas;
-	list<cPaciente*> Lista_pacientes ;
+	queue<cPaciente*> Cola_pacientes ;
 
 public:
-	cHospital(string Nombre_,string Direccion_,string Especialidad_, list<cMedico> Lista_Medicos_, string Direccion, string Especialidad, list<cOrtopedia> Lista_Afiliadas_);
+	cHospital(string Nombre_,string Direccion_,string Especialidad_, list<cMedico*> Lista_Medicos_, list<cOrtopedia*> Lista_Afiliadas_, queue<cPaciente*> Cola_pac_);
 	~cHospital();
-	void set_Pacientes(list<cPaciente> lista_actual);
+	void set_Pacientes(queue<cPaciente*> lista_actual);
 	bool Evaluar_Paciente(cPaciente Paciente_Actual);
 	string get_Nombre();
 	list<cOrtopedia*> get_afiliadas();

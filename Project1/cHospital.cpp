@@ -1,22 +1,19 @@
 #include "cHospital.h"
 
-cHospital::cHospital(string Nombre_, string Direccion_, string Especialidad_, list<cMedico> Lista_Medicos_, string Direccion, string Especialidad, list<cOrtopedia> Lista_Afiliadas_): Nombre(Nombre_),Direccion(Direccion_), Especialidad(Especialidad_)
+cHospital::cHospital(string Nombre_, string Direccion_, string Especialidad_, list<cMedico*> Lista_Medicos_, list<cOrtopedia*> Lista_Afiliadas_, queue<cPaciente*> Cola_pac_): Nombre(Nombre_),Direccion(Direccion_), Especialidad(Especialidad_)
 {
-	list<cMedico*>::iterator it_med = this->Lista_Medicos.begin();
-	this->Lista_Medicos.insert(it_med, Lista_Medicos_.begin(), Lista_Medicos_.end());
-
-	list<cOrtopedia*>::iterator it_ort = this->lista_Afiliadas.begin();
-	this->lista_Afiliadas.insert(it_ort, Lista_Afiliadas_.begin(), Lista_Afiliadas_.end());
+	this->Lista_Medicos = Lista_Medicos_;
+	this->Cola_pacientes = Cola_pac_;
+	this->lista_Afiliadas = Lista_Afiliadas_;
 }
 
 cHospital::~cHospital()
 {
 }
 
-void cHospital::set_Pacientes(list<cPaciente> lista_actual)
+void cHospital::set_Pacientes(queue<cPaciente*> cola_actual)
 {
-	list<cPaciente*>::iterator it = this->Lista_pacientes.begin();
-	this->Lista_pacientes.insert(it, lista_actual.begin(), lista_actual.end());
+	this->Cola_pacientes=cola_actual;
 }
 
 bool cHospital::Evaluar_Paciente(cPaciente Paciente_Actual)

@@ -1,10 +1,8 @@
 #include "cMedico.h"
 
-cMedico::cMedico(string Nombre_Apellido_, unsigned int Matricula_, string Hospitales_) :Nombre_Apellido(Nombre_Apellido_), Matricula(Matricula_)
+cMedico::cMedico(string Nombre_Apellido_, unsigned int Matricula_) :Nombre_Apellido(Nombre_Apellido_), Matricula(Matricula_)
 {
-	this->Hospitales = Hospitales_;
 	srand(time(0));
-
 	this->Disponible = rand() % 2 + 1;
 }
 

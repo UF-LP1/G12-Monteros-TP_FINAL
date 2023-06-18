@@ -11,6 +11,7 @@
 #include "cRegistros.h"
 #include "Funciones_aux.h"
 #include "cProt_No_Quirurgica.h"
+#include "Custom_Exceptions.h"
 
 class cANPA {
 	

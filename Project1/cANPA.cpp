@@ -19,6 +19,11 @@ cANPA::cANPA(list<cFabricante*> Fabricantes_, list<cHospital*> Hospitales_, list
 
 cANPA::~cANPA()
 {
+	this->lista_registros.erase(this->lista_registros.begin(),this->lista_registros.end());
+	this->Ortopedias.erase(this->Ortopedias.begin(), this->Ortopedias.end());
+	this->Hospitales.erase(this->Hospitales.begin(), this->Hospitales.end());
+	this->Fabricantes.erase(this->Fabricantes.begin(), this->Fabricantes.end());
+
 }
 
 bool cANPA::Solicitar_Protesis_A_Ortopedia()

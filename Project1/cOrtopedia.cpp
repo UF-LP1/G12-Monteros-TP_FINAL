@@ -1,6 +1,6 @@
 #include "cOrtopedia.h"
 
-cOrtopedia::cOrtopedia(string Nombre_, string Direccion_, list<cProtesis> lista_stock_): Nombre(Nombre_), Direccion(Direccion_)
+cOrtopedia::cOrtopedia(string Nombre_, string Direccion_, list<cProtesis*> lista_stock_): Nombre(Nombre_), Direccion(Direccion_)
 {
 	list<cProtesis*>::iterator it = this->Stock_Protesis.begin();
 	this->Stock_Protesis.insert(it, lista_stock_.begin(), lista_stock_.end());

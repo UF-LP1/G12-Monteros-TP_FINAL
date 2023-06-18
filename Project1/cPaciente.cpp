@@ -1,6 +1,6 @@
 #include "cPaciente.h"
 
-cPaciente::cPaciente(string Nombre_Apellido_, tm Feca_Nac_, string Telefono_, string* Alergias_, string Hospital_, float Radio_Amp_) : Nombre_Apellido(Nombre_Apellido_), Fecha_Nac(Feca_Nac_), Radio_Amputacion(Radio_Amp_)
+cPaciente::cPaciente(string Nombre_Apellido_, tm Feca_Nac_, string Telefono_, list<string*> Alergias_, float Radio_Amp_) : Nombre_Apellido(Nombre_Apellido_), Fecha_Nac(Feca_Nac_), Radio_Amputacion(Radio_Amp_)
 {
 	this->Telefono = Telefono_;
 	this->Hospital = "nn";

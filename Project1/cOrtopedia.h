@@ -17,7 +17,7 @@ private:
 	list<cProtesis*> Stock_Protesis;
 
 public:
-	cOrtopedia(string Nombre_, string Direccion_, list<cProtesis> lista_stock);
+	cOrtopedia(string Nombre_, string Direccion_, list<cProtesis*> lista_stock);
 	~cOrtopedia();
 	string get_Direccion();
 	bool Buscar_Protesis(float Radio_Amp, string Alergias[] );
