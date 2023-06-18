@@ -13,10 +13,9 @@ using namespace std;
 #define N 5 //Cantidad maxima de alergias de una persona
 
 
-class cPaciente {
+ class cPaciente {
 private:
 
-	friend class cMedico;
 	const string Nombre_Apellido;
 	const tm Fecha_Nac;
 	string Telefono;

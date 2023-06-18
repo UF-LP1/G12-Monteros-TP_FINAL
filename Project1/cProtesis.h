@@ -12,7 +12,7 @@ enum Organo_Extremidad_Reemplazada { Brazo = 1, Pierna, Mano, Dedo, Pie, Hombro,
 
 class cProtesis {
 
-private:
+protected:
 	Organo_Extremidad_Reemplazada Nombre;
 	const tm Fecha_Fabricacion;
 	const string Fabricante;

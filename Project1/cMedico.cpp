@@ -11,26 +11,26 @@ cMedico::~cMedico()
 
 }
 
-bool cMedico::Otorgar_Autorizacion(cPaciente Paciente_actual_)
+bool cMedico::Otorgar_Autorizacion(cPaciente Paciente_)
 {
 	srand(time(0));
-	Paciente_actual_.set_Medico(this->Nombre_Apellido);
-	if ((rand() % 2 + 1)== 1 && (0 < Paciente_actual_.get_danyada()) && Paciente_actual_.get_danyada() <= 10)
+	Paciente_.set_Medico(this->Nombre_Apellido);
+	if ((rand() % 2 + 1)== 1 && (0 < Paciente_.get_danyada()) && Paciente_.get_danyada() <= 10)
 	{	                                              // es aleatorio si la solicitud el paciente es autorizada
 												      // y si tiene una lesion o no es aleatorio, por propositos de simulacion
 		
 		
-		if ((Organo_Extremidad_Reemplazada)0 < Paciente_actual_.get_danyada() && Paciente_actual_.get_danyada() <= (Organo_Extremidad_Reemplazada)5)  // en el caso de que necesite una protesis no quirurgica se necesitan acalsraar als dimensiones para poder buscarla
+		if ((Organo_Extremidad_Reemplazada)0 < Paciente_.get_danyada() && Paciente_.get_danyada() <= (Organo_Extremidad_Reemplazada)5)  // en el caso de que necesite una protesis no quirurgica se necesitan acalsraar als dimensiones para poder buscarla
 		{
 			srand(time(0));
-			Paciente_actual_.get_Prot_NQ().set_Dim_ancho((float)(rand() % 10 + 1));
+			Paciente_.get_Prot_NQ().set_Dim_ancho((float)(rand() % 10 + 1));
 
 			srand(time(0));                                           
-			Paciente_actual_.get_Prot_NQ().set_Dim_largo((float)(rand() % 9 + 1));
+			Paciente_.get_Prot_NQ().set_Dim_largo((float)(rand() % 9 + 1));
 		}                                                                //no definimos ningun otro dato en el caso de necesitar prot quirurgica porque ya tenemos 
 															             //que necesita (nombre) y los materiales a los que el paciente es alergico
 
-		Paciente_actual_.set_Autorizacion(true);				  
+		Paciente_.set_Autorizacion(true);				  
 		return true;
 	}
 	else {
@@ -39,6 +39,7 @@ bool cMedico::Otorgar_Autorizacion(cPaciente Paciente_actual_)
 
 
 }
+
 
 string cMedico::get_Nombre()
 {

@@ -199,8 +199,6 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 		}
 		it_Afiliadas++;
 	}
-
-	if (it_Afiliadas == (*it_hosp)->get_afiliadas().end())
 		return false;
 }
 
@@ -232,7 +230,7 @@ string cANPA::Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int M
 		if ((*it)->get_Matricula() == Matricula)
 			return (*it)->get_Nombre();
 	}
-	// no se necesita una excepcion para el caso de que no exista el medico, porque la existencia de dicho medico ya fue comprobada anteriormente en el codigo
+	throw new OBJECT_NOT_FOUND;
 }
 
 void operator+(list<cRegistros*> lista, cRegistros* agregado)

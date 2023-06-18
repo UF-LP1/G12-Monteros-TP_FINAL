@@ -24,7 +24,7 @@ string cProt_Quirurgica::get_Articulacion()
 	return this->Articulacion;
 }
 
-float cProt_Quirurgica::get_ancho()		 //
+float cProt_Quirurgica::get_ancho()		 
 {												 //estas tres funciones no tienen utilidad en esta clase 
 	return 0;									 //
 }												 //
