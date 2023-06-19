@@ -206,6 +206,7 @@ list<cHospital*> leer_Hospitales()
 
 	ifstream Arch_Hospital;
 	Arch_Hospital.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Hospital.csv");
+
 	if (!Arch_Hospital.is_open())
 	{
 		throw new ARCH_NOT_OPENED;
@@ -245,6 +246,7 @@ list<cProtesis*> leer_protesis()
 {
 	ifstream Arch_protesis;
 	Arch_protesis.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Protesis.csv");
+
 	if (!Arch_protesis.is_open())
 	{
 		throw new ARCH_NOT_OPENED;
@@ -329,6 +331,11 @@ list<cPaciente*> leer_Pacientes()
 	ifstream Arch_Pacientes;
 	Arch_Pacientes.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Pacientes.csv");
 
+	if (!(Arch_Pacientes.is_open()))
+	{
+		throw new ARCH_NOT_OPENED();
+	}
+
 	list <cPaciente*> Retorno;	   //
 	string headers;				   //variables basicas de lectura
 	char coma;			           //
@@ -338,13 +345,6 @@ list<cPaciente*> leer_Pacientes()
 	string Nombre, Telefono;
 	float Radio_amp;
 	tm Fecha_nac;
-
-
-
-	if (!(Arch_Pacientes.is_open()))
-	{
-		throw new ARCH_NOT_OPENED();
-	}
 
 	getline(Arch_Pacientes, headers);
 

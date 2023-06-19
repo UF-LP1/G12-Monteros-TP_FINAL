@@ -41,3 +41,8 @@ list<cMedico*> cHospital::get_Medicos()
 {
 	return this->Lista_Medicos;
 }
+
+queue<cPaciente*> cHospital::get_Pacientes()
+{
+	return this->Cola_pacientes;
+}

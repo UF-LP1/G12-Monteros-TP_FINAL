@@ -10,11 +10,6 @@ cANPA::cANPA(list<cFabricante*> Fabricantes_, list<cHospital*> Hospitales_, list
 	this->Fabricantes = Fabricantes_;
 	this->Hospitales = Hospitales_;
 	this->Ortopedias = Ortopedias_;
-
-
-
-
-
 }
 
 cANPA::~cANPA()
@@ -44,6 +39,9 @@ bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Pa
 		}
 		it_hosp++;
 	}
+	if ((*it_hosp)->get_Nombre() != Nombre_hospital)
+		throw new OBJECT_NOT_FOUND;
+	
 
 	list<cFabricante*>::iterator it_Fab = this->Fabricantes.begin();
 	string tipo_fuente = "Fabricante";
@@ -61,15 +59,20 @@ bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Pa
 			localtime_s(&Actual, &fechaactual);
 
 			Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += (*it_Fab)->get_Nombre());
+
 			if (Paciente_Actual.get_radio() > 0)
 			{
 				cProt_No_Quirurgica Fabricada(Paciente_Actual.get_danyada(),Actual , (*it_Fab)->get_Nombre(), Paciente_Actual.get_Prot_NQ().get_Superior_inferior(), Paciente_Actual.get_Prot_NQ().get_largo(), Paciente_Actual.get_Prot_NQ().get_ancho(), Paciente_Actual.get_radio());
-				
+				Paciente_Actual.Recibir_Protesis_NQ(Fabricada);
+			}
+			else
+			{
+				cProt_Quirurgica Fabricada(Paciente_Actual.get_Prot_Q().get_Articulacion(), Paciente_Actual.get_Prot_Q().get_material(), Paciente_Actual.get_danyada(), Actual, (*it_Fab)->get_Nombre(), Paciente_Actual.get_Prot_Q().get_Superior_inferior());
+				Paciente_Actual.Recibir_Protesis_Q(Fabricada);
 			}
 			return true;
 		}
 	}
-
 	return false;
 }
 
@@ -199,8 +202,6 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 		}
 		it_Afiliadas++;
 	}
-
-	if (it_Afiliadas == (*it_hosp)->get_afiliadas().end())
 		return false;
 }
 
@@ -232,7 +233,12 @@ string cANPA::Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int M
 		if ((*it)->get_Matricula() == Matricula)
 			return (*it)->get_Nombre();
 	}
-	// no se necesita una excepcion para el caso de que no exista el medico, porque la existencia de dicho medico ya fue comprobada anteriormente en el codigo
+	throw new OBJECT_NOT_FOUND;
+}
+
+list<cHospital*> cANPA::get_Hospitales()
+{
+	return this->Hospitales;
 }
 
 void operator+(list<cRegistros*> lista, cRegistros* agregado)

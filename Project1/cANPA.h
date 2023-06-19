@@ -31,6 +31,7 @@ public:
     bool Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual, unsigned int Matricula_med_);
 	void Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospital*>::iterator Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente);
 	string Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int Matricula);
+	list<cHospital*> get_Hospitales();
 
 };
 void operator+(list<cRegistros*> lista, cRegistros* agregado);

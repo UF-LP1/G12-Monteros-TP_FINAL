@@ -39,6 +39,16 @@ void cPaciente::set_Hospital(string Hospital_)
 	this->Hospital = Hospital_;
 }
 
+void cPaciente::Recibir_Protesis_NQ(cProt_No_Quirurgica Seteada)
+{
+	this->Necesitada_NQ = Seteada;
+}
+
+void cPaciente::Recibir_Protesis_Q(cProt_Quirurgica Seteada)
+{
+	this->Necesitada_Q = Seteada;
+}
+
 string cPaciente::get_Nombre_Ap()
 {
 	return this->Nombre_Apellido;

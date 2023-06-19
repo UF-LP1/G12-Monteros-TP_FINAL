@@ -20,6 +20,7 @@ private:
 	const string Especialidad;
 	list<cOrtopedia*> lista_Afiliadas;
 	queue<cPaciente*> Cola_pacientes ;
+	list<cPaciente*> Pacientes_Atendidos;
 
 public:
 	cHospital(string Nombre_,string Direccion_,string Especialidad_, list<cMedico*> Lista_Medicos_, list<cOrtopedia*> Lista_Afiliadas_, queue<cPaciente*> Cola_pac_);
@@ -29,6 +30,7 @@ public:
 	string get_Nombre();
 	list<cOrtopedia*> get_afiliadas();
 	list<cMedico*> get_Medicos();
+	queue<cPaciente*> get_Pacientes();
 };
 
 #endif
