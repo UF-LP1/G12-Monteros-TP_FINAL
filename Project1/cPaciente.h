@@ -3,14 +3,9 @@
 #ifndef _CPACIENTE_H
 #define _CPACIENTE_H
 
-#include <string>
-#include <ctime>
-#include "cMedico.h"
 #include "cProt_No_Quirurgica.h"
 #include "cProt_Quirurgica.h"
 
-using namespace std;
-#define N 5 //Cantidad maxima de alergias de una persona
 
 
  class cPaciente {

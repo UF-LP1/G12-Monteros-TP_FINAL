@@ -3,7 +3,6 @@
 #ifndef _CMEDICO_H
 #define _CMEDICO_H
 
-#include <string>
 #include "cPaciente.h"
 
 using namespace std;
