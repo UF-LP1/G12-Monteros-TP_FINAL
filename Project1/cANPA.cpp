@@ -7,14 +7,14 @@
 
 cANPA::cANPA(list<cFabricante*> Fabricantes_, list<cHospital*> Hospitales_, list<cOrtopedia*> Ortopedias_)
 {
-	list<cFabricante*>::iterator it_Fab = this->Fabricantes.begin();
-	list<cHospital*>::iterator it_Hos = this->Hospitales.begin();
-	list<cOrtopedia*>::iterator it_Ort = this->Ortopedias.begin();
+	this->Fabricantes = Fabricantes_;
+	this->Hospitales = Hospitales_;
+	this->Ortopedias = Ortopedias_;
 
-	this->Fabricantes.insert(it_Fab, Fabricantes.begin(), Fabricantes.end());
-	this->Hospitales.insert(it_Hos, Hospitales.begin(), Hospitales.end());
-	this->Ortopedias.insert(it_Ort, Ortopedias.begin(), Ortopedias.end());
-	this->lista_registros.clear();
+
+
+
+
 }
 
 cANPA::~cANPA()
