@@ -39,7 +39,18 @@ bool operator!=(list<cOrtopedia*>::iterator Total, list<cOrtopedia*> Convenida)
 
 list<cProtesis*> Armar_lista_random_de_Protesis()
 {
-	list<cProtesis*> aux = leer_protesis();
+	list<cProtesis*> aux;
+	aux.clear();
+
+	try {
+		aux = leer_protesis();
+	}
+	catch (exception* e)
+	{
+		cout << e->what() << endl;
+		delete e;
+	}
+
 	list<cProtesis*>::iterator it_prot = aux.begin();
 
 	list<cProtesis*> Retorno;
@@ -205,7 +216,7 @@ list<cHospital*> leer_Hospitales()
 {
 
 	ifstream Arch_Hospital;
-	Arch_Hospital.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Hospital.csv");
+	Arch_Hospital.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Hospitales.csv", ios::in);
 
 	if (!Arch_Hospital.is_open())
 	{
@@ -244,10 +255,10 @@ list<cHospital*> leer_Hospitales()
 
 list<cProtesis*> leer_protesis()
 {
-	ifstream Arch_protesis;
-	Arch_protesis.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Protesis.csv");
+	fstream Arch_protesis;
+	Arch_protesis.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Protesis.csv", ios::in);
 
-	if (!Arch_protesis.is_open())
+	if (!(Arch_protesis.is_open()))
 	{
 		throw new ARCH_NOT_OPENED;
 	}
@@ -263,6 +274,7 @@ list<cProtesis*> leer_protesis()
 	tm fecha_fab;
 
 	getline(Arch_protesis, headers);
+
 	Arch_protesis >> Radio_amp >> coma >> Nombre >> coma >> fecha_fab.tm_mday>> coma>> fecha_fab.tm_mon>>coma>>fecha_fab.tm_year >> coma >> fabricante >> coma >> sup_inf >> coma >> largo >> coma >> ancho >> coma >> articulacion >> coma >> material;
 
 	while (Arch_protesis)
@@ -280,26 +292,26 @@ list<cProtesis*> leer_protesis()
 		Arch_protesis >> Radio_amp >> coma >> Nombre >> coma >> fecha_fab.tm_mday >> coma >> fecha_fab.tm_mon >> coma >> fecha_fab.tm_year >> coma >> fabricante >> coma >> sup_inf >> coma >> largo >> coma >> ancho >> coma >> articulacion >> coma >> material;
 
 	}
+
 	Arch_protesis.close();
 	return Retorno;
 }
 
 list<cOrtopedia*> Leer_Ortopedias()
 {
-	ifstream Arch_Ortopedias;
-	Arch_Ortopedias.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Ortopedias.csv");
-
-	list <cOrtopedia*> Retorno;	   //
-	string headers;				   //variables basicas de lectura
-	char coma;			           //
-
-	string nombre, direccion;
+	fstream Arch_Ortopedias;
+	//C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G-12-Monteros-Guerrieri-TP\\G_12-Monteros-Guerrieri-TP\\G_12-Monteros-Guerrieri-TP\\data_files\\Archivo_Cola_Clientes.txt"
+	Arch_Ortopedias.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Ortopedias.csv", ios::in);
 
 	if (!(Arch_Ortopedias.is_open()))
 	{
 		throw new ARCH_NOT_OPENED;
 	}
 
+	string nombre, direccion;
+	list <cOrtopedia*> Retorno;	   //
+	string headers;				   //variables basicas de lectura
+	char coma;			           //
 	
 	getline(Arch_Ortopedias, headers);
 
@@ -329,7 +341,7 @@ list<cOrtopedia*> Leer_Ortopedias()
 list<cPaciente*> leer_Pacientes()
 {
 	ifstream Arch_Pacientes;
-	Arch_Pacientes.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Pacientes.csv");
+	Arch_Pacientes.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Pacientes.csv", ios::in);
 
 	if (!(Arch_Pacientes.is_open()))
 	{
@@ -375,7 +387,7 @@ list<cPaciente*> leer_Pacientes()
 list<cMedico*> leer_Medicos()
 {
 	ifstream Arch_Medicos;
-	Arch_Medicos.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Medicos.csv");
+	Arch_Medicos.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12 - Monteros - TP_FINAL\\Project1\\Input Data_files\\Medicos.csv", ios::in);
 
 	if (!Arch_Medicos.is_open())
 	{
@@ -400,9 +412,9 @@ list<cMedico*> leer_Medicos()
 
 list<cFabricante*> leer_Fabricantes()
 {
-	ifstream Arch_Fabricantes;
+	fstream Arch_Fabricantes;
 
-	Arch_Fabricantes.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Fabricantes.csv");
+	Arch_Fabricantes.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Fabricantes.csv", ios::in);
 
 	if (!Arch_Fabricantes.is_open())
 	{
