@@ -3,9 +3,6 @@
 #ifndef _CREGISTROS_H
 #define _CREGISTROS_H
 
-
-#include <string>
-#include<ctime>
 #include "cprotesis.h"
 
 using namespace std;

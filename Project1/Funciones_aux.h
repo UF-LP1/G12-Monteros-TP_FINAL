@@ -4,7 +4,9 @@
 #include "cProt_Quirurgica.h"
 #include <fstream>
 #include "Custom_Exceptions.h"
+#include <sstream>
 #include <iostream>
+
 
 bool operator==(list<cProtesis*>::iterator original, cProt_No_Quirurgica comparado);
 bool operator==(list<cProtesis*>::iterator original, cProt_Quirurgica comparado);

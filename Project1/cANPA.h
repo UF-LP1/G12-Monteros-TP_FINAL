@@ -2,16 +2,10 @@
 
 #ifndef _CANPA_H
 #define _CANPA_H
-#include<string>
-#include <list>
 #include "cFabricante.h"
 #include "cHospital.h"
-#include "cOrtopedia.h"
-#include "cProtesis.h"
 #include "cRegistros.h"
 #include "Funciones_aux.h"
-#include "cProt_No_Quirurgica.h"
-#include "Custom_Exceptions.h"
 
 class cANPA {
 	

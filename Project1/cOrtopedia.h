@@ -3,8 +3,6 @@
 #ifndef _CORTOPEDIA_H
 #define _CORTOPEDIA_H
 
-#include <string>
-#include <list>
 #include "cProtesis.h"
 
 using namespace std;

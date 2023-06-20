@@ -1,5 +1,5 @@
 #include "Funciones_aux.h"
-#include <sstream>
+
 bool operator==(list<cProtesis*>::iterator original, cProt_No_Quirurgica comparado)
 {
 
@@ -401,6 +401,7 @@ list<cMedico*> leer_Medicos()
 list<cFabricante*> leer_Fabricantes()
 {
 	ifstream Arch_Fabricantes;
+
 	Arch_Fabricantes.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Fabricantes.csv");
 
 	if (!Arch_Fabricantes.is_open())

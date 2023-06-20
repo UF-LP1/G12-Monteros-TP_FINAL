@@ -3,8 +3,7 @@
 #ifndef _CHOSPITAL_H
 #define _CHOSPITAL_H
 
-#include <string>
-#include <list>
+
 #include "cMedico.h"
 #include "cOrtopedia.h"
 #include "cPaciente.h"

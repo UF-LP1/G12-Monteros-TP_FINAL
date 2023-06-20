@@ -3,7 +3,6 @@
 #ifndef _CPROT_QUIRURGICA_H
 #define _CPROT_QUIRURGICA_H
 
-#include <string>
 #include "cProtesis.h"
 
 class cProt_Quirurgica:public cProtesis {
