@@ -19,7 +19,6 @@ public:
 
 	cANPA(list<cFabricante*>Fabricantes_, list<cHospital*>Hospitales_, list<cOrtopedia*> Ortopedias_);
 	~cANPA();
-	bool Solicitar_Protesis_A_Ortopedia();
 	bool Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Paciente_Actual, unsigned int Matricula_med_);
 	bool Busqueda_Especial(string Nombre_hospital, cPaciente Paciente_Actual, unsigned int Matricula_med_);
     bool Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual, unsigned int Matricula_med_);

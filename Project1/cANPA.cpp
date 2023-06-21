@@ -21,11 +21,6 @@ cANPA::~cANPA()
 
 }
 
-bool cANPA::Solicitar_Protesis_A_Ortopedia()
-{
-	return false;
-}
-
 bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Paciente_Actual, unsigned int Matricula_med_)
 {
 	list<cHospital*>::iterator it_hosp = this->Hospitales.begin(); // todas las veces comprobamos que el hospital exista en las

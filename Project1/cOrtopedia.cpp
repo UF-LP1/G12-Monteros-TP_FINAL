@@ -15,10 +15,6 @@ string cOrtopedia::get_Direccion()
 	return this->Direccion;
 }
 
-bool cOrtopedia::Buscar_Protesis(float Radio_Amp, string Alergias[])
-{
-	return false;
-}
 
 bool cOrtopedia::Buscar_Por_Alergias(list<cProtesis> lista_filtrada, string Alergias[])
 {
