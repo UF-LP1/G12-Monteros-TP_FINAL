@@ -26,9 +26,11 @@ public:
 	void Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospital*>::iterator Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente);
 	string Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int Matricula);
 	list<cHospital*> get_Hospitales();
+	ostream& operator<<(ostream& out);
 
 };
 void operator+(list<cRegistros*> lista, cRegistros* agregado);
 void operator-(list<cOrtopedia*>:: iterator original, list<cProtesis*>::iterator* eliminado);
+
 
 #endif

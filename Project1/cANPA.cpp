@@ -241,6 +241,18 @@ list<cHospital*> cANPA::get_Hospitales()
 	return this->Hospitales;
 }
 
+ostream& cANPA::operator<<(ostream& out)
+{
+	//list<cRegistros*>::iterator it = this->lista_registros.begin();
+	//cout << "Hospital , Medico , Fecha de Solicitud , Fecha de Entrega , Estimacion , Pieza , Paciente ,";
+	//	unsigned int cont = 0;
+	//while (it != this->lista_registros.end())
+	//{
+	//	cout << " EXPEDIENTE " << cont << endl << endl;
+	//	cout<<"Hospital:"<<(*it)->ge
+	//}
+}
+
 void operator+(list<cRegistros*> lista, cRegistros* agregado)
 {
 	lista.push_back(agregado); //no es necesario agregar una excepcion porque el metodo pushback es a prueba de excepciones
@@ -250,4 +262,6 @@ void operator-(list<cOrtopedia*>::iterator original, list<cProtesis*>::iterator*
 {
 	(*original)->get_stock().erase(*eliminado);
 }
+
+
 

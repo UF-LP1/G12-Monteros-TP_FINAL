@@ -137,6 +137,7 @@
     <ClInclude Include="cProt_No_Quirurgica.h" />
     <ClInclude Include="cProt_Quirurgica.h" />
     <ClInclude Include="cRegistros.h" />
+    <ClInclude Include="Custom_Exceptions.h" />
     <ClInclude Include="Funciones_aux.h" />
   </ItemGroup>
   <ItemGroup>

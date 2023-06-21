@@ -11,7 +11,7 @@ cMedico::~cMedico()
 
 }
 
-bool cMedico::Otorgar_Autorizacion(cPaciente Paciente_actual_)
+bool cMedico::Otorgar_Autorizacion(cPaciente Paciente_actual_, unsigned int & Matricula_med)
 {
 	srand(time(0));
 	Paciente_actual_.set_Medico(this->Nombre_Apellido);
@@ -30,7 +30,8 @@ bool cMedico::Otorgar_Autorizacion(cPaciente Paciente_actual_)
 		}                                                                //no definimos ningun otro dato en el caso de necesitar prot quirurgica porque ya tenemos 
 															             //que necesita (nombre) y los materiales a los que el paciente es alergico
 
-		Paciente_actual_.set_Autorizacion(true);				  
+		Paciente_actual_.set_Autorizacion(true);	
+		Matricula_med = Matricula;
 		return true;
 	}
 	else {

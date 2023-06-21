@@ -11,10 +11,26 @@ int main()
 
 	list<cHospital*>::iterator it_hospital = Prueba.get_Hospitales().begin();
 
+	unsigned int Matricula_auxiliar = 0;
+	bool comprobacion=true;
+
 	while (it_hospital != Prueba.get_Hospitales().end())
 	{
-		cPaciente* Paciente_actual((*it_hospital)->get_Pacientes().front());
+		cPaciente* Paciente_actual((*it_hospital)->get_Pacientes().front()); // variable auxiliar para cada paciente
+		(*it_hospital)->get_Pacientes().pop();
 
+		if ((*it_hospital)->Evaluar_Paciente(*Paciente_actual, Matricula_auxiliar) == true); //si es true, el medico atendio al paciente y el paciente tiene la autorizacion y los datos de protesis
+		{
+			comprobacion = Prueba.Buscar_En_Ortopedia_convenida((*it_hospital)->get_Nombre(), *Paciente_actual, Matricula_auxiliar);  //se busca en ortopedias convenidas
+			if (comprobacion == false) {
+				comprobacion = Prueba.Busqueda_Especial((*it_hospital)->get_Nombre(), *Paciente_actual, Matricula_auxiliar);//si no se encuentra se busca en no convenidas
+			}
+			if (comprobacion == false) {
+				Prueba.Solicitar_Protesis_A_Fabricante((*it_hospital)->get_Nombre(), *Paciente_actual, Matricula_auxiliar);//si nadie las tiene se pude fabricar una
+			}
+		}// si el medico no autoriza al paciente, se pasa al siguiente
+
+		it_hospital++;
 	}
-
+	
 }

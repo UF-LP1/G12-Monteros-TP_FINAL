@@ -268,14 +268,17 @@ list<cProtesis*> leer_protesis()
 	char coma;						  //
 
 	float Radio_amp, largo, ancho;
-	string fabricante, articulacion, material;
+	string fabricante;
+	string articulacion;
+	string material;
 	unsigned int Nombre;                        // las protesis tienen una enumeracion para identificar su nombre
-	bool sup_inf;							    // 
+	bool sup_inf=true;							    // 
 	tm fecha_fab;
 
 	getline(Arch_protesis, headers);
 
-	Arch_protesis >> Radio_amp >> coma >> Nombre >> coma >> fecha_fab.tm_mday>> coma>> fecha_fab.tm_mon>>coma>>fecha_fab.tm_year >> coma >> fabricante >> coma >> sup_inf >> coma >> largo >> coma >> ancho >> coma >> articulacion >> coma >> material;
+
+	Arch_protesis >> Radio_amp >> coma >> Nombre >> coma >> fecha_fab.tm_mday >> coma >> fecha_fab.tm_mon >> coma >> fecha_fab.tm_year >> coma >> fabricante >> coma >> sup_inf >> coma >> largo >> coma >> ancho >> coma >> articulacion >> coma >> material;
 
 	while (Arch_protesis)
 	{

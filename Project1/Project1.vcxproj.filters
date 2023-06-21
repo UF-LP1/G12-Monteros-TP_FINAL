@@ -51,6 +51,9 @@
     <ClInclude Include="Funciones_aux.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Custom_Exceptions.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cPaciente.cpp">

@@ -25,11 +25,12 @@ public:
 	cHospital(string Nombre_,string Direccion_,string Especialidad_, list<cMedico*> Lista_Medicos_, list<cOrtopedia*> Lista_Afiliadas_, queue<cPaciente*> Cola_pac_);
 	~cHospital();
 	void set_Pacientes(queue<cPaciente*> lista_actual);
-	bool Evaluar_Paciente(cPaciente Paciente_Actual);
+	bool Evaluar_Paciente(cPaciente Paciente_Actual, unsigned int& Matricula_med);
 	string get_Nombre();
 	list<cOrtopedia*> get_afiliadas();
 	list<cMedico*> get_Medicos();
 	queue<cPaciente*> get_Pacientes();
+	void operator+(cPaciente* agregado);
 };
 
 #endif
