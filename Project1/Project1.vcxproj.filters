@@ -109,5 +109,8 @@
     <None Include="Input Data_files\Protesis.csv">
       <Filter>Archivos de encabezado\Input Data_files</Filter>
     </None>
+    <None Include="Input Data_files\Medicos.csv">
+      <Filter>Archivos de encabezado\Input Data_files</Filter>
+    </None>
   </ItemGroup>
 </Project>

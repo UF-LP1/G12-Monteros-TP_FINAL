@@ -30,6 +30,7 @@ public:
 	list<cOrtopedia*> get_afiliadas();
 	list<cMedico*> get_Medicos();
 	queue<cPaciente*> get_Pacientes();
+	void Popear_Paciente();
 	void operator+(cPaciente* agregado);
 };
 

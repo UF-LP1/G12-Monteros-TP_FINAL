@@ -9,17 +9,17 @@ int main()
 
 	cANPA Prueba(leer_Fabricantes(), leer_Hospitales(), Leer_Ortopedias()); //inicializamos ANPA, que contiene todos los datos
 
-	list<cHospital*>::iterator it_hospital = Prueba.get_Hospitales().begin();
+	list<cHospital*>::iterator it_hospital = Prueba.get_Primer_Hospital();
 
 	unsigned int Matricula_auxiliar = 0;
 	bool comprobacion=true;
 
-	while (it_hospital != Prueba.get_Hospitales().end())
+	while (it_hospital != Prueba.get_ultimo_hospital())
 	{
 		cPaciente* Paciente_actual((*it_hospital)->get_Pacientes().front()); // variable auxiliar para cada paciente
-		(*it_hospital)->get_Pacientes().pop();
+		(*it_hospital)->Popear_Paciente();
 
-		if ((*it_hospital)->Evaluar_Paciente(*Paciente_actual, Matricula_auxiliar) == true); //si es true, el medico atendio al paciente y el paciente tiene la autorizacion y los datos de protesis
+		if ((*it_hospital)->Evaluar_Paciente(*Paciente_actual, Matricula_auxiliar)) //si es true, el medico atendio al paciente y el paciente tiene la autorizacion y los datos de protesis
 		{
 			comprobacion = Prueba.Buscar_En_Ortopedia_convenida((*it_hospital)->get_Nombre(), *Paciente_actual, Matricula_auxiliar);  //se busca en ortopedias convenidas
 			if (comprobacion == false) {

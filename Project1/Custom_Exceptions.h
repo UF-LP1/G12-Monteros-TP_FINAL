@@ -24,3 +24,10 @@ public:											  // con los contenidos de los archivos, si fallan se lanza es
 		return "Error al Crear una lista random";
 	}
 };
+
+class NO_NEED :public exception {
+public:
+	const char* what() const throw() {
+		return "El paciente no necesita una protesis";
+	}
+};

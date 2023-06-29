@@ -60,6 +60,11 @@ void cProt_No_Quirurgica::set_Dim_largo(float set_)
 	this->Dim_Largo = set_;
 }
 
+void cProt_No_Quirurgica::set_radio(float set_)
+{
+	this->Radio_Conexion = set_;
+}
+
 
 
 

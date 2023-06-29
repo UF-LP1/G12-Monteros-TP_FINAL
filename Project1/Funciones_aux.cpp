@@ -37,6 +37,31 @@ bool operator!=(list<cOrtopedia*>::iterator Total, list<cOrtopedia*> Convenida)
 	return true;
 }
 
+list<cProtesis*>::iterator operator+(list<cProtesis*>::iterator corrido, unsigned int corrimiento)
+{
+	for (unsigned int i = 0; i < corrimiento; i++)
+		corrido++;
+	return corrido;
+}
+list<cOrtopedia*>::iterator operator+(list<cOrtopedia*>::iterator corrido, unsigned int corrimiento)
+{
+	for (unsigned int i = 0; i < corrimiento; i++)
+		corrido++;
+	return corrido;
+}
+list<cPaciente*>::iterator operator+(list<cPaciente*>::iterator corrido, unsigned int corrimiento)
+{
+	for (unsigned int i = 0; i < corrimiento; i++)
+		corrido++;
+	return corrido;
+}
+list<cMedico*>::iterator operator+(list<cMedico*>::iterator corrido, unsigned int corrimiento)
+{
+	for (unsigned int i = 0; i < corrimiento; i++)
+		corrido++;
+	return corrido;
+}
+
 list<cProtesis*> Armar_lista_random_de_Protesis()
 {
 	list<cProtesis*> aux;
@@ -54,6 +79,7 @@ list<cProtesis*> Armar_lista_random_de_Protesis()
 	list<cProtesis*>::iterator it_prot = aux.begin();
 
 	list<cProtesis*> Retorno;
+	Retorno.clear();
 	int i;
 	
 	unsigned int seleccionador;
@@ -61,40 +87,62 @@ list<cProtesis*> Armar_lista_random_de_Protesis()
 	for (i = 0; i < 5; i++)
 	{
 		srand(time(0));
-		seleccionador = (rand() % aux.size());           // un numero random que va entre 0 y la cantidad de ojetos
-		                                                 // almacenados en la lista
-		Retorno.push_back(*it_prot + seleccionador);     //se agregan 5 elementos aleatorios de la pool de protesis
+		seleccionador = (rand() % aux.size());           //un numero random que va entre 0 y la cantidad de ojetos
+		it_prot =it_prot + seleccionador;              // almacenados en la lista
+
+		Retorno.push_back(*it_prot);                     //se agregan 5 elementos aleatorios de la pool de protesis
 		                                                 //que es el archivo
 
-		aux.remove(*it_prot + seleccionador);     //sacamos de la lista aux los elementos que devolvemos para que al
-		                                          //liberar memoria no se borren los que queremos
+		aux.remove(*it_prot );      //sacamos de la lista aux los elementos que devolvemos para que al
+		                           //liberar memoria no se borren los que queremos
+		it_prot = aux.begin();
 	}
-	aux.erase(aux.begin(), aux.end()); //se libera memoria de todos los objetos dinamicos que no se usaron
+	
+	for (list<cProtesis*>::iterator it_aux = aux.begin(); it_aux != aux.end(); it_aux++)
+		delete* it_aux;
+
 	return Retorno;
 }
 
 list<cOrtopedia*> Armar_random_ortopedia()
 {
-	list<cOrtopedia*> aux = Leer_Ortopedias();
+	list<cOrtopedia*> aux;
+	aux.clear();
+
+	try {
+		aux=Leer_Ortopedias();
+	} 
+	catch (exception* e)
+	{
+		cout << e->what();
+		delete e;
+	}
+
 	list<cOrtopedia*>::iterator it_ort = aux.begin();
 	int i;
 	
 	unsigned int seleccionador;
 
 	list<cOrtopedia*> Retorno;
+	Retorno.clear();
 
 	for (i = 0; i < 5; i++)
 	{
 		srand(time(0));
 		seleccionador = (rand() % aux.size());
 
-		Retorno.push_back(*it_ort + seleccionador);  //se guarda una ortopedia aleatoria de la lista y el iterador
-		                                             //vuelve al principio
-		aux.remove(*it_ort + seleccionador);        //sacamos de la lista aux los elementos que devolvemos para que al
-		                                            //liberar memoria no se borren los que queremos
+		it_ort = it_ort + seleccionador;
+
+		Retorno.push_back(*it_ort);          //se guarda una ortopedia aleatoria de la lista y el iterador
+		                                     //vuelve al principio
+		aux.remove(*it_ort);                 //sacamos de la lista aux los elementos que devolvemos para que al
+		                                     //liberar memoria no se borren los que queremos
+		it_ort = aux.begin();
 	}
 
-	aux.erase(aux.begin(), aux.end());  //se libera memoria y se retorna solo la nueva lista random armada
+	for (list<cOrtopedia*>::iterator it_aux = aux.begin(); it_aux != aux.end(); it_aux++)
+		delete* it_aux;
+
 	return Retorno;
 }
 
@@ -103,57 +151,59 @@ list<string*> Generar_Alergias()
 	srand(time(0));
 	list<string*> Retorno;
 	Retorno.clear();     // chequeo que este vacia
-	list<string*>::iterator it_Al = Retorno.begin();
-	unsigned int Cantidad= (rand()%6); // puede tener un maximo de 5 alergias y un minimo de 0
-
 	
+	unsigned int Cantidad= (rand()%6); // puede tener un maximo de 5 alergias y un minimo de 0
 	unsigned int Eleccion;
 
 	for (unsigned int i = 0; i < Cantidad; i++)
 	{
+		string* agregado = new string;
 		srand(time(0));
 		Eleccion = (rand() % 5 + 1); // se elijen alergias al azar en el switch
 
 		switch (Eleccion)
 		{
-		case 1:(*it_Al)->append("Mani");
-			Retorno.push_back(*it_Al);
-			(*it_Al)++;
+			
+		case 1: {*agregado = "Mani";
+			Retorno.push_back(agregado);
 			break;
+			}
 
-		case 2:(*it_Al)->append("Hierro");
-			Retorno.push_back(*it_Al);
-			(*it_Al)++;
-			break;
-
-		case 3:(*it_Al)->append("Titanio");
-			Retorno.push_back(*it_Al);
-			(*it_Al)++;
-			break;
-
-		case 4:(*it_Al)->append("Oricalco");
-			Retorno.push_back(*it_Al);
-			(*it_Al)++;
-			break;
-
-		case 5:(*it_Al)->append("Platino");
-			Retorno.push_back(*it_Al);
-			(*it_Al)++;
-			break;
-
-		default:
-			throw new RANDOM_CREATION_FAILED;
+		
+		case 2: {*agregado = "Hierro";
+			Retorno.push_back(agregado);
 			break;
 		}
+
+		case 3: {*agregado = "Titanio";
+			Retorno.push_back(agregado);
+			break;
+		}
+		case 4: {
+			*agregado = "Oricalco";
+			Retorno.push_back(agregado);
+			break;
+		}
+		case 5: {
+			*agregado = "Platino";
+			Retorno.push_back(agregado);
+			break;
+		}
+
+		default: {
+			break;
+		}
+		}
 	}
+
 	return Retorno;
 }
 
 queue<cPaciente*> Armar_random_Pacientes()
 {
 	queue<cPaciente*> Retorno;
-
 	list<cPaciente*>aux;
+	aux.clear();
 
 	try
 	{
@@ -167,18 +217,22 @@ queue<cPaciente*> Armar_random_Pacientes()
 
 	list<cPaciente*>::iterator it_Pac = aux.begin();
 
-	unsigned int seleccionador=0;
+	unsigned int seleccionador;
 
 	for (int i = 0; i < 5; i++)
 	{
 		srand(time(0));
 		seleccionador = (rand() % aux.size());
+		it_Pac = it_Pac + seleccionador;
 
-		Retorno.push(*it_Pac + seleccionador);
-		aux.remove(*it_Pac + seleccionador);    // de esta forma cuando liberemos memoria de la lista aux no borraremos
-		                                        //las instancias que devolvemos
+		Retorno.push(*it_Pac);
+		aux.remove(*it_Pac);           // de esta forma cuando liberemos memoria de la lista aux no borraremos
+		                               //las instancias que devolvemos
+		it_Pac = aux.begin();
 	}
-	aux.erase(aux.begin(),aux.end());    // liberamos memoria de los elementos de la lista que no usamos
+
+	for (list<cPaciente*>::iterator it_aux=aux.begin(); it_aux != aux.end(); it_aux++)
+		delete* it_aux;                                           //liberamos memoria de los elementos de la lista que no usamos
 
 	return Retorno;
 }
@@ -186,7 +240,9 @@ queue<cPaciente*> Armar_random_Pacientes()
 list<cMedico*> Armar_random_Medicos()
 {
 	list<cMedico*> Retorno;
+	Retorno.clear();
 	list<cMedico*> aux;
+	aux.clear();
 
 	try
 	{
@@ -197,17 +253,24 @@ list<cMedico*> Armar_random_Medicos()
 		cout << e->what() << endl;
 		delete e;
 	}
+
 	list<cMedico*>::iterator it_med = aux.begin();
 	unsigned int seleccionador;
 
 	for (int i = 0; i < 5; i++)
 	{
 		srand(time(0));
-		seleccionador = (rand() % aux.size() + 1);
-		Retorno.push_back(*it_med + seleccionador);
-		aux.remove(*it_med + seleccionador);
+		seleccionador = (rand() % aux.size());
+		it_med = it_med + seleccionador;
+
+		Retorno.push_back(*it_med);
+		aux.remove(*it_med);
+
+		it_med = aux.begin();
 	}
-	aux.erase(aux.begin(), aux.end());
+
+	for (list<cMedico*>::iterator it_aux = aux.begin(); it_aux != aux.end(); it_aux++)
+		delete* it_aux;
 
 	return Retorno;
 }
@@ -265,23 +328,51 @@ list<cProtesis*> leer_protesis()
 	
 	list<cProtesis*>Retorno;		  //
 	string headers;					  //variables basicas de lectura
-	char coma;						  //
 
 	float Radio_amp, largo, ancho;
+	Radio_amp = largo = ancho = 0;
 	string fabricante;
 	string articulacion;
 	string material;
 	unsigned int Nombre;                        // las protesis tienen una enumeracion para identificar su nombre
 	bool sup_inf=true;							    // 
 	tm fecha_fab;
-
 	getline(Arch_protesis, headers);
 
+	//Arch_protesis >> Radio_amp >> coma >> Nombre >> coma >> fecha_fab.tm_mday >> coma >> fecha_fab.tm_mon >> coma >> fecha_fab.tm_year >> coma >> fabricante >> coma >> sup_inf >> coma >> largo >> coma >> ancho >> coma >> articulacion >> coma >> material;
+	getline(Arch_protesis,headers);
+	stringstream lectura(headers);
+	getline(lectura, headers, ',');
+	stringstream(headers) >> Radio_amp;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> Nombre;
+	getline(lectura, headers, '/');
+	stringstream(headers) >> fecha_fab.tm_mday;
+	getline(lectura, headers, '/');
+	stringstream(headers) >> fecha_fab.tm_mon;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> fecha_fab.tm_year;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> fabricante;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> sup_inf;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> largo;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> ancho;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> articulacion;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> material;
 
-	Arch_protesis >> Radio_amp >> coma >> Nombre >> coma >> fecha_fab.tm_mday >> coma >> fecha_fab.tm_mon >> coma >> fecha_fab.tm_year >> coma >> fabricante >> coma >> sup_inf >> coma >> largo >> coma >> ancho >> coma >> articulacion >> coma >> material;
+	
+
+	
 
 	while (Arch_protesis)
 	{
+		
+
 		if (Radio_amp > 0)
 		{
 			cProt_No_Quirurgica* aux_NQ = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)Nombre, fecha_fab, fabricante, sup_inf, largo, ancho, Radio_amp);
@@ -292,8 +383,30 @@ list<cProtesis*> leer_protesis()
 			cProt_Quirurgica* aux_Q = new cProt_Quirurgica(articulacion, material, (Organo_Extremidad_Reemplazada)Nombre, fecha_fab, fabricante, sup_inf);
 			Retorno.push_back(aux_Q);
 		}
-		Arch_protesis >> Radio_amp >> coma >> Nombre >> coma >> fecha_fab.tm_mday >> coma >> fecha_fab.tm_mon >> coma >> fecha_fab.tm_year >> coma >> fabricante >> coma >> sup_inf >> coma >> largo >> coma >> ancho >> coma >> articulacion >> coma >> material;
-
+		getline(Arch_protesis, headers);
+		stringstream lectura(headers);
+		getline(lectura, headers, ',');
+		stringstream(headers) >> Radio_amp;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> Nombre;
+		getline(lectura, headers, '/');
+		stringstream(headers) >> fecha_fab.tm_mday;
+		getline(lectura, headers, '/');
+		stringstream(headers) >> fecha_fab.tm_mon;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> fecha_fab.tm_year;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> fabricante;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> sup_inf;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> largo;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> ancho;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> articulacion;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> material;
 	}
 
 	Arch_protesis.close();
@@ -303,7 +416,6 @@ list<cProtesis*> leer_protesis()
 list<cOrtopedia*> Leer_Ortopedias()
 {
 	fstream Arch_Ortopedias;
-	//C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G-12-Monteros-Guerrieri-TP\\G_12-Monteros-Guerrieri-TP\\G_12-Monteros-Guerrieri-TP\\data_files\\Archivo_Cola_Clientes.txt"
 	Arch_Ortopedias.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Ortopedias.csv", ios::in);
 
 	if (!(Arch_Ortopedias.is_open()))
@@ -312,7 +424,7 @@ list<cOrtopedia*> Leer_Ortopedias()
 	}
 
 	string nombre, direccion;
-	list <cOrtopedia*> Retorno;	   //
+	list <cOrtopedia*> Retorno_ortopedias;	   //
 	string headers;				   //variables basicas de lectura
 	char coma;			           //
 	
@@ -333,12 +445,13 @@ list<cOrtopedia*> Leer_Ortopedias()
 		}
 
 		cOrtopedia* Auxiliar = new cOrtopedia(nombre, direccion, aux);
-		Retorno.push_back(Auxiliar);
+		Retorno_ortopedias.push_back(Auxiliar);
 
 		Arch_Ortopedias >> nombre >> coma >> direccion;
 	}
 	Arch_Ortopedias.close();
-	return Retorno;
+
+	return Retorno_ortopedias;
 }
 
 list<cPaciente*> leer_Pacientes()
@@ -369,13 +482,8 @@ list<cPaciente*> leer_Pacientes()
 
 	while (Arch_Pacientes)
 	{
-		try {
-			Alergias = Generar_Alergias();   // le generamos una lista de alergias randomizada a cada paciente   
-		}									 //la lista en su la creo afuera del try porque sino el codigola considera
-		catch (exception* e) {				 //como no existente al crear el objeto de paciente
-			cout << e->what() << endl;
-			delete e;
-		}
+		
+		Alergias = Generar_Alergias();   // le generamos una lista de alergias randomizada a cada paciente
 
 		cPaciente* Pac = new cPaciente(Nombre, Fecha_nac, Telefono, Alergias, Radio_amp);
 		Retorno.push_back(Pac);
@@ -390,23 +498,27 @@ list<cPaciente*> leer_Pacientes()
 list<cMedico*> leer_Medicos()
 {
 	ifstream Arch_Medicos;
-	Arch_Medicos.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12 - Monteros - TP_FINAL\\Project1\\Input Data_files\\Medicos.csv", ios::in);
+	Arch_Medicos.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Medicos.csv", ios::in);
 
 	if (!Arch_Medicos.is_open())
 	{
 		throw new ARCH_NOT_OPENED;
 	}
-	string Nombre;
+
+	string Nombre, headers ;
+	unsigned int Matricula=0;
+	char coma;
 	list<cMedico*> Retorno;
 
-	Arch_Medicos >> Nombre;
+	getline(Arch_Medicos, headers);
+	Arch_Medicos >> Nombre>> coma>> Matricula;
 
 	while (Arch_Medicos)
 	{
 		srand(time(0));
-		cMedico* Actual = new cMedico(Nombre, (rand() % 9999999 + 10000000)); // el archivo solo tiene nombres, lo demas es aleatorio
+		cMedico* Actual = new cMedico(Nombre, Matricula);
 		Retorno.push_back(Actual);
-		Arch_Medicos >> Nombre;
+		Arch_Medicos >> Nombre>> coma>> Matricula;
 	}
 	Arch_Medicos.close();
 
@@ -429,6 +541,7 @@ list<cFabricante*> leer_Fabricantes()
 
 	string Nombre, Direccion;
 	unsigned int Num_Habilitacion;
+	getline(Arch_Fabricantes, headers);
 
 	Arch_Fabricantes >> Nombre >> coma >> Direccion >> coma >> Num_Habilitacion;
 

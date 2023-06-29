@@ -14,6 +14,7 @@ cANPA::cANPA(list<cFabricante*> Fabricantes_, list<cHospital*> Hospitales_, list
 
 cANPA::~cANPA()
 {
+
 	this->lista_registros.erase(this->lista_registros.begin(),this->lista_registros.end());
 	this->Ortopedias.erase(this->Ortopedias.begin(), this->Ortopedias.end());
 	this->Hospitales.erase(this->Hospitales.begin(), this->Hospitales.end());
@@ -231,22 +232,30 @@ string cANPA::Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int M
 	throw new OBJECT_NOT_FOUND;
 }
 
-list<cHospital*> cANPA::get_Hospitales()
+list<cHospital*>::iterator cANPA::get_ultimo_hospital()
 {
-	return this->Hospitales;
+	return this->Hospitales.end();
 }
 
-ostream& cANPA::operator<<(ostream& out)
+
+
+list<cHospital*>::iterator cANPA::get_Primer_Hospital()
 {
-	//list<cRegistros*>::iterator it = this->lista_registros.begin();
-	//cout << "Hospital , Medico , Fecha de Solicitud , Fecha de Entrega , Estimacion , Pieza , Paciente ,";
-	//	unsigned int cont = 0;
-	//while (it != this->lista_registros.end())
-	//{
-	//	cout << " EXPEDIENTE " << cont << endl << endl;
-	//	cout<<"Hospital:"<<(*it)->ge
-	//}
+	return this->Hospitales.begin();
 }
+
+//ostream& cANPA::operator<<(ostream& out)
+//{
+//	//list<cRegistros*>::iterator it = this->lista_registros.begin();
+//	//cout << "Hospital , Medico , Fecha de Solicitud , Fecha de Entrega , Estimacion , Pieza , Paciente ,";
+//	//	unsigned int cont = 0;
+//	//while (it != this->lista_registros.end())
+//	//{
+//	//	cout << " EXPEDIENTE " << cont << endl << endl;
+//	//	cout<<"Hospital:"<<(*it)->ge
+//	//}
+//
+//}
 
 void operator+(list<cRegistros*> lista, cRegistros* agregado)
 {

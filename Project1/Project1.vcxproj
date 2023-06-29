@@ -157,6 +157,7 @@
   <ItemGroup>
     <None Include="Input Data_files\Fabricantes.csv" />
     <None Include="Input Data_files\Hospitales.csv" />
+    <None Include="Input Data_files\Medicos.csv" />
     <None Include="Input Data_files\Ortopedias.csv" />
     <None Include="Input Data_files\Pacientes.csv" />
     <None Include="Input Data_files\Protesis.csv" />

@@ -13,6 +13,12 @@ bool operator==(list<cProtesis*>::iterator original, cProt_Quirurgica comparado)
 bool operator==(list<cOrtopedia*>::iterator izquierda, list<cOrtopedia*>::iterator Derecha);
 bool operator!=(list<cOrtopedia*>::iterator Total, list<cOrtopedia*> Convenida);
 
+list<cProtesis*>::iterator operator+(list<cProtesis*>::iterator corrido, unsigned int corrimiento);  //estas sobrecargas de operadores se usan
+list<cOrtopedia*>::iterator operator+(list<cOrtopedia*>::iterator corrido, unsigned int corrimiento); //en las funciones de armar listas random
+list<cPaciente*>::iterator operator+(list<cPaciente*>::iterator corrido, unsigned int corrimiento);
+list<cMedico*>::iterator operator+(list<cMedico*>::iterator corrido, unsigned int corrimiento);
+
+
 list<cProtesis*> Armar_lista_random_de_Protesis();
 list<cOrtopedia*> Armar_random_ortopedia();
 list<string*> Generar_Alergias();

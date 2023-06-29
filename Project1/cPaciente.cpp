@@ -39,6 +39,21 @@ void cPaciente::set_Hospital(string Hospital_)
 	this->Hospital = Hospital_;
 }
 
+void cPaciente::set_ancho(float seter)
+{
+	this->Necesitada_NQ.set_Dim_ancho(seter);
+}
+
+void cPaciente::set_largo(float seter)
+{
+	this->Necesitada_NQ.set_Dim_largo(seter);
+}
+
+void cPaciente::set_radio(float seter)
+{
+	this->Necesitada_NQ.set_radio(seter);
+}
+
 void cPaciente::Recibir_Protesis_NQ(cProt_No_Quirurgica Seteada)
 {
 	this->Necesitada_NQ = Seteada;

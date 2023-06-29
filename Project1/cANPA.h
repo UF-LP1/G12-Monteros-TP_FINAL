@@ -14,6 +14,7 @@ private:
 	list<cHospital*> Hospitales;
 	list<cOrtopedia*> Ortopedias;
 	list<cRegistros*> lista_registros;
+	//revisr el tema de foreach
 
 public:
 
@@ -24,8 +25,9 @@ public:
     bool Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual, unsigned int Matricula_med_);
 	void Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospital*>::iterator Hospital_, unsigned int Matricula_Med, string Nombre_pac, string Nombre_fuente);
 	string Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int Matricula);
-	list<cHospital*> get_Hospitales();
-	ostream& operator<<(ostream& out);
+	list<cHospital*>::iterator get_ultimo_hospital();
+	list<cHospital*>::iterator get_Primer_Hospital();
+	//ostream& operator<<(ostream& out);
 
 };
 void operator+(list<cRegistros*> lista, cRegistros* agregado);

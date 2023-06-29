@@ -21,8 +21,10 @@ bool cHospital::Evaluar_Paciente(cPaciente Paciente_Actual, unsigned int & Matri
 	list<cMedico*>::iterator Med_Aux = this->Lista_Medicos.begin();
 	while (Med_Aux != this->Lista_Medicos.end())
 	{
-		if ((*Med_Aux)->get_Disponibilidad() == true)
+		if ((*Med_Aux)->get_Disponibilidad())
 			return (*Med_Aux)->Otorgar_Autorizacion(Paciente_Actual, Matricula_med);
+
+		Med_Aux++;
 	}
 	return false;  // caso de que no haya ningun medico disponible en el hospital
 }
@@ -45,6 +47,11 @@ list<cMedico*> cHospital::get_Medicos()
 queue<cPaciente*> cHospital::get_Pacientes()
 {
 	return this->Cola_pacientes;
+}
+
+void cHospital::Popear_Paciente()
+{
+	this->Cola_pacientes.pop();
 }
 
 void cHospital::operator+(cPaciente* agregado)

@@ -26,6 +26,7 @@ public:
 	float get_Radio();
 	void set_Dim_ancho(float set_);
 	void set_Dim_largo(float set_);
+	void set_radio(float set_);
 };
 
 #endif
