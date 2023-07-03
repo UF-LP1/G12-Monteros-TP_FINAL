@@ -84,6 +84,8 @@ bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente Paciente_Actual, 
 		}
 		it_hosp++;
 	}
+	if ((*it_hosp)->get_Nombre() != Nombre_hospital)
+	throw new OBJECT_NOT_FOUND;
 
 	list<cOrtopedia*>::iterator it_No_Convenidas = this->Ortopedias.begin();
 	list<cProtesis*>::iterator it_prot;
@@ -94,14 +96,11 @@ bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente Paciente_Actual, 
 		if (it_No_Convenidas != (*it_hosp)->get_afiliadas())      //operador sobrecargado, si son ortopedias convenidas, 
 		{	                                                   //no hace el resto de preguntas 
 		
-			it_prot = (*it_No_Convenidas)->get_stock().begin();
+			it_prot = (*it_No_Convenidas)->get_Primer_Prot();
 			if (Paciente_Actual.get_radio() > 0)
 			{
-				while (it_prot != (*it_No_Convenidas)->get_stock().end())
+				while (it_prot != (*it_No_Convenidas)->get_ultima_Prot())
 				{
-					//cProtesis* aux = new cProt_No_Quirurgica();    //revisar si esto funciona
-					// aux = (cProt_No_Quirurgica*)(&it_prot);
-
 					if (it_prot ==  Paciente_Actual.get_Prot_NQ())
 					{
 						Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += (*it_No_Convenidas)->get_Nombre());
@@ -114,11 +113,8 @@ bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente Paciente_Actual, 
 				}
 			}
 			else
-				while (it_prot != (*it_No_Convenidas)->get_stock().end())
+				while (it_prot != (*it_No_Convenidas)->get_ultima_Prot())
 				{
-					//cProtesis* aux = new cProt_Quirurgica();    //revisar si esto funciona
-					//aux = (cProt_Quirurgica*)(&it_prot);   
-
 					if (it_prot == Paciente_Actual.get_Prot_Q())
 					{
 						Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += (*it_No_Convenidas)->get_Nombre());
@@ -147,44 +143,43 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paci
 		}
 		it_hosp++;
 	}
-	//Agregar una exception aca en caso de que no se encuentre el nombre del hospital en la lista de hospitales de ANPA
+	if ((*it_hosp)->get_Nombre() != Nombre_hospital)
+		throw new OBJECT_NOT_FOUND;
 
 	string 	tipo_fuente = "ortopedia";;
-	list<cOrtopedia*>::iterator it_Afiliadas = (*it_hosp)->get_afiliadas().begin();
+	list<cOrtopedia*>::iterator it_Afiliadas = (*it_hosp)->get_primera_afiliada();
 
 	list<cProtesis*>::iterator it_prot;
 
-	while (it_Afiliadas != (*it_hosp)->get_afiliadas().end())
+	while (it_Afiliadas != (*it_hosp)->get_ultima_afiliada())
 	{
-		it_prot = (*it_Afiliadas)->get_stock().begin();
+		it_prot = (*it_Afiliadas)->get_Primer_Prot();
 		if (paciente_actual.get_radio() > 0)            //si el paciente tiene un radio de amputacion,
 		{												//necesita una protesis de un miembro, es decir no quirurgica
 
-			while (it_prot != (*it_Afiliadas)->get_stock().end())
+			while (it_prot != (*it_Afiliadas)->get_ultima_Prot())
 			{
 
 				if (it_prot == paciente_actual.get_Prot_NQ())
 				{
-					//cProt_No_Quirurgica* aux =dynamic_cast<cProt_No_Quirurgica*>(it_prot) efectivamente esto no funciona a menos que tengas un puntero en todas tus listas
-					//revisar si la alternativa de los gets virtuales funciona
-	
 						Registrar_tramite(paciente_actual.get_danyada(), it_hosp, Matricula_med_, paciente_actual.get_Nombre_Ap(), tipo_fuente += (*it_Afiliadas)->get_Nombre()); 
 
 						//si se encuentra la pieza necesitada se genera un registro de la venta/tramite con los datos de
 						//los implicados y como fuente de la protesis se especifica que la fuente fue una ortopedia y se agrega su nombre
 						//aprovechando sobrecarga de operadores de la clase string
+						cProt_No_Quirurgica encontrada(it_prot);
+						paciente_actual.Recibir_Protesis_NQ(encontrada);
 						
-						it_Afiliadas-&it_prot; 
-
+						it_Afiliadas-&it_prot; //la Ortopedia pierde esa protesis
+						delete *it_prot;
 						return true;
-					
 				}
 				it_prot++;
 			}
 		}
 		else
 		{
-			while (it_prot != (*it_Afiliadas)->get_stock().end())
+			while (it_prot != (*it_Afiliadas)->get_ultima_Prot())
 			{
 
 				if (it_prot == paciente_actual.get_Prot_Q())
@@ -215,16 +210,17 @@ void cANPA::Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospit
 	fecha_entrega.tm_mday += estimacion;
 	                                             //la protesis se entrega en cualquier momento entre un lapso de 10 dias 
 												 //despues de que la solicitud fue aceptada
-	cRegistros* aux= new cRegistros((*Hospital_)->get_Nombre(), Buscar_Medico(Hospital_, Matricula_Med), &Fecha_Actual, &fecha_entrega, estimacion, Pieza_, Nombre_pac, Nombre_fuente);
-	
+	//cRegistros(string Hospital_, string Medico_, tm Fecha_sol_, tm Fecha_Entrega_, unsigned int Estimacion_, Organo_Extremidad_Reemplazada Pieza_, string Paciente_, string Nombre_Fuente_);
+	cRegistros* aux = new cRegistros((*Hospital_)->get_Nombre(), Buscar_Medico(Hospital_, Matricula_Med), Fecha_Actual, fecha_entrega, estimacion, Pieza_, Nombre_pac, Nombre_fuente);
+
 	this->lista_registros + aux;  // se crea el registro con los datos recibidos y se agrega a la lista
 }
 
 string cANPA::Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int Matricula)
 {
-	list<cMedico*>::iterator it =  (*Hospital_)->get_Medicos().begin();
+	list<cMedico*>::iterator it =  (*Hospital_)->get_Primer_Medico();
 
-	while (it != (*Hospital_)->get_Medicos().end())
+	while (it != (*Hospital_)->get_Ultimo_Medico())
 	{
 		if ((*it)->get_Matricula() == Matricula)
 			return (*it)->get_Nombre();
@@ -244,18 +240,18 @@ list<cHospital*>::iterator cANPA::get_Primer_Hospital()
 	return this->Hospitales.begin();
 }
 
-//ostream& cANPA::operator<<(ostream& out)
-//{
-//	//list<cRegistros*>::iterator it = this->lista_registros.begin();
-//	//cout << "Hospital , Medico , Fecha de Solicitud , Fecha de Entrega , Estimacion , Pieza , Paciente ,";
-//	//	unsigned int cont = 0;
-//	//while (it != this->lista_registros.end())
-//	//{
-//	//	cout << " EXPEDIENTE " << cont << endl << endl;
-//	//	cout<<"Hospital:"<<(*it)->ge
-//	//}
-//
-//}
+ostream& operator<<(ostream& out, cANPA Prueba)
+{
+    list<cRegistros*>::iterator it = Prueba.lista_registros.begin();
+    	unsigned int cont = 1;
+    while (it != Prueba.lista_registros.end())
+    {
+    	out << " EXPEDIENTE " << cont << endl << endl;
+		out << "Hospital:" << (*it)->Hospital << endl << "Medico:" << (*it)->Medico << endl << "Fecha de Solicitud:" << endl << "Fecha de Solicitud" << endl << (*it)->Fecha_Sol.tm_mday << "/" << (*it)->Fecha_Sol.tm_mon << "/" << (*it)->Fecha_Sol.tm_year << endl << "Fecha de Entrega:" << (*it)->Fecha_Entrega.tm_mday << "/" << (*it)->Fecha_Entrega.tm_mon << "/" << (*it)->Fecha_Entrega.tm_year << endl << "Estimacion:" << (*it)->Estimacion << endl << "Pieza:" << (*it)->Estimacion << endl << "Paciente:" << (*it)->Paciente << endl;
+		cont++;
+    }
+	return out;
+}
 
 void operator+(list<cRegistros*> lista, cRegistros* agregado)
 {

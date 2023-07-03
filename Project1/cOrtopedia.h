@@ -21,6 +21,8 @@ public:
 	bool Buscar_Por_Alergias(list<cProtesis> lista_filtrada, string Alergias[]);
 	bool Buscar_Por_radio(float Radio_Amp);
 	list<cProtesis*> get_stock();
+	list<cProtesis*>::iterator get_Primer_Prot();
+	list<cProtesis*>::iterator get_ultima_Prot();
 	
 	string get_Nombre();
 	

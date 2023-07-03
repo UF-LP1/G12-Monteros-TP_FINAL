@@ -33,6 +33,7 @@ bool operator!=(list<cOrtopedia*>::iterator Total, list<cOrtopedia*> Convenida)
 	{
 		if (Total == it)
 			return false;
+		it++;
 	}
 	return true;
 }
@@ -553,6 +554,144 @@ list<cFabricante*> leer_Fabricantes()
 
 	}
 	Arch_Fabricantes.close();
+
+	return Retorno;
+}
+
+list<cHospital*> Hospitales_Predeterminados()
+{
+	list<cHospital*> Retorno;
+	Retorno.clear();
+	
+	cMedico* Medico1 = new cMedico("Juan_Juan", 45598355, false);
+	cMedico* Medico2 = new cMedico("Antonio_Perez", 34524256, true);
+	cMedico* Medico3 = new cMedico("Osvaldo_Gutierrez", 409842092, false);
+	cMedico* Medico4 = new cMedico("Mateo_Pilomini", 45527890, true);
+	cMedico* Medico5 = new cMedico("Juan_NoJuan", 37124035, true);
+	list<cMedico*> Lista_Medicos;
+	Lista_Medicos.push_back(Medico1);
+	Lista_Medicos.push_back(Medico2);
+	Lista_Medicos.push_back(Medico3);
+	Lista_Medicos.push_back(Medico4);
+	Lista_Medicos.push_back(Medico5);
+
+	list<cProtesis*> aux;
+	aux.clear();
+	cOrtopedia* Ortopedia1 = new cOrtopedia("San_Juan", "Dorrego_999", aux);//no es necesario que estos objetos de Ortopedia tengan un stock declarado porque solo se compararan los nombres en las funciones
+	cOrtopedia* Ortopedia2 = new cOrtopedia("Alexander_Chaparri", "Brasil_547", aux);
+	list<cOrtopedia*> Convenidas;
+	Convenidas.push_back(Ortopedia1);
+	Convenidas.push_back(Ortopedia2);
+
+	tm aux_f;
+	aux_f.tm_mday = 05; aux_f.tm_mon = 10; aux_f.tm_year = 2000;
+	cPaciente* Paciente1 = new cPaciente("Lucia_Quintana", aux_f, "1144227740", Generar_Alergias(), 2.9);
+	aux_f.tm_mday = 27; aux_f.tm_mon = 12; aux_f.tm_year = 2004;
+	cPaciente* Paciente2 = new cPaciente("Eric_Gadea",  aux_f , "1169035382", Generar_Alergias(), 0);
+	aux_f.tm_mday = 15; aux_f.tm_mon = 04; aux_f.tm_year = 2004;
+	cPaciente* Paciente3 = new cPaciente("Ariana_Ordonyez", aux_f, "1162569077",Generar_Alergias(), 0);
+	aux_f.tm_mday = 8; aux_f.tm_mon = 02; aux_f.tm_year = 2004;
+	cPaciente* Paciente4 = new cPaciente("Alma_Maiolino", aux_f , "1146738292", Generar_Alergias(), 6.2);
+	aux_f.tm_mday = 03; aux_f.tm_mon = 06; aux_f.tm_year = 2004;
+	cPaciente* Paciente5 = new cPaciente("Juan_Perez", aux_f, "1161197786", Generar_Alergias(), 0.9);
+
+	queue<cPaciente*> Cola_pacientes;
+	Cola_pacientes.push(Paciente1);
+	Cola_pacientes.push(Paciente2);
+	Cola_pacientes.push(Paciente3);
+	Cola_pacientes.push(Paciente4);
+	Cola_pacientes.push(Paciente5);
+
+	cHospital* Hospitalito = new cHospital("San_Juan_De_Dios", "Brasil_959", "Cardiologia",Lista_Medicos,Convenidas,Cola_pacientes);
+	Retorno.push_back(Hospitalito);
+
+	return Retorno;
+}
+
+list<cOrtopedia*> Ortopedias_Predeterminadas()
+{
+	list<cOrtopedia*> Retorno;
+
+	tm aux;
+	aux.tm_mday = 23; aux.tm_mon = 02; aux.tm_year = 2019;
+	cProt_No_Quirurgica* Protesis_NQ1 = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)1, aux, "Stephano", true, 20.4, 19.1, 4.5);
+	aux.tm_mday = 04; aux.tm_mon = 11; aux.tm_year = 2020;
+	cProt_No_Quirurgica* Protesis_NQ2 = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)2, aux, "Ariana_Pereyra", false, 90.0, 20.0, 9.2);
+	aux.tm_mday = 03; aux.tm_mon = 01; aux.tm_year = 2023;
+	cProt_No_Quirurgica* Protesis_NQ3 = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)3, aux, "Agustina", true, 10.5, 8.0, 2.5);
+	aux.tm_mday = 15; aux.tm_mon = 04; aux.tm_year = 2023;
+	cProt_No_Quirurgica* Protesis_NQ4 = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)4, aux, "Fernando_Oras", true, 8.3, 0.2, 0.3);
+	aux.tm_mday = 30; aux.tm_mon = 8; aux.tm_year = 2020;
+	cProt_No_Quirurgica* Protesis_NQ5 = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)5, aux, "Juliana", false, 7.8, 8.9, 4.5);
+
+	aux.tm_mday = 05; aux.tm_mon = 11; aux.tm_year = 2022;
+	cProt_Quirurgica* Protesis_Q1 = new cProt_Quirurgica("Esternoclavicular", "Platino", (Organo_Extremidad_Reemplazada)6, aux, "Agustina", true);
+	aux.tm_mday = 06; aux.tm_mon = 07; aux.tm_year = 2021;
+	cProt_Quirurgica* Protesis_Q2 = new cProt_Quirurgica("Coxofemoral", "Titanio", (Organo_Extremidad_Reemplazada)7, aux, "Stephano", false);
+	aux.tm_mday = 15; aux.tm_mon = 04; aux.tm_year = 2023;
+	cProt_Quirurgica* Protesis_Q3 = new cProt_Quirurgica("Escapula", "Hierro", (Organo_Extremidad_Reemplazada)8, aux, "Ariana_Pereyra", true);
+	aux.tm_mday = 20; aux.tm_mon = 9; aux.tm_year = 2022;
+	cProt_Quirurgica* Protesis_Q4 = new cProt_Quirurgica("Tallo Femoral", "Platino", (Organo_Extremidad_Reemplazada)9, aux, "Agustina", false);
+	aux.tm_mday = 25; aux.tm_mon = 04; aux.tm_year = 2023;
+	cProt_Quirurgica* Protesis_Q5 = new cProt_Quirurgica("Mandibula", "Titanio", (Organo_Extremidad_Reemplazada)10, aux, "Stephano", true);
+
+	list<cProtesis*> Protesis_ortopedia;
+	Protesis_ortopedia.push_back(Protesis_NQ1);
+	Protesis_ortopedia.push_back(Protesis_NQ5);
+	Protesis_ortopedia.push_back(Protesis_Q3);
+	Protesis_ortopedia.push_back(Protesis_Q5);
+	Protesis_ortopedia.push_back(Protesis_Q4);
+	cOrtopedia* Ortopedia1 = new cOrtopedia("San_Juan", "Dorrego_999", Protesis_ortopedia);
+
+	Protesis_ortopedia.clear();
+	Protesis_ortopedia.push_back(Protesis_NQ2);
+	Protesis_ortopedia.push_back(Protesis_Q2);
+	Protesis_ortopedia.push_back(Protesis_NQ3);
+	Protesis_ortopedia.push_back(Protesis_Q1);
+	Protesis_ortopedia.push_back(Protesis_NQ4);
+	cOrtopedia* Ortopedia2 = new cOrtopedia("Alexander_Chaparri", "Brasil_547", Protesis_ortopedia);
+
+	//
+	//
+	Protesis_ortopedia.clear();
+	Protesis_ortopedia.push_back(Protesis_NQ1);
+	Protesis_ortopedia.push_back(Protesis_Q2);
+	Protesis_ortopedia.push_back(Protesis_NQ5);
+	Protesis_ortopedia.push_back(Protesis_Q5);
+	Protesis_ortopedia.push_back(Protesis_NQ4);
+	cOrtopedia* Ortopedia3 = new cOrtopedia("Quintana_Pereyra", "Reconquista_567", Protesis_ortopedia);
+
+	Protesis_ortopedia.clear();
+	Protesis_ortopedia.push_back(Protesis_NQ3);
+	Protesis_ortopedia.push_back(Protesis_Q5);
+	Protesis_ortopedia.push_back(Protesis_NQ5);
+	Protesis_ortopedia.push_back(Protesis_Q2);
+	Protesis_ortopedia.push_back(Protesis_NQ2);
+	cOrtopedia* Ortopedia4 = new cOrtopedia("Chilapri", "Callao_555", Protesis_ortopedia);
+
+	Retorno.push_back(Ortopedia1);
+	Retorno.push_back(Ortopedia2);
+	Retorno.push_back(Ortopedia3);
+	Retorno.push_back(Ortopedia4);
+	return Retorno;
+}
+
+list<cFabricante*> Fabricantes_Predeterminados()
+{
+	list<cFabricante*> Retorno;
+
+	cFabricante* Fabricante1 = new cFabricante("Stephano", "Federico_Alvear_457", 455324455);
+	cFabricante* Fabricante2 = new cFabricante("Juliana", "Libetador_889", 455242557);
+	cFabricante* Fabricante3 = new cFabricante("Ariana_Pereyra", "Brandy_876", 643557824);
+	cFabricante* Fabricante4 = new cFabricante("Fernando_Oras", "Anubis_198", 543354476);
+	cFabricante* Fabricante5 = new cFabricante("Fernando_Oras", "Anubis_198", 543354476);
+	cFabricante* Fabricante6 = new cFabricante("Agustina", "Ordonyes_765", 123321345);
+	Retorno.push_back(Fabricante1);
+	Retorno.push_back(Fabricante2);
+	Retorno.push_back(Fabricante3);
+	Retorno.push_back(Fabricante4);
+	Retorno.push_back(Fabricante5);
+	Retorno.push_back(Fabricante6);
 
 	return Retorno;
 }

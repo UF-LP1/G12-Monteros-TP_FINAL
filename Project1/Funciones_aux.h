@@ -18,7 +18,7 @@ list<cOrtopedia*>::iterator operator+(list<cOrtopedia*>::iterator corrido, unsig
 list<cPaciente*>::iterator operator+(list<cPaciente*>::iterator corrido, unsigned int corrimiento);
 list<cMedico*>::iterator operator+(list<cMedico*>::iterator corrido, unsigned int corrimiento);
 
-
+//Estas funciones son el armado de listas random, pero tienen el problema de armarse todas iguales en algunas variables
 list<cProtesis*> Armar_lista_random_de_Protesis();
 list<cOrtopedia*> Armar_random_ortopedia();
 list<string*> Generar_Alergias();
@@ -32,3 +32,9 @@ list<cOrtopedia*> Leer_Ortopedias();
 list<cPaciente*>leer_Pacientes();
 list<cMedico*> leer_Medicos();
 list<cFabricante*> leer_Fabricantes();
+
+//Estas funciones estan para armar datos de prueba especificos mas comodamente, sacrificando la calidad de simulacion
+list<cHospital*> Hospitales_Predeterminados();
+list<cOrtopedia*> Ortopedias_Predeterminadas();
+list<cFabricante*> Fabricantes_Predeterminados();
+

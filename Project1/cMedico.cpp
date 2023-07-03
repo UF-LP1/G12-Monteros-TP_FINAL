@@ -6,6 +6,11 @@ cMedico::cMedico(string Nombre_Apellido_, unsigned int Matricula_) :Nombre_Apell
 	this->Disponible = rand() % 2 == 0;
 }
 
+cMedico::cMedico(string Nombre_Apellido_, unsigned int Matricula_, bool Disponible_):Nombre_Apellido(Nombre_Apellido_), Matricula(Matricula_)
+{
+	this->Disponible = Disponible_;
+}
+
 cMedico::~cMedico()
 {
 

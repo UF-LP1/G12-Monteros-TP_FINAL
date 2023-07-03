@@ -31,6 +31,15 @@ list<cProtesis*> cOrtopedia::get_stock()
 	return this->Stock_Protesis;
 }
 
+list<cProtesis*>::iterator cOrtopedia::get_Primer_Prot()
+{
+	return this->Stock_Protesis.begin();
+}
+
+list<cProtesis*>::iterator cOrtopedia::get_ultima_Prot()
+{
+	return this->Stock_Protesis.end();
+}
 
 string cOrtopedia::get_Nombre()
 {

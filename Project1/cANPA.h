@@ -27,9 +27,10 @@ public:
 	string Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int Matricula);
 	list<cHospital*>::iterator get_ultimo_hospital();
 	list<cHospital*>::iterator get_Primer_Hospital();
-	//ostream& operator<<(ostream& out);
+	friend ostream& operator<<(ostream& out, cANPA Prueba);
 
 };
+ostream& operator<<(ostream& out, cANPA Prueba);
 void operator+(list<cRegistros*> lista, cRegistros* agregado);
 void operator-(list<cOrtopedia*>:: iterator original, list<cProtesis*>::iterator* eliminado);
 

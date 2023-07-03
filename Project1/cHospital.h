@@ -27,10 +27,15 @@ public:
 	void set_Pacientes(queue<cPaciente*> lista_actual);
 	bool Evaluar_Paciente(cPaciente Paciente_Actual, unsigned int& Matricula_med);
 	string get_Nombre();
+	list<cOrtopedia*>::iterator get_primera_afiliada();
+	list<cOrtopedia*>::iterator get_ultima_afiliada();
+	list<cMedico*>::iterator get_Primer_Medico();
+	list<cMedico*>::iterator get_Ultimo_Medico();
 	list<cOrtopedia*> get_afiliadas();
 	list<cMedico*> get_Medicos();
 	queue<cPaciente*> get_Pacientes();
 	void Popear_Paciente();
+	unsigned int get_Pacientes_pendientes();
 	void operator+(cPaciente* agregado);
 };
 

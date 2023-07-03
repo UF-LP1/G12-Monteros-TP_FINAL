@@ -34,6 +34,26 @@ string cHospital::get_Nombre()
 	return this->Nombre;
 }
 
+list<cOrtopedia*>::iterator cHospital::get_primera_afiliada()
+{
+	return this->lista_Afiliadas.begin();
+}
+
+list<cOrtopedia*>::iterator cHospital::get_ultima_afiliada()
+{
+	return this->lista_Afiliadas.end();
+}
+
+list<cMedico*>::iterator cHospital::get_Primer_Medico()
+{
+	return this->Lista_Medicos.begin();
+}
+
+list<cMedico*>::iterator cHospital::get_Ultimo_Medico()
+{
+	return this->Lista_Medicos.end();
+}
+
 list<cOrtopedia*> cHospital::get_afiliadas()
 {
 	return this->lista_Afiliadas;
@@ -52,6 +72,11 @@ queue<cPaciente*> cHospital::get_Pacientes()
 void cHospital::Popear_Paciente()
 {
 	this->Cola_pacientes.pop();
+}
+
+unsigned int cHospital::get_Pacientes_pendientes()
+{
+	return this->Cola_pacientes.size();
 }
 
 void cHospital::operator+(cPaciente* agregado)

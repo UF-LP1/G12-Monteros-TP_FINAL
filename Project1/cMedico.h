@@ -14,6 +14,7 @@ private:
 	bool Disponible;
 public:
 	cMedico(string Nombre_Apellido_, unsigned int Matricula_);
+	cMedico(string Nombre_Apellido_, unsigned int Matricula_, bool Disponible_);
 	~cMedico();
 
 	bool Otorgar_Autorizacion(cPaciente Paciente_actual_, unsigned int & Matricula_med);
