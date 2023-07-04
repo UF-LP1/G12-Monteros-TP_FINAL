@@ -25,7 +25,7 @@ public:
 	cHospital(string Nombre_,string Direccion_,string Especialidad_, list<cMedico*> Lista_Medicos_, list<cOrtopedia*> Lista_Afiliadas_, queue<cPaciente*> Cola_pac_);
 	~cHospital();
 	void set_Pacientes(queue<cPaciente*> lista_actual);
-	bool Evaluar_Paciente(cPaciente Paciente_Actual, unsigned int& Matricula_med);
+	bool Evaluar_Paciente(cPaciente& Paciente_Actual, unsigned int& Matricula_med);
 	string get_Nombre();
 	list<cOrtopedia*>::iterator get_primera_afiliada();
 	list<cOrtopedia*>::iterator get_ultima_afiliada();
@@ -36,7 +36,7 @@ public:
 	queue<cPaciente*> get_Pacientes();
 	void Popear_Paciente();
 	unsigned int get_Pacientes_pendientes();
-	void operator+(cPaciente* agregado);
+	void Archivar_paciente(cPaciente* agregado);
 };
 
 #endif

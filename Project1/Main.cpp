@@ -33,8 +33,9 @@ int main()
 					Prueba.Solicitar_Protesis_A_Fabricante((*it_hospital)->get_Nombre(), *Paciente_actual, Matricula_auxiliar);//si nadie las tiene se pude fabricar una
 				}
 			}// si el medico no autoriza al paciente, se pasa al siguiente paciente
+			(*it_hospital)->Archivar_paciente(Paciente_actual);
 		}
 		it_hospital++;
 	}
-	cout<<Prueba;
+	return 1;
 }

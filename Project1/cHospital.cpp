@@ -16,7 +16,7 @@ void cHospital::set_Pacientes(queue<cPaciente*> cola_actual)
 	this->Cola_pacientes=cola_actual;
 }
 
-bool cHospital::Evaluar_Paciente(cPaciente Paciente_Actual, unsigned int & Matricula_med )
+bool cHospital::Evaluar_Paciente(cPaciente &Paciente_Actual, unsigned int & Matricula_med )
 {
 	list<cMedico*>::iterator Med_Aux = this->Lista_Medicos.begin();
 	while (Med_Aux != this->Lista_Medicos.end())
@@ -79,7 +79,7 @@ unsigned int cHospital::get_Pacientes_pendientes()
 	return this->Cola_pacientes.size();
 }
 
-void cHospital::operator+(cPaciente* agregado)
+void cHospital::Archivar_paciente(cPaciente* agregado)
 {
 	this->Pacientes_Atendidos.push_back(agregado);
 }

@@ -54,6 +54,11 @@ void cPaciente::set_radio(float seter)
 	this->Necesitada_NQ.set_radio(seter);
 }
 
+void cPaciente::set_articulacion(string seteada)
+{
+	this->Necesitada_Q.set_Articulacion(seteada);
+}
+
 void cPaciente::Recibir_Protesis_NQ(cProt_No_Quirurgica Seteada)
 {
 	this->Necesitada_NQ = Seteada;
@@ -116,6 +121,11 @@ cProt_No_Quirurgica cPaciente::get_Prot_NQ()
 cProt_Quirurgica cPaciente::get_Prot_Q()
 {
 	return this->Necesitada_Q;
+}
+
+list<string*> cPaciente::get_alergias()
+{
+	return this->Alergias;
 }
 
 

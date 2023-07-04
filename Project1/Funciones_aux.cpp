@@ -678,7 +678,7 @@ list<cOrtopedia*> Ortopedias_Predeterminadas()
 
 list<cFabricante*> Fabricantes_Predeterminados()
 {
-	list<cFabricante*> Retorno;
+
 
 	cFabricante* Fabricante1 = new cFabricante("Stephano", "Federico_Alvear_457", 455324455);
 	cFabricante* Fabricante2 = new cFabricante("Juliana", "Libetador_889", 455242557);
@@ -686,6 +686,7 @@ list<cFabricante*> Fabricantes_Predeterminados()
 	cFabricante* Fabricante4 = new cFabricante("Fernando_Oras", "Anubis_198", 543354476);
 	cFabricante* Fabricante5 = new cFabricante("Fernando_Oras", "Anubis_198", 543354476);
 	cFabricante* Fabricante6 = new cFabricante("Agustina", "Ordonyes_765", 123321345);
+	list<cFabricante*> Retorno;
 	Retorno.push_back(Fabricante1);
 	Retorno.push_back(Fabricante2);
 	Retorno.push_back(Fabricante3);

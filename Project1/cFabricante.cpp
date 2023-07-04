@@ -1,6 +1,6 @@
 #include "cFabricante.h"
 
-cFabricante::cFabricante(string Nombre_, string Direccion_, unsigned int Num_Habilitacion_): Nombre(Nombre),Direccion(Direccion_), Num_Habilitacion(Num_Habilitacion_)
+cFabricante::cFabricante(string Nombre_, string Direccion_, unsigned int Num_Habilitacion_): Nombre(Nombre_),Direccion(Direccion_), Num_Habilitacion(Num_Habilitacion_)
 {
 }
 

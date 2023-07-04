@@ -7,7 +7,7 @@ cProt_No_Quirurgica::cProt_No_Quirurgica(Organo_Extremidad_Reemplazada Nombre_, 
 	this->Radio_Conexion = Radio_Conexion_;
 }
 
-cProt_No_Quirurgica::cProt_No_Quirurgica(list<cProtesis*>::iterator copia) :cProtesis((*copia)->get_nombre(), (*copia)->get_Fabricacion(), (*copia)->get_Fabricante(),(*copia)->get_Superior_inferior())
+cProt_No_Quirurgica::cProt_No_Quirurgica(list<cProtesis*>::iterator copia):cProtesis((*copia)->get_nombre(), (*copia)->get_Fabricacion(), (*copia)->get_Fabricante(),(*copia)->get_Superior_inferior())
 {
 	this->Dim_Ancho = (*copia)->get_ancho();
 	this->Dim_Largo = (*copia)->get_largo();

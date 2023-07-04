@@ -33,6 +33,7 @@ public:
 	void set_ancho(float seter);
 	void set_largo(float seter);
 	void set_radio(float seter);
+	void set_articulacion(string seteada);
 	void Recibir_Protesis_NQ(cProt_No_Quirurgica Seteada);
 	void Recibir_Protesis_Q(cProt_Quirurgica Seteada);
 	string get_Nombre_Ap();
@@ -45,5 +46,7 @@ public:
 	Organo_Extremidad_Reemplazada get_danyada();
 	cProt_No_Quirurgica get_Prot_NQ();
 	cProt_Quirurgica get_Prot_Q();
+	list<string*> get_alergias();
+
 };
 #endif

@@ -22,7 +22,7 @@ cANPA::~cANPA()
 
 }
 
-bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Paciente_Actual, unsigned int Matricula_med_)
+bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente &Paciente_Actual, unsigned int Matricula_med_)
 {
 	list<cHospital*>::iterator it_hosp = this->Hospitales.begin(); // todas las veces comprobamos que el hospital exista en las
 	                                                              //listas del ANPA
@@ -41,7 +41,7 @@ bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Pa
 
 	list<cFabricante*>::iterator it_Fab = this->Fabricantes.begin();
 	string tipo_fuente = "Fabricante";
-	
+
 	while (it_Fab != this->Fabricantes.end())
 	{
 		srand(time(0));
@@ -54,7 +54,7 @@ bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Pa
 			tm Actual;
 			localtime_s(&Actual, &fechaactual);
 
-			Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += (*it_Fab)->get_Nombre());
+			Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), (tipo_fuente += (*it_Fab)->get_Nombre()));
 
 			if (Paciente_Actual.get_radio() > 0)
 			{
@@ -63,16 +63,17 @@ bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente Pa
 			}
 			else
 			{
-				cProt_Quirurgica Fabricada(Paciente_Actual.get_Prot_Q().get_Articulacion(), Paciente_Actual.get_Prot_Q().get_material(), Paciente_Actual.get_danyada(), Actual, (*it_Fab)->get_Nombre(), Paciente_Actual.get_Prot_Q().get_Superior_inferior());
+				cProt_Quirurgica Fabricada(Elegir_Una_Articulacion(Paciente_Actual.get_danyada()), Elegir_Un_Material(Paciente_Actual.get_alergias()), Paciente_Actual.get_danyada(), Actual, (*it_Fab)->get_Nombre(), Paciente_Actual.get_Prot_Q().get_Superior_inferior());
 				Paciente_Actual.Recibir_Protesis_Q(Fabricada);
 			}
 			return true;
 		}
+		it_Fab++;
 	}
 	return false;
 }
 
-bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente Paciente_Actual, unsigned int Matricula_med_)
+bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente &Paciente_Actual, unsigned int Matricula_med_)
 {
 	list<cHospital*>::iterator it_hosp = this->Hospitales.begin();
 
@@ -104,8 +105,10 @@ bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente Paciente_Actual, 
 					if (it_prot ==  Paciente_Actual.get_Prot_NQ())
 					{
 						Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += (*it_No_Convenidas)->get_Nombre());
-
+						cProt_No_Quirurgica entregada(it_prot);
+						Paciente_Actual.Recibir_Protesis_NQ(entregada);
 						it_No_Convenidas - &it_prot;
+						delete* it_prot;
 						return true;
 					}
 
@@ -118,7 +121,10 @@ bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente Paciente_Actual, 
 					if (it_prot == Paciente_Actual.get_Prot_Q())
 					{
 						Registrar_tramite(Paciente_Actual.get_danyada(), it_hosp, Matricula_med_, Paciente_Actual.get_Nombre_Ap(), tipo_fuente += (*it_No_Convenidas)->get_Nombre());
+						cProt_Quirurgica entregada(it_prot);
+						Paciente_Actual.Recibir_Protesis_Q(entregada);
 						it_No_Convenidas -&it_prot; 
+						delete* it_prot;
 						return true;
 					}
 					it_prot++;
@@ -130,7 +136,7 @@ bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente Paciente_Actual, 
 	return false;
 }
 
-bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente paciente_actual,unsigned int Matricula_med_)
+bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente &paciente_actual,unsigned int Matricula_med_)
 {
 	
 	list<cHospital*>::iterator it_hosp = this->Hospitales.begin();
@@ -205,12 +211,11 @@ void cANPA::Registrar_tramite(Organo_Extremidad_Reemplazada Pieza_, list<cHospit
 	unsigned int estimacion = rand() % 10 + 1;
 	tm Fecha_Actual;
 	localtime_s(&Fecha_Actual, &fecha_actual);
-
-	tm fecha_entrega=Fecha_Actual;
+	                                                 //la protesis se entrega en cualquier momento entre un lapso de 10 dias
+	tm fecha_entrega = Fecha_Actual;				 //despues de que la solicitud fue aceptada          
 	fecha_entrega.tm_mday += estimacion;
-	                                             //la protesis se entrega en cualquier momento entre un lapso de 10 dias 
-												 //despues de que la solicitud fue aceptada
-	//cRegistros(string Hospital_, string Medico_, tm Fecha_sol_, tm Fecha_Entrega_, unsigned int Estimacion_, Organo_Extremidad_Reemplazada Pieza_, string Paciente_, string Nombre_Fuente_);
+	                                    
+												 
 	cRegistros* aux = new cRegistros((*Hospital_)->get_Nombre(), Buscar_Medico(Hospital_, Matricula_Med), Fecha_Actual, fecha_entrega, estimacion, Pieza_, Nombre_pac, Nombre_fuente);
 
 	this->lista_registros + aux;  // se crea el registro con los datos recibidos y se agrega a la lista
@@ -224,6 +229,7 @@ string cANPA::Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int M
 	{
 		if ((*it)->get_Matricula() == Matricula)
 			return (*it)->get_Nombre();
+		it++;
 	}
 	throw new OBJECT_NOT_FOUND;
 }
@@ -233,24 +239,93 @@ list<cHospital*>::iterator cANPA::get_ultimo_hospital()
 	return this->Hospitales.end();
 }
 
-
-
 list<cHospital*>::iterator cANPA::get_Primer_Hospital()
 {
 	return this->Hospitales.begin();
 }
 
-ostream& operator<<(ostream& out, cANPA Prueba)
+string cANPA::Elegir_Un_Material(list<string*> alergias)
 {
-    list<cRegistros*>::iterator it = Prueba.lista_registros.begin();
-    	unsigned int cont = 1;
-    while (it != Prueba.lista_registros.end())
-    {
-    	out << " EXPEDIENTE " << cont << endl << endl;
-		out << "Hospital:" << (*it)->Hospital << endl << "Medico:" << (*it)->Medico << endl << "Fecha de Solicitud:" << endl << "Fecha de Solicitud" << endl << (*it)->Fecha_Sol.tm_mday << "/" << (*it)->Fecha_Sol.tm_mon << "/" << (*it)->Fecha_Sol.tm_year << endl << "Fecha de Entrega:" << (*it)->Fecha_Entrega.tm_mday << "/" << (*it)->Fecha_Entrega.tm_mon << "/" << (*it)->Fecha_Entrega.tm_year << endl << "Estimacion:" << (*it)->Estimacion << endl << "Pieza:" << (*it)->Estimacion << endl << "Paciente:" << (*it)->Paciente << endl;
-		cont++;
-    }
-	return out;
+	list<string>Posibles_Materiales;
+	Posibles_Materiales.push_back("Hierro");
+	Posibles_Materiales.push_back("Platino");
+	Posibles_Materiales.push_back("Thaumio");
+	Posibles_Materiales.push_back("Oricalco");
+	Posibles_Materiales.push_back("Bronce");
+	Posibles_Materiales.push_back("Cobre");
+	Posibles_Materiales.push_back("Aluminio");
+	Posibles_Materiales.push_back("Plastico");
+	Posibles_Materiales.push_back("Madera_De_Abedul");
+	Posibles_Materiales.push_back("Madera_De_Roble");
+	Posibles_Materiales.push_back("Mithrilo");
+	Posibles_Materiales.push_back("Titanio");
+	list<string>::iterator it = Posibles_Materiales.begin();
+
+	while (it != Posibles_Materiales.end())
+	{
+		if (*it != alergias)
+			return *it;
+		it++;
+	}
+}
+
+string cANPA::Elegir_Una_Articulacion(Organo_Extremidad_Reemplazada criterio)
+{
+	srand(time(0));
+	unsigned int eleccion = rand() % 2+1;
+	//tipos de protessi quirurgicas:
+	//Hombro, Cadera, Clavicula, Placa_Metalica, Implante_Dental
+	//
+	switch (criterio)  // esta fucnion se llama solo para las protesis quirurgicas, del 6 al 10 en el enum
+	{
+	case 6: // hombro
+		switch (eleccion) {
+		case 1:return "glenohumeral";
+			break;
+		case 2: return "subdeltoidea";
+			break;
+		}
+		break;
+
+	case 7:
+		switch (eleccion) {
+		case 1: return "Cabeza Femoral";
+			break;
+		case 2: return "Pelvis";
+			break;
+		}
+		break;
+
+	case 8: 
+		switch (eleccion) {
+		case 1: return "Acromioclavicular";
+			break;
+		case 2: return "Manubrio";
+			break;
+		}
+		break;
+
+	case 9:
+		switch (eleccion) {
+		case 1: return "Femur";
+			break;
+		case 2: return "Radio";
+			break;
+		}
+		break;
+
+	case 10:
+		switch (eleccion) {
+		case 1: return "Mandibula";
+			break;
+		case 2: return "Corona";
+			break;
+		}
+		break;
+
+	default:
+		return "Ninguna";
+	}
 }
 
 void operator+(list<cRegistros*> lista, cRegistros* agregado)
@@ -261,6 +336,18 @@ void operator+(list<cRegistros*> lista, cRegistros* agregado)
 void operator-(list<cOrtopedia*>::iterator original, list<cProtesis*>::iterator* eliminado)
 {
 	(*original)->get_stock().erase(*eliminado);
+}
+
+bool operator!=(string algo, list<string*> comparado)
+{
+	list<string*>::iterator it = comparado.begin();
+	while (it != comparado.end())
+	{
+		if (*(*it) == algo)
+			return false;
+		it++;
+	}
+	return true;
 }
 
 

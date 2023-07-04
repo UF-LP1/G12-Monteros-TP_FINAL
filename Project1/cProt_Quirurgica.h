@@ -12,6 +12,7 @@ private:
 
 public:
 	cProt_Quirurgica(string Articulacion,string Material, Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Inferior_);
+	cProt_Quirurgica(list<cProtesis*>::iterator seteada);
 	~cProt_Quirurgica();
 
 	cProt_Quirurgica();
@@ -20,6 +21,7 @@ public:
 	float get_ancho();
 	float get_largo();
 	float get_Radio();
+	void set_Articulacion(string seteada);
 };
 
 #endif

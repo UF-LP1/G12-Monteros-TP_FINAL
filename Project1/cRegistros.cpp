@@ -8,4 +8,5 @@ cRegistros::cRegistros(string Hospital_, string Medico_, tm Fecha_sol_, tm Fecha
 
 cRegistros::~cRegistros()
 {
+
 }

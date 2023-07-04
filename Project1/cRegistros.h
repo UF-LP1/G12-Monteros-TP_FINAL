@@ -20,10 +20,11 @@ private:
 	const string Paciente;
 	const string Nombre_Fuente;
 	friend class cANPA;
-	//friend ostream& operator<<(ostream& out, cANPA Prueba);
 public:
 	cRegistros(string Hospital_, string Medico_, tm Fecha_sol_, tm Fecha_Entrega_, unsigned int Estimacion_, Organo_Extremidad_Reemplazada Pieza_, string Paciente_, string Nombre_Fuente_);
 	~cRegistros();
+
+	string to_string_registros();
 };
 
 #endif
