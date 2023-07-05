@@ -38,7 +38,7 @@ string cFabricante::to_string_fab()
 
 void cFabricante::Imprimir_fab()
 {
-	cout << to_string_fab << endl;
+	cout << to_string_fab() << endl;
 }
 
 

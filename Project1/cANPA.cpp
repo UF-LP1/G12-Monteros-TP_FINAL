@@ -270,6 +270,7 @@ string cANPA::Elegir_Un_Material(list<string*> alergias)
 			return *it;
 		it++;
 	}
+	return "ninguna";
 }
 
 string cANPA::Elegir_Una_Articulacion(Organo_Extremidad_Reemplazada criterio)
@@ -333,15 +334,38 @@ string cANPA::Elegir_Una_Articulacion(Organo_Extremidad_Reemplazada criterio)
 
 ostream& operator<<(ostream& out, cANPA print)
 {
+	out << "FABRICANTES:" << endl;
+	list<cFabricante*>::iterator it_fab = print.Fabricantes.begin();
+	while (it_fab != print.Fabricantes.end())
 	{
+		(*it_fab)->Imprimir_fab();
+		it_fab++;
+	}
+	out << "HOSPITALES:" << endl;
+	list<cHospital*>::iterator it_hosp = print.Hospitales.begin();
+	while (it_hosp != print.Hospitales.end())
+	{
+		(*it_hosp)->imprimir_Hosp();
+		it_hosp++;
+	}
+	list<cOrtopedia*>::iterator it_ort = print.Ortopedias.begin();
+	out << "ORTOPEDIAS: " << endl;
+	while (it_ort != print.Ortopedias.end())
+	{
+		(*it_ort)->Imprimir();
+		it_ort++;
+	}
+
+	out << "REGISTROS FINALES:" << endl;
 		list<cRegistros*>::iterator it_reg = print.lista_registros.begin();
 		while (it_reg != print.lista_registros.end())
 		{
 			out << *(*it_reg) << endl;
 			it_reg++;
 		}
+
 		return out;
-	}
+	
 }
 
 void operator+(list<cRegistros*>& lista, cRegistros* agregado)

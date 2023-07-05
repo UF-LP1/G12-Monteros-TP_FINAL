@@ -127,4 +127,38 @@ list<string*> cPaciente::get_alergias()
 	return this->Alergias;
 }
 
+string cPaciente::to_string()
+{
+	string aux;
+	if (this->Autorizacion) { aux = "Autorizado/a"; }
+	else { aux = "No autorizado/a"; }
+
+	stringstream Salida;
+	Salida << "Nombre y apellido: " << this->Nombre_Apellido
+		<< ", Fecha de nacimiento: " << Fecha_Nac.tm_mday << "/" << Fecha_Nac.tm_mon << "/" << Fecha_Nac.tm_year + 1900
+		<< ", Telefono: " << this->Telefono
+		<< ", Alergias: ";
+	list<string*>::iterator it = this->Alergias.begin();
+	while (it != this->Alergias.end())
+	{
+		Salida << *(*it)<<", ";
+		it++;
+	}
+	Salida << this->Hospital
+		<< ", Radio de amputacion: " << this->Radio_Amputacion
+		<< ", Autorizacion: " << aux
+		<< ", Medico: " << this->Medico;
+	if (this->Radio_Amputacion == 0)
+		Salida << ", Protesis: " << endl << this->Necesitada_Q.to_string();
+	else
+		Salida << ", Protesis: " << endl << this->Necesitada_NQ.to_string();
+
+	return Salida.str();
+}
+
+void cPaciente::Imprimir()
+{
+	cout << to_string()<<endl;
+}
+
 

@@ -46,7 +46,7 @@ string cOrtopedia::get_Nombre()
 	return this->Nombre;
 }
 
-string cOrtopedia::to_string()
+string cOrtopedia::to_string_Ort()
 {
 	stringstream Salida;
 	Salida << "Nombre: " << this->Nombre
@@ -59,6 +59,11 @@ string cOrtopedia::to_string()
 		it++;
 	}
 	return Salida.str();
+}
+
+void cOrtopedia::Imprimir()
+{
+	cout << to_string_Ort() << endl;
 }
 
 

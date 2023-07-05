@@ -24,7 +24,7 @@ public:
 	list<cProtesis*>::iterator get_Primer_Prot();
 	list<cProtesis*>::iterator get_ultima_Prot();
 	string get_Nombre();
-	string to_string();
+	string to_string_Ort();
 	void Imprimir();
 	
 };

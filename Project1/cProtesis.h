@@ -33,6 +33,7 @@ public:
 	float virtual get_Radio() ;              
 	string virtual get_Articulacion() ;
 	string virtual get_material() ;
+	string virtual to_string();
 	void set_Nombre(Organo_Extremidad_Reemplazada set);
 };
 //void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado);

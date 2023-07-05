@@ -93,7 +93,7 @@ const string Nombre;
 	list<cPaciente*> Pacientes_Atendidos;
 	*/
 
-string cHospital::to_string()
+string cHospital::to_string_hosp()
 {
 	stringstream Salida;
 	Salida << "Nombre: " << this->Nombre
@@ -103,7 +103,7 @@ string cHospital::to_string()
 	list<cOrtopedia*>::iterator it_afiliadas = this->lista_Afiliadas.begin();
 	while (it_afiliadas != this->lista_Afiliadas.end())
 	{
-		Salida << (*it_afiliadas)->to_string() << endl;
+		Salida << (*it_afiliadas)->to_string_Ort() << endl;
 		it_afiliadas++;
 	}
 	Salida << "PACIENTES POR ATENDER:" << endl;
@@ -121,4 +121,9 @@ string cHospital::to_string()
 		it_pac++;
 	}
 	return Salida.str();
+}
+
+void cHospital::imprimir_Hosp()
+{
+	cout << to_string_hosp() << endl;
 }
