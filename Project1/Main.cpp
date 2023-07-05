@@ -30,12 +30,19 @@ int main()
 					comprobacion = Prueba.Busqueda_Especial((*it_hospital)->get_Nombre(), *Paciente_actual, Matricula_auxiliar);//si no se encuentra se busca en no convenidas
 				}
 				if (comprobacion == false) {
-					Prueba.Solicitar_Protesis_A_Fabricante((*it_hospital)->get_Nombre(), *Paciente_actual, Matricula_auxiliar);//si nadie las tiene se pude fabricar una
+					try {
+						Prueba.Solicitar_Protesis_A_Fabricante((*it_hospital)->get_Nombre(), *Paciente_actual, Matricula_auxiliar);//si nadie las tiene se pude fabricar una
+					}
+					catch (exception* e) {
+						cout << e->what() << endl;
+						delete e;
+					}
 				}
 			}// si el medico no autoriza al paciente, se pasa al siguiente paciente
 			(*it_hospital)->Archivar_paciente(Paciente_actual);
 		}
 		it_hospital++;
 	}
+	cout << Prueba << endl;
 	return 1;
 }

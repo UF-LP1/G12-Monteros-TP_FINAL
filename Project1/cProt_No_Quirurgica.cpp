@@ -66,5 +66,29 @@ void cProt_No_Quirurgica::set_radio(float set_)
 }
 
 
+string cProt_No_Quirurgica::to_string()
+{
+	string aux;
+	if (Superior_Inferior) { aux = "Superior"; }
+	else { aux = "Inferior"; }
+
+	stringstream Salida;
+	Salida << "Radio de conexion: " << this->Radio_Conexion
+		<< ", Largo de la protesis: " << this->Dim_Largo
+		<< ", Ancho de la protesis: " << this->Dim_Ancho
+		<< ", Miembro reemplazado: " << this->Nombre
+		<< ", Fecha de fabricacion: " << this->Fecha_Fabricacion.tm_mday << "/" << Fecha_Fabricacion.tm_mon << "/" << Fecha_Fabricacion.tm_year + 1900
+		<< ", Fabricante: " << this->Fabricante
+		<< ", Seccion del cuerpo: " << aux << endl;
+		
+	return Salida.str();
+}
+
+void cProt_No_Quirurgica::imprimir()
+{
+	cout << to_string() << endl;
+}
+
+
 
 

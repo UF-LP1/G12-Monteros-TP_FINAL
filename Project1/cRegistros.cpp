@@ -10,3 +10,24 @@ cRegistros::~cRegistros()
 {
 
 }
+
+string cRegistros::to_string_registros() const
+{
+    stringstream Salida;
+    Salida << ", Fecha de entrega: " << Fecha_Entrega.tm_mday << "/" << Fecha_Entrega.tm_mon << "/" << Fecha_Entrega.tm_year+1900
+        << ", Estimacion: " << this->Estimacion
+        << ", Fecha de Solicitud: " << Fecha_Sol.tm_mday << "/" << Fecha_Sol.tm_mon << "/" << Fecha_Sol.tm_year+1900
+        << ", Hospital: " << this->Hospital
+        << ", Medico: " << this->Medico
+        << ", Pieza Quirurgica: " << this->Pieza
+        << ", Nombre del paciente: " << this->Paciente
+        << ", Fuente de la pieza: " << this->Nombre_Fuente << endl;
+       
+    return Salida.str();
+}
+
+ostream& operator<<(ostream& out, const cRegistros& Registro)
+{
+    out << Registro.to_string_registros() << endl;
+    return out;
+}

@@ -31,3 +31,10 @@ public:
 		return "El paciente no necesita una protesis";
 	}
 };
+
+class PACIENTE_PENDIENTE : public exception {
+public:
+	const char* what() const throw() {
+		return "No se pudo conseguir una protesis para el paciente";
+	}
+};

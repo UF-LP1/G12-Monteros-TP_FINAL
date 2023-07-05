@@ -46,10 +46,21 @@ string cOrtopedia::get_Nombre()
 	return this->Nombre;
 }
 
-//void cOrtopedia::Quitar_de_Stock(list<cProtesis>::iterator *quitado)
-//{
-//	this->Stock_Protesis-quitado;
-//}
+string cOrtopedia::to_string()
+{
+	stringstream Salida;
+	Salida << "Nombre: " << this->Nombre
+		<< ", Direccion: " << this->Direccion << endl
+		<< "STOCK:" << endl;
+	list<cProtesis*>::iterator it = this->Stock_Protesis.begin();
+	while (it != this->Stock_Protesis.end())
+	{
+		Salida<<(*it)->to_string()<<endl;
+		it++;
+	}
+	return Salida.str();
+}
+
 
 void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado)
 {

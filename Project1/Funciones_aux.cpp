@@ -560,6 +560,7 @@ list<cFabricante*> leer_Fabricantes()
 
 list<cHospital*> Hospitales_Predeterminados()
 {
+	srand(time(0));
 	list<cHospital*> Retorno;
 	Retorno.clear();
 	
@@ -586,12 +587,16 @@ list<cHospital*> Hospitales_Predeterminados()
 	tm aux_f;
 	aux_f.tm_mday = 05; aux_f.tm_mon = 10; aux_f.tm_year = 2000;
 	cPaciente* Paciente1 = new cPaciente("Lucia_Quintana", aux_f, "1144227740", Generar_Alergias(), 2.9);
+
 	aux_f.tm_mday = 27; aux_f.tm_mon = 12; aux_f.tm_year = 2004;
 	cPaciente* Paciente2 = new cPaciente("Eric_Gadea",  aux_f , "1169035382", Generar_Alergias(), 0);
+
 	aux_f.tm_mday = 15; aux_f.tm_mon = 04; aux_f.tm_year = 2004;
 	cPaciente* Paciente3 = new cPaciente("Ariana_Ordonyez", aux_f, "1162569077",Generar_Alergias(), 0);
+
 	aux_f.tm_mday = 8; aux_f.tm_mon = 02; aux_f.tm_year = 2004;
 	cPaciente* Paciente4 = new cPaciente("Alma_Maiolino", aux_f , "1146738292", Generar_Alergias(), 6.2);
+
 	aux_f.tm_mday = 03; aux_f.tm_mon = 06; aux_f.tm_year = 2004;
 	cPaciente* Paciente5 = new cPaciente("Juan_Perez", aux_f, "1161197786", Generar_Alergias(), 0.9);
 

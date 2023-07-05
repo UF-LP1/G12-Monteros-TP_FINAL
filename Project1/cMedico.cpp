@@ -60,5 +60,27 @@ bool cMedico::get_Disponibilidad()
 unsigned int cMedico::get_Matricula()
 {
 	return this->Matricula;
+}/*
+ const string Nombre_Apellido;
+	const unsigned int Matricula;
+	bool Disponible;
+	*/
+string cMedico::to_string_med()
+{
+	string aux;
+	if (this->Disponible == true) { aux = "Disponible"; }
+	else { aux = "No Disponible"; }
+
+	stringstream Salida;
+	Salida << "Nombre: " << this->Nombre_Apellido 
+		<< ", Matricula: " << this->Matricula 
+		<< " Disponibilidad: " << aux<<endl;
+
+	return Salida.str();
+}
+
+void cMedico::imprimir()
+{
+	cout << to_string_med()<<endl;
 }
 

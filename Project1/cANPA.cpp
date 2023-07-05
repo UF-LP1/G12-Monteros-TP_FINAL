@@ -26,7 +26,6 @@ bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente &P
 {
 	list<cHospital*>::iterator it_hosp = this->Hospitales.begin(); // todas las veces comprobamos que el hospital exista en las
 	                                                              //listas del ANPA
-
 	while (it_hosp != this->Hospitales.end())
 	{
 		if ((*it_hosp)->get_Nombre() == Nombre_hospital)
@@ -40,11 +39,12 @@ bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente &P
 	
 
 	list<cFabricante*>::iterator it_Fab = this->Fabricantes.begin();
-	string tipo_fuente = "Fabricante";
+	string tipo_fuente = "Fabricante ";
 
+	srand(time(0));
 	while (it_Fab != this->Fabricantes.end())
 	{
-		srand(time(0));
+
 
 		if ((rand() % 4 + 1) == 4) //una de cada 4 veces el fabricante acepta hacer una protesis a medida
 		{
@@ -70,6 +70,9 @@ bool cANPA::Solicitar_Protesis_A_Fabricante(string Nombre_hospital, cPaciente &P
 		}
 		it_Fab++;
 	}
+	if (it_Fab == this->Fabricantes.end())
+		throw new PACIENTE_PENDIENTE;
+
 	return false;
 }
 
@@ -90,7 +93,7 @@ bool cANPA::Busqueda_Especial(string Nombre_hospital,cPaciente &Paciente_Actual,
 
 	list<cOrtopedia*>::iterator it_No_Convenidas = this->Ortopedias.begin();
 	list<cProtesis*>::iterator it_prot;
-	string tipo_fuente = "Ortopedia";
+	string tipo_fuente = "Ortopedia ";
 
 	while (it_No_Convenidas != this->Ortopedias.end())
 	{
@@ -152,7 +155,7 @@ bool cANPA::Buscar_En_Ortopedia_convenida(string Nombre_hospital, cPaciente &pac
 	if ((*it_hosp)->get_Nombre() != Nombre_hospital)
 		throw new OBJECT_NOT_FOUND;
 
-	string 	tipo_fuente = "ortopedia";;
+	string 	tipo_fuente = "ortopedia ";
 	list<cOrtopedia*>::iterator it_Afiliadas = (*it_hosp)->get_primera_afiliada();
 
 	list<cProtesis*>::iterator it_prot;
@@ -328,7 +331,20 @@ string cANPA::Elegir_Una_Articulacion(Organo_Extremidad_Reemplazada criterio)
 	}
 }
 
-void operator+(list<cRegistros*> lista, cRegistros* agregado)
+ostream& operator<<(ostream& out, cANPA print)
+{
+	{
+		list<cRegistros*>::iterator it_reg = print.lista_registros.begin();
+		while (it_reg != print.lista_registros.end())
+		{
+			out << *(*it_reg) << endl;
+			it_reg++;
+		}
+		return out;
+	}
+}
+
+void operator+(list<cRegistros*>& lista, cRegistros* agregado)
 {
 	lista.push_back(agregado); //no es necesario agregar una excepcion porque el metodo pushback es a prueba de excepciones
 	                            //fuente:cplusplus

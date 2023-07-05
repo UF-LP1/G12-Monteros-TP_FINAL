@@ -22,6 +22,8 @@ public:
 	float get_largo();
 	float get_Radio();
 	void set_Articulacion(string seteada);
+	string to_string();
+	void imprimir();
 };
 
 #endif

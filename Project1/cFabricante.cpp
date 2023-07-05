@@ -22,3 +22,24 @@ unsigned int cFabricante::get_Num_Habilitacion()
 {
 	return this->Num_Habilitacion;
 }
+/*
+const string Nombre;
+const string Direccion;
+const unsigned int Num_Habilitacion;
+*/
+string cFabricante::to_string_fab()
+{
+	stringstream Salida;
+	Salida << "Nombre: " << this->Nombre 
+		<< ", Direccion: " << this->Direccion 
+		<< ", Numero de Habilitacion" << this->Num_Habilitacion << endl;
+	return Salida.str();
+}
+
+void cFabricante::Imprimir_fab()
+{
+	cout << to_string_fab << endl;
+}
+
+
+

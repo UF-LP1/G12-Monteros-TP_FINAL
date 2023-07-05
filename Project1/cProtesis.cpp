@@ -59,13 +59,13 @@ string cProtesis::get_material()
     return string();
 }
 
+string cProtesis::to_string()
+{
+    return string();
+}
+
 void cProtesis::set_Nombre(Organo_Extremidad_Reemplazada set)
 {
     this->Nombre = set;
 }
-
-//void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado)
-//{
-//    original.erase(*eliminado);
-//}
 

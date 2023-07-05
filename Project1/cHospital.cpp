@@ -83,3 +83,42 @@ void cHospital::Archivar_paciente(cPaciente* agregado)
 {
 	this->Pacientes_Atendidos.push_back(agregado);
 }
+/*
+const string Nombre;
+	list<cMedico*> Lista_Medicos;
+	const string Direccion;
+	const string Especialidad;
+	list<cOrtopedia*> lista_Afiliadas;
+	queue<cPaciente*> Cola_pacientes ;
+	list<cPaciente*> Pacientes_Atendidos;
+	*/
+
+string cHospital::to_string()
+{
+	stringstream Salida;
+	Salida << "Nombre: " << this->Nombre
+		<< ", Direccion: " << this->Direccion
+		<< ", Especialidad: " << this->Especialidad<<endl;
+	Salida << "ORTOPEDIAS AFILIADAS:" << endl;
+	list<cOrtopedia*>::iterator it_afiliadas = this->lista_Afiliadas.begin();
+	while (it_afiliadas != this->lista_Afiliadas.end())
+	{
+		Salida << (*it_afiliadas)->to_string() << endl;
+		it_afiliadas++;
+	}
+	Salida << "PACIENTES POR ATENDER:" << endl;
+	while (this->Cola_pacientes.size() != 0)
+	{
+		cPaciente* aux(this->Cola_pacientes.front());
+		this->Cola_pacientes.pop();
+		Salida << aux->to_string()<<endl;
+	}
+	Salida << "PACIENTES ATENDIDOS:" << endl;
+	list<cPaciente*>::iterator it_pac = this->Pacientes_Atendidos.begin();
+	while (it_pac != this->Pacientes_Atendidos.end())
+	{
+		Salida << (*it_pac)->to_string()<<endl;
+		it_pac++;
+	}
+	return Salida.str();
+}

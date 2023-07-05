@@ -37,6 +37,8 @@ public:
 	void Popear_Paciente();
 	unsigned int get_Pacientes_pendientes();
 	void Archivar_paciente(cPaciente* agregado);
+	string to_string();
+	void imprimir_Hosp();
 };
 
 #endif

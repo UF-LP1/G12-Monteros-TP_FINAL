@@ -23,8 +23,9 @@ public:
 	list<cProtesis*> get_stock();
 	list<cProtesis*>::iterator get_Primer_Prot();
 	list<cProtesis*>::iterator get_ultima_Prot();
-	
 	string get_Nombre();
+	string to_string();
+	void Imprimir();
 	
 };
 void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado);

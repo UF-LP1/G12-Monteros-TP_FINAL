@@ -14,7 +14,6 @@ private:
 	list<cHospital*> Hospitales;
 	list<cOrtopedia*> Ortopedias;
 	list<cRegistros*> lista_registros;
-	//revisr el tema de foreach
 
 public:
 
@@ -29,10 +28,15 @@ public:
 	list<cHospital*>::iterator get_Primer_Hospital();
 	string Elegir_Un_Material(list<string*> alergias); // elije el primer material disponible al que el paciente no sea alergico
 	string Elegir_Una_Articulacion(Organo_Extremidad_Reemplazada criterio); // le asigna una articulacion posible a la protesis a partir del tipo de protesis quirugica que necesite el paciente, se usan dos posibles articulaciones por protesis a modo de ejemplo, en la realidad son mas
-};
+	friend ostream& operator<<(ostream& out, cANPA print);
 
-void operator+(list<cRegistros*> lista, cRegistros* agregado);
+
+};
+ostream& operator<<(ostream& out, cANPA print);
+void operator+(list<cRegistros*>& lista, cRegistros* agregado);
 void operator-(list<cOrtopedia*>:: iterator original, list<cProtesis*>::iterator* eliminado);
 bool operator!=(string algo, list<string*> comparado);
+
+
 
 #endif
