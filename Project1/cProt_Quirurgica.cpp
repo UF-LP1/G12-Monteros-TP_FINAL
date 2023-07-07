@@ -67,7 +67,7 @@ string cProt_Quirurgica::to_string()
 	return Salida.str();
 }
 
-void cProt_Quirurgica::imprimir()
+void cProt_Quirurgica::imprimir_Prot_Q()
 {
 	cout << to_string() << endl;
 }

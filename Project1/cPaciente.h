@@ -48,6 +48,6 @@ public:
 	cProt_Quirurgica get_Prot_Q();
 	list<string*> get_alergias();
 	string to_string();
-	void Imprimir();
+	void Imprimir_Pac();
 };
 #endif

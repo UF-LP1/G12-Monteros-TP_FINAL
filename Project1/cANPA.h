@@ -26,9 +26,11 @@ public:
 	string Buscar_Medico(list<cHospital*>::iterator Hospital_, unsigned int Matricula);
 	list<cHospital*>::iterator get_ultimo_hospital();
 	list<cHospital*>::iterator get_Primer_Hospital();
+	list<cRegistros*>::iterator get_Primer_Registro();
+	list<cRegistros*>::iterator get_Ultimo_Registro();
 	string Elegir_Un_Material(list<string*> alergias); // elije el primer material disponible al que el paciente no sea alergico
 	string Elegir_Una_Articulacion(Organo_Extremidad_Reemplazada criterio); // le asigna una articulacion posible a la protesis a partir del tipo de protesis quirugica que necesite el paciente, se usan dos posibles articulaciones por protesis a modo de ejemplo, en la realidad son mas
-	friend ostream& operator<<(ostream& out, cANPA print);
+	friend ostream& operator<<(ostream& out, cANPA print); //Esta sobrecarga cumple la misma funcion que un imprimir
 
 
 };

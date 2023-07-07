@@ -22,7 +22,7 @@ public:
 	bool get_Disponibilidad();
 	unsigned int get_Matricula();
 	string to_string_med();
-	void imprimir();
+	void imprimir_Med();
 };
 
 #endif

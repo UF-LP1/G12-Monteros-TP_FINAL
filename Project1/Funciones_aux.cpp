@@ -701,3 +701,27 @@ list<cFabricante*> Fabricantes_Predeterminados()
 
 	return Retorno;
 }
+
+void Escribir_Archivo(cANPA Impreso)
+{
+	ofstream Archivo_Escritura;
+
+	Archivo_Escritura.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Output_Data_files\\Registros.csv", ios::out);
+
+	if (!(Archivo_Escritura.is_open()))
+	{
+		throw new ARCH_NOT_OPENED;
+	}
+
+	list<cRegistros*>::iterator it = Impreso.get_Primer_Registro();
+
+	Archivo_Escritura << "Hospital , medico , Fecha_Solicitud , Fecha_Entrega , Estimacion , Pieza , Paciente , Fuente"<<endl; //headers
+
+	while (it != Impreso.get_Ultimo_Registro())
+	{
+		Archivo_Escritura << (*it)->to_string_registros_csv();
+		it++;
+	}
+
+	Archivo_Escritura.close();
+}

@@ -35,6 +35,7 @@ public:
 	string virtual get_material() ;
 	string virtual to_string();
 	void set_Nombre(Organo_Extremidad_Reemplazada set);
+	//no son necesarias funciones de impresion porque nunca haremos un objeto de cProtesis
 };
 //void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado);
 

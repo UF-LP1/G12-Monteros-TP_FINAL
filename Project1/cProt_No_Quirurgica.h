@@ -28,7 +28,7 @@ public:
 	void set_Dim_largo(float set_);
 	void set_radio(float set_);
 	string to_string();
-	void imprimir();
+	void imprimir_Prot_NQ();
 };
 
 #endif

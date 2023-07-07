@@ -247,6 +247,16 @@ list<cHospital*>::iterator cANPA::get_Primer_Hospital()
 	return this->Hospitales.begin();
 }
 
+list<cRegistros*>::iterator cANPA::get_Primer_Registro()
+{
+	return this->lista_registros.begin();
+}
+
+list<cRegistros*>::iterator cANPA::get_Ultimo_Registro()
+{
+	return this->lista_registros.end();
+}
+
 string cANPA::Elegir_Un_Material(list<string*> alergias)
 {
 	list<string>Posibles_Materiales;
@@ -352,7 +362,7 @@ ostream& operator<<(ostream& out, cANPA print)
 	out << "ORTOPEDIAS: " << endl;
 	while (it_ort != print.Ortopedias.end())
 	{
-		(*it_ort)->Imprimir();
+		(*it_ort)->Imprimir_Ort();
 		it_ort++;
 	}
 

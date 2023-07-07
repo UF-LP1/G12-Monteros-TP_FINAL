@@ -61,7 +61,7 @@ string cOrtopedia::to_string_Ort()
 	return Salida.str();
 }
 
-void cOrtopedia::Imprimir()
+void cOrtopedia::Imprimir_Ort()
 {
 	cout << to_string_Ort() << endl;
 }

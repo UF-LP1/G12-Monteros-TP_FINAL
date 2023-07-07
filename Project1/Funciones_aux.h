@@ -34,3 +34,5 @@ list<cHospital*> Hospitales_Predeterminados();
 list<cOrtopedia*> Ortopedias_Predeterminadas();
 list<cFabricante*> Fabricantes_Predeterminados();
 
+void Escribir_Archivo(cANPA Impreso);
+

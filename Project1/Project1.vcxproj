@@ -161,6 +161,7 @@
     <None Include="Input Data_files\Ortopedias.csv" />
     <None Include="Input Data_files\Pacientes.csv" />
     <None Include="Input Data_files\Protesis.csv" />
+    <None Include="Output_Data_files\Registros.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

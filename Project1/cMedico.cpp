@@ -79,7 +79,7 @@ string cMedico::to_string_med()
 	return Salida.str();
 }
 
-void cMedico::imprimir()
+void cMedico::imprimir_Med()
 {
 	cout << to_string_med()<<endl;
 }

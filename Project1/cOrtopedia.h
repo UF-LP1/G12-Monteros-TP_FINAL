@@ -25,7 +25,7 @@ public:
 	list<cProtesis*>::iterator get_ultima_Prot();
 	string get_Nombre();
 	string to_string_Ort();
-	void Imprimir();
+	void Imprimir_Ort();
 	
 };
 void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado);

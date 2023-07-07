@@ -32,7 +32,7 @@ string cFabricante::to_string_fab()
 	stringstream Salida;
 	Salida << "Nombre: " << this->Nombre 
 		<< ", Direccion: " << this->Direccion 
-		<< ", Numero de Habilitacion" << this->Num_Habilitacion << endl;
+		<< ", Numero de Habilitacion: " << this->Num_Habilitacion << endl;
 	return Salida.str();
 }
 

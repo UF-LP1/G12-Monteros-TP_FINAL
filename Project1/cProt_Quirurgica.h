@@ -23,7 +23,7 @@ public:
 	float get_Radio();
 	void set_Articulacion(string seteada);
 	string to_string();
-	void imprimir();
+	void imprimir_Prot_Q();
 };
 
 #endif

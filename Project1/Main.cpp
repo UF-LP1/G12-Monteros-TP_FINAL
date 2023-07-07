@@ -44,5 +44,7 @@ int main()
 		it_hospital++;
 	}
 	cout << Prueba << endl;
+
+	Escribir_Archivo(Prueba);
 	return 1;
 }

@@ -156,7 +156,7 @@ string cPaciente::to_string()
 	return Salida.str();
 }
 
-void cPaciente::Imprimir()
+void cPaciente::Imprimir_Pac()
 {
 	cout << to_string()<<endl;
 }
