@@ -3,7 +3,6 @@
 #ifndef _CPROT_NO_QUIRURGICA_H
 #define _CPROT_NO_QUIRURGICA_H
 
-#include <string>
 #include "cProtesis.h"
 
 class cProt_No_Quirurgica:public cProtesis {
@@ -16,7 +15,7 @@ private:
 
 public:
 	cProt_No_Quirurgica(Organo_Extremidad_Reemplazada Nombre_, tm Fecha_Fabricacion_, string Fabricante_, bool Superior_Infeior, float Dim_Largo_, float Dim_Ancho_, float Radio_Conexion);
-	//cProt_No_Quirurgica(cProt_No_Quirurgica &copia);
+	cProt_No_Quirurgica(list<cProtesis*>::iterator copia);
 	cProt_No_Quirurgica();
 	~cProt_No_Quirurgica();
 
@@ -27,6 +26,9 @@ public:
 	float get_Radio();
 	void set_Dim_ancho(float set_);
 	void set_Dim_largo(float set_);
+	void set_radio(float set_);
+	string to_string();
+	void imprimir_Prot_NQ();
 };
 
 #endif

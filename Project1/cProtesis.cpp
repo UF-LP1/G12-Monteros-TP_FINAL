@@ -8,11 +8,6 @@ cProtesis::~cProtesis()
 {
 }
 
-cProtesis::cProtesis(list<cProtesis>::iterator copia): Nombre(copia->get_nombre()), Fecha_Fabricacion(copia->get_Fabricacion()), Fabricante(copia->get_Fabricante()), Superior_Inferior(copia->get_Superior_inferior())
-{
-
-}
-
 
 Organo_Extremidad_Reemplazada cProtesis::get_nombre()
 {
@@ -39,12 +34,38 @@ bool cProtesis::get_Superior_inferior()
     return this->Superior_Inferior;
 }
 
+float cProtesis::get_largo()
+{
+    return 0.0f;
+}
+
+float cProtesis::get_ancho()
+{
+    return 0.0f;
+}
+
+float cProtesis::get_Radio()
+{
+    return 0.0f;
+}
+
+string cProtesis::get_Articulacion()
+{
+    return string();
+}
+
+string cProtesis::get_material()
+{
+    return string();
+}
+
+string cProtesis::to_string()
+{
+    return string();
+}
+
 void cProtesis::set_Nombre(Organo_Extremidad_Reemplazada set)
 {
     this->Nombre = set;
-}
-void operator-(list<cProtesis> original, list<cProtesis>::iterator* eliminado)
-{
-    original.erase(*eliminado);
 }
 

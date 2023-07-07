@@ -7,12 +7,12 @@ cProt_No_Quirurgica::cProt_No_Quirurgica(Organo_Extremidad_Reemplazada Nombre_, 
 	this->Radio_Conexion = Radio_Conexion_;
 }
 
-//cProt_No_Quirurgica::cProt_No_Quirurgica(cProt_No_Quirurgica& copia):cProtesis(copia)
-//{
-//	this->Dim_Ancho = copia.get_ancho();
-//	this->Dim_Largo = copia.get_largo();
-//	this->Radio_Conexion = copia.get_Radio();
-//}
+cProt_No_Quirurgica::cProt_No_Quirurgica(list<cProtesis*>::iterator copia):cProtesis((*copia)->get_nombre(), (*copia)->get_Fabricacion(), (*copia)->get_Fabricante(),(*copia)->get_Superior_inferior())
+{
+	this->Dim_Ancho = (*copia)->get_ancho();
+	this->Dim_Largo = (*copia)->get_largo();
+	this->Radio_Conexion = (*copia)->get_Radio();
+}
 
 cProt_No_Quirurgica::cProt_No_Quirurgica() :cProtesis()
 {
@@ -58,6 +58,35 @@ void cProt_No_Quirurgica::set_Dim_ancho(float set_)
 void cProt_No_Quirurgica::set_Dim_largo(float set_)
 {
 	this->Dim_Largo = set_;
+}
+
+void cProt_No_Quirurgica::set_radio(float set_)
+{
+	this->Radio_Conexion = set_;
+}
+
+
+string cProt_No_Quirurgica::to_string()
+{
+	string aux;
+	if (Superior_Inferior) { aux = "Superior"; }
+	else { aux = "Inferior"; }
+
+	stringstream Salida;
+	Salida << "Radio de conexion: " << this->Radio_Conexion
+		<< ", Largo de la protesis: " << this->Dim_Largo
+		<< ", Ancho de la protesis: " << this->Dim_Ancho
+		<< ", Miembro reemplazado: " << this->Nombre
+		<< ", Fecha de fabricacion: " << this->Fecha_Fabricacion.tm_mday << "/" << Fecha_Fabricacion.tm_mon << "/" << Fecha_Fabricacion.tm_year + 1900
+		<< ", Fabricante: " << this->Fabricante
+		<< ", Seccion del cuerpo: " << aux << endl;
+		
+	return Salida.str();
+}
+
+void cProt_No_Quirurgica::imprimir_Prot_NQ()
+{
+	cout << to_string() << endl;
 }
 
 

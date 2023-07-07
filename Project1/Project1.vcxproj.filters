@@ -16,6 +16,9 @@
     <Filter Include="Archivos de encabezado\Input Data_files">
       <UniqueIdentifier>{57c9dc38-e3ff-4601-97aa-d127c99e98c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Output Data_files">
+      <UniqueIdentifier>{517a97b7-2f4d-4ecb-ab1e-412d0941e481}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cPaciente.h">
@@ -49,6 +52,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Funciones_aux.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Custom_Exceptions.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -105,6 +111,12 @@
     </None>
     <None Include="Input Data_files\Protesis.csv">
       <Filter>Archivos de encabezado\Input Data_files</Filter>
+    </None>
+    <None Include="Input Data_files\Medicos.csv">
+      <Filter>Archivos de encabezado\Input Data_files</Filter>
+    </None>
+    <None Include="Output_Data_files\Registros.csv">
+      <Filter>Archivos de encabezado\Output Data_files</Filter>
     </None>
   </ItemGroup>
 </Project>

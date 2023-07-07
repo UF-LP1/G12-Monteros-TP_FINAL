@@ -1,5 +1,5 @@
 #include "Funciones_aux.h"
-#include <sstream>
+
 bool operator==(list<cProtesis*>::iterator original, cProt_No_Quirurgica comparado)
 {
 
@@ -33,16 +33,54 @@ bool operator!=(list<cOrtopedia*>::iterator Total, list<cOrtopedia*> Convenida)
 	{
 		if (Total == it)
 			return false;
+		it++;
 	}
 	return true;
 }
 
+list<cProtesis*>::iterator operator+(list<cProtesis*>::iterator corrido, unsigned int corrimiento)
+{
+	for (unsigned int i = 0; i < corrimiento; i++)
+		corrido++;
+	return corrido;
+}
+list<cOrtopedia*>::iterator operator+(list<cOrtopedia*>::iterator corrido, unsigned int corrimiento)
+{
+	for (unsigned int i = 0; i < corrimiento; i++)
+		corrido++;
+	return corrido;
+}
+list<cPaciente*>::iterator operator+(list<cPaciente*>::iterator corrido, unsigned int corrimiento)
+{
+	for (unsigned int i = 0; i < corrimiento; i++)
+		corrido++;
+	return corrido;
+}
+list<cMedico*>::iterator operator+(list<cMedico*>::iterator corrido, unsigned int corrimiento)
+{
+	for (unsigned int i = 0; i < corrimiento; i++)
+		corrido++;
+	return corrido;
+}
+
 list<cProtesis*> Armar_lista_random_de_Protesis()
 {
-	list<cProtesis*> aux = leer_protesis();
+	list<cProtesis*> aux;
+	aux.clear();
+
+	try {
+		aux = leer_protesis();
+	}
+	catch (exception* e)
+	{
+		cout << e->what() << endl;
+		delete e;
+	}
+
 	list<cProtesis*>::iterator it_prot = aux.begin();
 
 	list<cProtesis*> Retorno;
+	Retorno.clear();
 	int i;
 	
 	unsigned int seleccionador;
@@ -50,40 +88,62 @@ list<cProtesis*> Armar_lista_random_de_Protesis()
 	for (i = 0; i < 5; i++)
 	{
 		srand(time(0));
-		seleccionador = (rand() % aux.size());           // un numero random que va entre 0 y la cantidad de ojetos
-		                                                 // almacenados en la lista
-		Retorno.push_back(*it_prot + seleccionador);     //se agregan 5 elementos aleatorios de la pool de protesis
+		seleccionador = (rand() % aux.size());           //un numero random que va entre 0 y la cantidad de ojetos
+		it_prot =it_prot + seleccionador;              // almacenados en la lista
+
+		Retorno.push_back(*it_prot);                     //se agregan 5 elementos aleatorios de la pool de protesis
 		                                                 //que es el archivo
 
-		aux.remove(*it_prot + seleccionador);     //sacamos de la lista aux los elementos que devolvemos para que al
-		                                          //liberar memoria no se borren los que queremos
+		aux.remove(*it_prot );      //sacamos de la lista aux los elementos que devolvemos para que al
+		                           //liberar memoria no se borren los que queremos
+		it_prot = aux.begin();
 	}
-	aux.erase(aux.begin(), aux.end()); //se libera memoria de todos los objetos dinamicos que no se usaron
+	
+	for (list<cProtesis*>::iterator it_aux = aux.begin(); it_aux != aux.end(); it_aux++)
+		delete* it_aux;
+
 	return Retorno;
 }
 
 list<cOrtopedia*> Armar_random_ortopedia()
 {
-	list<cOrtopedia*> aux = Leer_Ortopedias();
+	list<cOrtopedia*> aux;
+	aux.clear();
+
+	try {
+		aux=Leer_Ortopedias();
+	} 
+	catch (exception* e)
+	{
+		cout << e->what();
+		delete e;
+	}
+
 	list<cOrtopedia*>::iterator it_ort = aux.begin();
 	int i;
 	
 	unsigned int seleccionador;
 
 	list<cOrtopedia*> Retorno;
+	Retorno.clear();
 
 	for (i = 0; i < 5; i++)
 	{
 		srand(time(0));
 		seleccionador = (rand() % aux.size());
 
-		Retorno.push_back(*it_ort + seleccionador);  //se guarda una ortopedia aleatoria de la lista y el iterador
-		                                             //vuelve al principio
-		aux.remove(*it_ort + seleccionador);        //sacamos de la lista aux los elementos que devolvemos para que al
-		                                            //liberar memoria no se borren los que queremos
+		it_ort = it_ort + seleccionador;
+
+		Retorno.push_back(*it_ort);          //se guarda una ortopedia aleatoria de la lista y el iterador
+		                                     //vuelve al principio
+		aux.remove(*it_ort);                 //sacamos de la lista aux los elementos que devolvemos para que al
+		                                     //liberar memoria no se borren los que queremos
+		it_ort = aux.begin();
 	}
 
-	aux.erase(aux.begin(), aux.end());  //se libera memoria y se retorna solo la nueva lista random armada
+	for (list<cOrtopedia*>::iterator it_aux = aux.begin(); it_aux != aux.end(); it_aux++)
+		delete* it_aux;
+
 	return Retorno;
 }
 
@@ -92,57 +152,59 @@ list<string*> Generar_Alergias()
 	srand(time(0));
 	list<string*> Retorno;
 	Retorno.clear();     // chequeo que este vacia
-	list<string*>::iterator it_Al = Retorno.begin();
-	unsigned int Cantidad= (rand()%6); // puede tener un maximo de 5 alergias y un minimo de 0
-
 	
+	unsigned int Cantidad= (rand()%6); // puede tener un maximo de 5 alergias y un minimo de 0
 	unsigned int Eleccion;
 
 	for (unsigned int i = 0; i < Cantidad; i++)
 	{
+		string* agregado = new string;
 		srand(time(0));
 		Eleccion = (rand() % 5 + 1); // se elijen alergias al azar en el switch
 
 		switch (Eleccion)
 		{
-		case 1:(*it_Al)->append("Mani");
-			Retorno.push_back(*it_Al);
-			(*it_Al)++;
+			
+		case 1: {*agregado = "Mani";
+			Retorno.push_back(agregado);
 			break;
+			}
 
-		case 2:(*it_Al)->append("Hierro");
-			Retorno.push_back(*it_Al);
-			(*it_Al)++;
-			break;
-
-		case 3:(*it_Al)->append("Titanio");
-			Retorno.push_back(*it_Al);
-			(*it_Al)++;
-			break;
-
-		case 4:(*it_Al)->append("Oricalco");
-			Retorno.push_back(*it_Al);
-			(*it_Al)++;
-			break;
-
-		case 5:(*it_Al)->append("Platino");
-			Retorno.push_back(*it_Al);
-			(*it_Al)++;
-			break;
-
-		default:
-			throw new RANDOM_CREATION_FAILED;
+		
+		case 2: {*agregado = "Hierro";
+			Retorno.push_back(agregado);
 			break;
 		}
+
+		case 3: {*agregado = "Titanio";
+			Retorno.push_back(agregado);
+			break;
+		}
+		case 4: {
+			*agregado = "Oricalco";
+			Retorno.push_back(agregado);
+			break;
+		}
+		case 5: {
+			*agregado = "Platino";
+			Retorno.push_back(agregado);
+			break;
+		}
+
+		default: {
+			break;
+		}
+		}
 	}
+
 	return Retorno;
 }
 
 queue<cPaciente*> Armar_random_Pacientes()
 {
 	queue<cPaciente*> Retorno;
-
 	list<cPaciente*>aux;
+	aux.clear();
 
 	try
 	{
@@ -156,18 +218,22 @@ queue<cPaciente*> Armar_random_Pacientes()
 
 	list<cPaciente*>::iterator it_Pac = aux.begin();
 
-	unsigned int seleccionador=0;
+	unsigned int seleccionador;
 
 	for (int i = 0; i < 5; i++)
 	{
 		srand(time(0));
 		seleccionador = (rand() % aux.size());
+		it_Pac = it_Pac + seleccionador;
 
-		Retorno.push(*it_Pac + seleccionador);
-		aux.remove(*it_Pac + seleccionador);    // de esta forma cuando liberemos memoria de la lista aux no borraremos
-		                                        //las instancias que devolvemos
+		Retorno.push(*it_Pac);
+		aux.remove(*it_Pac);           // de esta forma cuando liberemos memoria de la lista aux no borraremos
+		                               //las instancias que devolvemos
+		it_Pac = aux.begin();
 	}
-	aux.erase(aux.begin(),aux.end());    // liberamos memoria de los elementos de la lista que no usamos
+
+	for (list<cPaciente*>::iterator it_aux=aux.begin(); it_aux != aux.end(); it_aux++)
+		delete* it_aux;                                           //liberamos memoria de los elementos de la lista que no usamos
 
 	return Retorno;
 }
@@ -175,7 +241,9 @@ queue<cPaciente*> Armar_random_Pacientes()
 list<cMedico*> Armar_random_Medicos()
 {
 	list<cMedico*> Retorno;
+	Retorno.clear();
 	list<cMedico*> aux;
+	aux.clear();
 
 	try
 	{
@@ -186,17 +254,24 @@ list<cMedico*> Armar_random_Medicos()
 		cout << e->what() << endl;
 		delete e;
 	}
+
 	list<cMedico*>::iterator it_med = aux.begin();
 	unsigned int seleccionador;
 
 	for (int i = 0; i < 5; i++)
 	{
 		srand(time(0));
-		seleccionador = (rand() % aux.size() + 1);
-		Retorno.push_back(*it_med + seleccionador);
-		aux.remove(*it_med + seleccionador);
+		seleccionador = (rand() % aux.size());
+		it_med = it_med + seleccionador;
+
+		Retorno.push_back(*it_med);
+		aux.remove(*it_med);
+
+		it_med = aux.begin();
 	}
-	aux.erase(aux.begin(), aux.end());
+
+	for (list<cMedico*>::iterator it_aux = aux.begin(); it_aux != aux.end(); it_aux++)
+		delete* it_aux;
 
 	return Retorno;
 }
@@ -205,7 +280,8 @@ list<cHospital*> leer_Hospitales()
 {
 
 	ifstream Arch_Hospital;
-	Arch_Hospital.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Hospital.csv");
+	Arch_Hospital.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Hospitales.csv", ios::in);
+
 	if (!Arch_Hospital.is_open())
 	{
 		throw new ARCH_NOT_OPENED;
@@ -243,28 +319,61 @@ list<cHospital*> leer_Hospitales()
 
 list<cProtesis*> leer_protesis()
 {
-	ifstream Arch_protesis;
-	Arch_protesis.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Protesis.csv");
-	if (!Arch_protesis.is_open())
+	fstream Arch_protesis;
+	Arch_protesis.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Protesis.csv", ios::in);
+
+	if (!(Arch_protesis.is_open()))
 	{
 		throw new ARCH_NOT_OPENED;
 	}
 	
 	list<cProtesis*>Retorno;		  //
 	string headers;					  //variables basicas de lectura
-	char coma;						  //
 
 	float Radio_amp, largo, ancho;
-	string fabricante, articulacion, material;
+	Radio_amp = largo = ancho = 0;
+	string fabricante;
+	string articulacion;
+	string material;
 	unsigned int Nombre;                        // las protesis tienen una enumeracion para identificar su nombre
-	bool sup_inf;							    // 
+	bool sup_inf=true;							    // 
 	tm fecha_fab;
-
 	getline(Arch_protesis, headers);
-	Arch_protesis >> Radio_amp >> coma >> Nombre >> coma >> fecha_fab.tm_mday>> coma>> fecha_fab.tm_mon>>coma>>fecha_fab.tm_year >> coma >> fabricante >> coma >> sup_inf >> coma >> largo >> coma >> ancho >> coma >> articulacion >> coma >> material;
+
+	//Arch_protesis >> Radio_amp >> coma >> Nombre >> coma >> fecha_fab.tm_mday >> coma >> fecha_fab.tm_mon >> coma >> fecha_fab.tm_year >> coma >> fabricante >> coma >> sup_inf >> coma >> largo >> coma >> ancho >> coma >> articulacion >> coma >> material;
+	getline(Arch_protesis,headers);
+	stringstream lectura(headers);
+	getline(lectura, headers, ',');
+	stringstream(headers) >> Radio_amp;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> Nombre;
+	getline(lectura, headers, '/');
+	stringstream(headers) >> fecha_fab.tm_mday;
+	getline(lectura, headers, '/');
+	stringstream(headers) >> fecha_fab.tm_mon;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> fecha_fab.tm_year;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> fabricante;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> sup_inf;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> largo;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> ancho;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> articulacion;
+	getline(lectura, headers, ',');
+	stringstream(headers) >> material;
+
+	
+
+	
 
 	while (Arch_protesis)
 	{
+		
+
 		if (Radio_amp > 0)
 		{
 			cProt_No_Quirurgica* aux_NQ = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)Nombre, fecha_fab, fabricante, sup_inf, largo, ancho, Radio_amp);
@@ -275,29 +384,50 @@ list<cProtesis*> leer_protesis()
 			cProt_Quirurgica* aux_Q = new cProt_Quirurgica(articulacion, material, (Organo_Extremidad_Reemplazada)Nombre, fecha_fab, fabricante, sup_inf);
 			Retorno.push_back(aux_Q);
 		}
-		Arch_protesis >> Radio_amp >> coma >> Nombre >> coma >> fecha_fab.tm_mday >> coma >> fecha_fab.tm_mon >> coma >> fecha_fab.tm_year >> coma >> fabricante >> coma >> sup_inf >> coma >> largo >> coma >> ancho >> coma >> articulacion >> coma >> material;
-
+		getline(Arch_protesis, headers);
+		stringstream lectura(headers);
+		getline(lectura, headers, ',');
+		stringstream(headers) >> Radio_amp;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> Nombre;
+		getline(lectura, headers, '/');
+		stringstream(headers) >> fecha_fab.tm_mday;
+		getline(lectura, headers, '/');
+		stringstream(headers) >> fecha_fab.tm_mon;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> fecha_fab.tm_year;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> fabricante;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> sup_inf;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> largo;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> ancho;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> articulacion;
+		getline(lectura, headers, ',');
+		stringstream(headers) >> material;
 	}
+
 	Arch_protesis.close();
 	return Retorno;
 }
 
 list<cOrtopedia*> Leer_Ortopedias()
 {
-	ifstream Arch_Ortopedias;
-	Arch_Ortopedias.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Ortopedias.csv");
-
-	list <cOrtopedia*> Retorno;	   //
-	string headers;				   //variables basicas de lectura
-	char coma;			           //
-
-	string nombre, direccion;
+	fstream Arch_Ortopedias;
+	Arch_Ortopedias.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Ortopedias.csv", ios::in);
 
 	if (!(Arch_Ortopedias.is_open()))
 	{
 		throw new ARCH_NOT_OPENED;
 	}
 
+	string nombre, direccion;
+	list <cOrtopedia*> Retorno_ortopedias;	   //
+	string headers;				   //variables basicas de lectura
+	char coma;			           //
 	
 	getline(Arch_Ortopedias, headers);
 
@@ -316,18 +446,24 @@ list<cOrtopedia*> Leer_Ortopedias()
 		}
 
 		cOrtopedia* Auxiliar = new cOrtopedia(nombre, direccion, aux);
-		Retorno.push_back(Auxiliar);
+		Retorno_ortopedias.push_back(Auxiliar);
 
 		Arch_Ortopedias >> nombre >> coma >> direccion;
 	}
 	Arch_Ortopedias.close();
-	return Retorno;
+
+	return Retorno_ortopedias;
 }
 
 list<cPaciente*> leer_Pacientes()
 {
 	ifstream Arch_Pacientes;
-	Arch_Pacientes.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Pacientes.csv");
+	Arch_Pacientes.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Pacientes.csv", ios::in);
+
+	if (!(Arch_Pacientes.is_open()))
+	{
+		throw new ARCH_NOT_OPENED();
+	}
 
 	list <cPaciente*> Retorno;	   //
 	string headers;				   //variables basicas de lectura
@@ -339,13 +475,6 @@ list<cPaciente*> leer_Pacientes()
 	float Radio_amp;
 	tm Fecha_nac;
 
-
-
-	if (!(Arch_Pacientes.is_open()))
-	{
-		throw new ARCH_NOT_OPENED();
-	}
-
 	getline(Arch_Pacientes, headers);
 
 	list<string*> Alergias;
@@ -354,13 +483,8 @@ list<cPaciente*> leer_Pacientes()
 
 	while (Arch_Pacientes)
 	{
-		try {
-			Alergias = Generar_Alergias();   // le generamos una lista de alergias randomizada a cada paciente   
-		}									 //la lista en su la creo afuera del try porque sino el codigola considera
-		catch (exception* e) {				 //como no existente al crear el objeto de paciente
-			cout << e->what() << endl;
-			delete e;
-		}
+		
+		Alergias = Generar_Alergias();   // le generamos una lista de alergias randomizada a cada paciente
 
 		cPaciente* Pac = new cPaciente(Nombre, Fecha_nac, Telefono, Alergias, Radio_amp);
 		Retorno.push_back(Pac);
@@ -375,23 +499,27 @@ list<cPaciente*> leer_Pacientes()
 list<cMedico*> leer_Medicos()
 {
 	ifstream Arch_Medicos;
-	Arch_Medicos.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Medicos.csv");
+	Arch_Medicos.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Medicos.csv", ios::in);
 
 	if (!Arch_Medicos.is_open())
 	{
 		throw new ARCH_NOT_OPENED;
 	}
-	string Nombre;
+
+	string Nombre, headers ;
+	unsigned int Matricula=0;
+	char coma;
 	list<cMedico*> Retorno;
 
-	Arch_Medicos >> Nombre;
+	getline(Arch_Medicos, headers);
+	Arch_Medicos >> Nombre>> coma>> Matricula;
 
 	while (Arch_Medicos)
 	{
 		srand(time(0));
-		cMedico* Actual = new cMedico(Nombre, (rand() % 9999999 + 10000000)); // el archivo solo tiene nombres, lo demas es aleatorio
+		cMedico* Actual = new cMedico(Nombre, Matricula);
 		Retorno.push_back(Actual);
-		Arch_Medicos >> Nombre;
+		Arch_Medicos >> Nombre>> coma>> Matricula;
 	}
 	Arch_Medicos.close();
 
@@ -400,8 +528,9 @@ list<cMedico*> leer_Medicos()
 
 list<cFabricante*> leer_Fabricantes()
 {
-	ifstream Arch_Fabricantes;
-	Arch_Fabricantes.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Project1\\Input Data_files\\Fabricantes.csv");
+	fstream Arch_Fabricantes;
+
+	Arch_Fabricantes.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Input Data_files\\Fabricantes.csv", ios::in);
 
 	if (!Arch_Fabricantes.is_open())
 	{
@@ -413,6 +542,7 @@ list<cFabricante*> leer_Fabricantes()
 
 	string Nombre, Direccion;
 	unsigned int Num_Habilitacion;
+	getline(Arch_Fabricantes, headers);
 
 	Arch_Fabricantes >> Nombre >> coma >> Direccion >> coma >> Num_Habilitacion;
 
@@ -426,4 +556,172 @@ list<cFabricante*> leer_Fabricantes()
 	Arch_Fabricantes.close();
 
 	return Retorno;
+}
+
+list<cHospital*> Hospitales_Predeterminados()
+{
+	srand(time(0));
+	list<cHospital*> Retorno;
+	Retorno.clear();
+	
+	cMedico* Medico1 = new cMedico("Juan_Juan", 45598355, false);
+	cMedico* Medico2 = new cMedico("Antonio_Perez", 34524256, true);
+	cMedico* Medico3 = new cMedico("Osvaldo_Gutierrez", 409842092, false);
+	cMedico* Medico4 = new cMedico("Mateo_Pilomini", 45527890, true);
+	cMedico* Medico5 = new cMedico("Juan_NoJuan", 37124035, true);
+	list<cMedico*> Lista_Medicos;
+	Lista_Medicos.push_back(Medico1);
+	Lista_Medicos.push_back(Medico2);
+	Lista_Medicos.push_back(Medico3);
+	Lista_Medicos.push_back(Medico4);
+	Lista_Medicos.push_back(Medico5);
+
+	list<cProtesis*> aux;
+	aux.clear();
+	cOrtopedia* Ortopedia1 = new cOrtopedia("San_Juan", "Dorrego_999", aux);//no es necesario que estos objetos de Ortopedia tengan un stock declarado porque solo se compararan los nombres en las funciones
+	cOrtopedia* Ortopedia2 = new cOrtopedia("Alexander_Chaparri", "Brasil_547", aux);
+	list<cOrtopedia*> Convenidas;
+	Convenidas.push_back(Ortopedia1);
+	Convenidas.push_back(Ortopedia2);
+
+	tm aux_f;
+	aux_f.tm_mday = 05; aux_f.tm_mon = 10; aux_f.tm_year = 2000;
+	cPaciente* Paciente1 = new cPaciente("Lucia_Quintana", aux_f, "1144227740", Generar_Alergias(), 2.9);
+
+	aux_f.tm_mday = 27; aux_f.tm_mon = 12; aux_f.tm_year = 2004;
+	cPaciente* Paciente2 = new cPaciente("Eric_Gadea",  aux_f , "1169035382", Generar_Alergias(), 0);
+
+	aux_f.tm_mday = 15; aux_f.tm_mon = 04; aux_f.tm_year = 2004;
+	cPaciente* Paciente3 = new cPaciente("Ariana_Ordonyez", aux_f, "1162569077",Generar_Alergias(), 0);
+
+	aux_f.tm_mday = 8; aux_f.tm_mon = 02; aux_f.tm_year = 2004;
+	cPaciente* Paciente4 = new cPaciente("Alma_Maiolino", aux_f , "1146738292", Generar_Alergias(), 6.2);
+
+	aux_f.tm_mday = 03; aux_f.tm_mon = 06; aux_f.tm_year = 2004;
+	cPaciente* Paciente5 = new cPaciente("Juan_Perez", aux_f, "1161197786", Generar_Alergias(), 0.9);
+
+	queue<cPaciente*> Cola_pacientes;
+	Cola_pacientes.push(Paciente1);
+	Cola_pacientes.push(Paciente2);
+	Cola_pacientes.push(Paciente3);
+	Cola_pacientes.push(Paciente4);
+	Cola_pacientes.push(Paciente5);
+
+	cHospital* Hospitalito = new cHospital("San_Juan_De_Dios", "Brasil_959", "Cardiologia",Lista_Medicos,Convenidas,Cola_pacientes);
+	Retorno.push_back(Hospitalito);
+
+	return Retorno;
+}
+
+list<cOrtopedia*> Ortopedias_Predeterminadas()
+{
+	list<cOrtopedia*> Retorno;
+
+	tm aux;
+	aux.tm_mday = 23; aux.tm_mon = 02; aux.tm_year = 2019;
+	cProt_No_Quirurgica* Protesis_NQ1 = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)1, aux, "Stephano", true, 20.4, 19.1, 4.5);
+	aux.tm_mday = 04; aux.tm_mon = 11; aux.tm_year = 2020;
+	cProt_No_Quirurgica* Protesis_NQ2 = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)2, aux, "Ariana_Pereyra", false, 90.0, 20.0, 9.2);
+	aux.tm_mday = 03; aux.tm_mon = 01; aux.tm_year = 2023;
+	cProt_No_Quirurgica* Protesis_NQ3 = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)3, aux, "Agustina", true, 10.5, 8.0, 2.5);
+	aux.tm_mday = 15; aux.tm_mon = 04; aux.tm_year = 2023;
+	cProt_No_Quirurgica* Protesis_NQ4 = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)4, aux, "Fernando_Oras", true, 8.3, 0.2, 0.3);
+	aux.tm_mday = 30; aux.tm_mon = 8; aux.tm_year = 2020;
+	cProt_No_Quirurgica* Protesis_NQ5 = new cProt_No_Quirurgica((Organo_Extremidad_Reemplazada)5, aux, "Juliana", false, 7.8, 8.9, 4.5);
+
+	aux.tm_mday = 05; aux.tm_mon = 11; aux.tm_year = 2022;
+	cProt_Quirurgica* Protesis_Q1 = new cProt_Quirurgica("Esternoclavicular", "Platino", (Organo_Extremidad_Reemplazada)6, aux, "Agustina", true);
+	aux.tm_mday = 06; aux.tm_mon = 07; aux.tm_year = 2021;
+	cProt_Quirurgica* Protesis_Q2 = new cProt_Quirurgica("Coxofemoral", "Titanio", (Organo_Extremidad_Reemplazada)7, aux, "Stephano", false);
+	aux.tm_mday = 15; aux.tm_mon = 04; aux.tm_year = 2023;
+	cProt_Quirurgica* Protesis_Q3 = new cProt_Quirurgica("Escapula", "Hierro", (Organo_Extremidad_Reemplazada)8, aux, "Ariana_Pereyra", true);
+	aux.tm_mday = 20; aux.tm_mon = 9; aux.tm_year = 2022;
+	cProt_Quirurgica* Protesis_Q4 = new cProt_Quirurgica("Tallo Femoral", "Platino", (Organo_Extremidad_Reemplazada)9, aux, "Agustina", false);
+	aux.tm_mday = 25; aux.tm_mon = 04; aux.tm_year = 2023;
+	cProt_Quirurgica* Protesis_Q5 = new cProt_Quirurgica("Mandibula", "Titanio", (Organo_Extremidad_Reemplazada)10, aux, "Stephano", true);
+
+	list<cProtesis*> Protesis_ortopedia;
+	Protesis_ortopedia.push_back(Protesis_NQ1);
+	Protesis_ortopedia.push_back(Protesis_NQ5);
+	Protesis_ortopedia.push_back(Protesis_Q3);
+	Protesis_ortopedia.push_back(Protesis_Q5);
+	Protesis_ortopedia.push_back(Protesis_Q4);
+	cOrtopedia* Ortopedia1 = new cOrtopedia("San_Juan", "Dorrego_999", Protesis_ortopedia);
+
+	Protesis_ortopedia.clear();
+	Protesis_ortopedia.push_back(Protesis_NQ2);
+	Protesis_ortopedia.push_back(Protesis_Q2);
+	Protesis_ortopedia.push_back(Protesis_NQ3);
+	Protesis_ortopedia.push_back(Protesis_Q1);
+	Protesis_ortopedia.push_back(Protesis_NQ4);
+	cOrtopedia* Ortopedia2 = new cOrtopedia("Alexander_Chaparri", "Brasil_547", Protesis_ortopedia);
+
+	//
+	//
+	Protesis_ortopedia.clear();
+	Protesis_ortopedia.push_back(Protesis_NQ1);
+	Protesis_ortopedia.push_back(Protesis_Q2);
+	Protesis_ortopedia.push_back(Protesis_NQ5);
+	Protesis_ortopedia.push_back(Protesis_Q5);
+	Protesis_ortopedia.push_back(Protesis_NQ4);
+	cOrtopedia* Ortopedia3 = new cOrtopedia("Quintana_Pereyra", "Reconquista_567", Protesis_ortopedia);
+
+	Protesis_ortopedia.clear();
+	Protesis_ortopedia.push_back(Protesis_NQ3);
+	Protesis_ortopedia.push_back(Protesis_Q5);
+	Protesis_ortopedia.push_back(Protesis_NQ5);
+	Protesis_ortopedia.push_back(Protesis_Q2);
+	Protesis_ortopedia.push_back(Protesis_NQ2);
+	cOrtopedia* Ortopedia4 = new cOrtopedia("Chilapri", "Callao_555", Protesis_ortopedia);
+
+	Retorno.push_back(Ortopedia1);
+	Retorno.push_back(Ortopedia2);
+	Retorno.push_back(Ortopedia3);
+	Retorno.push_back(Ortopedia4);
+	return Retorno;
+}
+
+list<cFabricante*> Fabricantes_Predeterminados()
+{
+
+
+	cFabricante* Fabricante1 = new cFabricante("Stephano", "Federico_Alvear_457", 455324455);
+	cFabricante* Fabricante2 = new cFabricante("Juliana", "Libetador_889", 455242557);
+	cFabricante* Fabricante3 = new cFabricante("Ariana_Pereyra", "Brandy_876", 643557824);
+	cFabricante* Fabricante4 = new cFabricante("Fernando_Oras", "Anubis_198", 543354476);
+	cFabricante* Fabricante5 = new cFabricante("Fernando_Oras", "Anubis_198", 543354476);
+	cFabricante* Fabricante6 = new cFabricante("Agustina", "Ordonyes_765", 123321345);
+	list<cFabricante*> Retorno;
+	Retorno.push_back(Fabricante1);
+	Retorno.push_back(Fabricante2);
+	Retorno.push_back(Fabricante3);
+	Retorno.push_back(Fabricante4);
+	Retorno.push_back(Fabricante5);
+	Retorno.push_back(Fabricante6);
+
+	return Retorno;
+}
+
+void Escribir_Archivo(cANPA Impreso)
+{
+	ofstream Archivo_Escritura;
+
+	Archivo_Escritura.open("C:\\Users\\thmon\\OneDrive\\Documents\\Universidad\\Labo de programacion\\G12-Monteros-TP_FINAL\\Project1\\Output_Data_files\\Registros.csv", ios::out);
+
+	if (!(Archivo_Escritura.is_open()))
+	{
+		throw new ARCH_NOT_OPENED;
+	}
+
+	list<cRegistros*>::iterator it = Impreso.get_Primer_Registro();
+
+	Archivo_Escritura << "Hospital , medico , Fecha_Solicitud , Fecha_Entrega , Estimacion , Pieza , Paciente , Fuente"<<endl; //headers
+
+	while (it != Impreso.get_Ultimo_Registro())
+	{
+		Archivo_Escritura << (*it)->to_string_registros_csv();
+		it++;
+	}
+
+	Archivo_Escritura.close();
 }

@@ -2,14 +2,13 @@
 
 cPaciente::cPaciente(string Nombre_Apellido_, tm Feca_Nac_, string Telefono_, list<string*> Alergias_, float Radio_Amp_) : Nombre_Apellido(Nombre_Apellido_), Fecha_Nac(Feca_Nac_), Radio_Amputacion(Radio_Amp_)
 {
+
 	this->Telefono = Telefono_;
 	this->Hospital = "nn";
 	this->Autorizacion = false;
 	this->Medico = "nn";
 	this->Alergias = Alergias_;
-
-
-	srand(time(0));
+	srand(time(nullptr));
 
 	if (this->Radio_Amputacion > 0)                             //si hay un radio de amputacion se inicializa la parte danyada con algunas de las opciones no quirurgicas
 	{                                                             //revisar enum de cPaciente.h
@@ -37,6 +36,36 @@ void cPaciente::set_Medico(string Medico_)
 void cPaciente::set_Hospital(string Hospital_)
 {
 	this->Hospital = Hospital_;
+}
+
+void cPaciente::set_ancho(float seter)
+{
+	this->Necesitada_NQ.set_Dim_ancho(seter);
+}
+
+void cPaciente::set_largo(float seter)
+{
+	this->Necesitada_NQ.set_Dim_largo(seter);
+}
+
+void cPaciente::set_radio(float seter)
+{
+	this->Necesitada_NQ.set_radio(seter);
+}
+
+void cPaciente::set_articulacion(string seteada)
+{
+	this->Necesitada_Q.set_Articulacion(seteada);
+}
+
+void cPaciente::Recibir_Protesis_NQ(cProt_No_Quirurgica Seteada)
+{
+	this->Necesitada_NQ = Seteada;
+}
+
+void cPaciente::Recibir_Protesis_Q(cProt_Quirurgica Seteada)
+{
+	this->Necesitada_Q = Seteada;
 }
 
 string cPaciente::get_Nombre_Ap()
@@ -91,6 +120,45 @@ cProt_No_Quirurgica cPaciente::get_Prot_NQ()
 cProt_Quirurgica cPaciente::get_Prot_Q()
 {
 	return this->Necesitada_Q;
+}
+
+list<string*> cPaciente::get_alergias()
+{
+	return this->Alergias;
+}
+
+string cPaciente::to_string()
+{
+	string aux;
+	if (this->Autorizacion) { aux = "Autorizado/a"; }
+	else { aux = "No autorizado/a"; }
+
+	stringstream Salida;
+	Salida << "Nombre y apellido: " << this->Nombre_Apellido
+		<< ", Fecha de nacimiento: " << Fecha_Nac.tm_mday << "/" << Fecha_Nac.tm_mon << "/" << Fecha_Nac.tm_year + 1900
+		<< ", Telefono: " << this->Telefono
+		<< ", Alergias: ";
+	list<string*>::iterator it = this->Alergias.begin();
+	while (it != this->Alergias.end())
+	{
+		Salida << *(*it)<<", ";
+		it++;
+	}
+	Salida << this->Hospital
+		<< ", Radio de amputacion: " << this->Radio_Amputacion
+		<< ", Autorizacion: " << aux
+		<< ", Medico: " << this->Medico;
+	if (this->Radio_Amputacion == 0)
+		Salida << ", Protesis: " << endl << this->Necesitada_Q.to_string();
+	else
+		Salida << ", Protesis: " << endl << this->Necesitada_NQ.to_string();
+
+	return Salida.str();
+}
+
+void cPaciente::Imprimir_Pac()
+{
+	cout << to_string()<<endl;
 }
 
 
