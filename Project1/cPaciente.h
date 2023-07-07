@@ -7,10 +7,9 @@
 #include "cProt_Quirurgica.h"
 
 
-class cPaciente {
+ class cPaciente {
 private:
 
-	friend class cMedico;
 	const string Nombre_Apellido;
 	const tm Fecha_Nac;
 	string Telefono;

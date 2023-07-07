@@ -47,6 +47,7 @@ bool cMedico::Otorgar_Autorizacion(cPaciente &Paciente_actual_, unsigned int & M
 
 }
 
+
 string cMedico::get_Nombre()
 {
 	return this->Nombre_Apellido;
